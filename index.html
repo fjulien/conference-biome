@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Biome</title>
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="dist/theme/solarized.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- 1 -->
+			<section class="slide-1">
+				<h1>Biome</h1>
+			</section>
+
+			<!-- 2 MOI-->
+			<section class="slide-2">
+				<h2>Julien</h3>
+					<div class="is-flex align-items-center">
+						<div>
+							<p>Developpeur JS/TS de reconvertion depuis 2019</p>
+							<p>Chez onepoint depuis 2 ans</p>
+						</div>
+						<img class="r-stretch" src="/images/moi.jpg">
+					</div>
+
+					<aside class="notes">
+						<ol>
+							<li>Avant Electromécanicien cuisisne de restauration</li>
+							<li>Reconversion WCS de 5 mois</li>
+							<li>Quelque entreprises</li>
+						</ol>
+					</aside>
+			</section>
+
+			<!-- 3 -->
+			<section data-transition="fade-int">
+				<section data-transition="fade-in">
+					<h2>Formatage et analyse de code</h2>
+				</section>
+				<section data-transition="fade-in">
+					<h2>Formatage</h2>
+				</section>
+				<section>
+					<img class="r-stretch w-50" src="/images/slide-3/not-formatted.png">
+				</section>
+				<section>
+					<img class="r-stretch w-50" src="/images/slide-3/formatted.png">
+				</section>
+				<section data-transition="fade-in">
+					<h2>Analyse statique</h2>
+				</section>
+				<section>
+					<div class="is-flex gap-2 align-items-center justify-content-space-between">
+						<img class="r-stretch w-50" src="/images/slide-3/linter-error.png">
+						<ul class="list-style-none f-size-1">
+							<li class="t-color-orange"><span class="mr-1">⚠</span>Utiliser une propriété de classe plus
+								explicite au lieu d'une propriété de paramètre.</li>
+							<li class="t-color-red"><span class="mr-1">✖</span>Les modèles littéraux sont préférés à la
+								concaténation de chaînes de caractères.</li>
+							<li class="t-color-red"><span class="mr-1">✖</span>Utilisez === au lieu de ==</li>
+							<li class="t-color-red"><span class="mr-1">✖</span>Utiliser let ou const au lieu de var.
+							</li>
+							<li class="t-color-orange"><span class="mr-1">⚠</span>Cette variable n'est pas utilisée.
+							</li>
+						</ul>
+					</diV>
+				</section>
+				<section>
+					<h2>Les outils</h2>
+					<ul>
+						<li>Site web</li>
+						<li>Intégré au environnements de développement (Intellij, Visuel Studio Code, ...)</li>
+						<li>Librairies (Prettier, ESLint, Biome, ...)</li>
+					</ul>
+					<aside class="notes">
+						<p>+ et -</p>
+						<ul>
+							<li>Site web -> zero conf ; copier/coller ; fastidieux ; uniformité </li>
+							<li>IDE -> conf ; Integré ; automatisable à la sauvegarde, commit ; utilisatation de
+								différent ide ; pas de CI/CD</li>
+							<li>Librairies -> conf ; automatisable ; CI/CD ; librairis en plus</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+
+			<!-- 4 -->
+			<section data-transition="fade-int">
+				<section data-transition="fade-in">
+					<img class="r-stretch bk-color-black p-2" src="/images/slide-4/logo-biome.svg">
+				</section>
+				<section data-transition="fade-in">
+					<h2>Remporte le défi Prettier 🎉</h2>
+					<img class="r-stretch bk-color-black p-2" src="/images/slide-4/bg-prettier-defi.png">
+				</section>
+				<section data-transition="fade-in">
+					<ul>
+						<li>Écrire un formatteur conforme > 95 % de Prettier en Rust</li>
+						<li>En JavaScript ES6</li>
+						<li>Toutes les options de formatage prises en charge, ...</li>
+					</ul>
+					<p class="t-color-rainbow t-bold">$25 000</p>
+				</section>
+				<section data-transition="fade-in">
+					<h2>Pourquoi Biome</h2>
+				</section>
+				<section data-transition="fade-in">
+					<h2>Rapide</h2>
+					<figure>
+						<img class="r-stretch" src="/images/slide-4/performance.png">
+						<figcaption class="t-font-size-2">
+							Plus rapide que Prettier lors du formatage de 171 127 lignes de code dans 2 104 fichiers
+							avec un Intel Core i7 1270P.
+						</figcaption>
+					</figure>
+					<p class="t-font-size-1">*source https://biomejs.dev/</p>
+				</section>
+				<section data-transition="fade-in">
+					<h3>Résoudre les problèmes et apprendre les meilleures pratiques</h2>
+						<img class="r-stretch w-25" src="/images/slide-4/fix-and-learn.png">
+				</section>
+				<section data-transition="fade-in">
+					<h2>Accessibilité</h2>
+					<img class="r-stretch w-25" src="/images/slide-4/accessibilite.png">
+				</section>
+				<section data-transition="fade-in">
+					<h2>Feuille de route 2024</h2>
+					<ul>
+						<li>Faciliter la migration des outils existants tels que Prettier et ESLint vers Biome</li>
+						<li>L'ajout de fonctionnalités en ligne de commande (CLI)</li>
+						<li>Supporter plus de languages : css, html, et Markdown</li>
+						<li>Faire du "cross-linting"</li>
+						<li>Détection des dépendances non utilisées dans un projet</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>"cross-linting" -> class css non utilisée dans du html</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+
+			<!-- 6 -->
+			<section data-transition="fade-in"><h2 class="">Merci</h2></section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>
