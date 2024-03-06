@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>Biome</title>
+	<title>Conférence - Biome</title>
 	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
 	<link rel="stylesheet" href="dist/theme/black.css">
@@ -16,21 +16,20 @@
 	<div class="reveal">
 		<div class="slides">
 			<!-- 1 -->
-			<section class="slide-1">
-				<h1>Biome</h1>
+			<section id="slide-1" class="slide-1">
+				<h2>Biome, votre nouvelle lib js (encore)</h1>
 			</section>
 
 			<!-- 2 MOI-->
-			<section class="slide-2">
+			<section id="slide-2" class="slide-2">
 				<h2>Julien</h3>
 					<div class="is-flex align-items-center">
 						<div>
-							<p>Developpeur JS/TS de reconvertion depuis 2019</p>
-							<p>Chez onepoint depuis 2 ans</p>
+							<p>Développeur JS/TS</p>
+							<img class="r-stretch w-50 my-1-n" src="images/slide-2/onepoint.png">
 						</div>
-						<img class="r-stretch" src="/images/moi.jpg">
+						<img class="r-stretch rounded" src="images/slide-2/moi.jpg">
 					</div>
-
 					<aside class="notes">
 						<ol>
 							<li>Avant Electromécanicien cuisisne de restauration</li>
@@ -41,81 +40,141 @@
 			</section>
 
 			<!-- 3 -->
-			<section data-transition="fade-int">
-				<section data-transition="fade-in">
+			<section id="slide-3">
+				<section>
 					<h2>Formatage et analyse de code</h2>
+					<aside class="notes">
+					</aside>
 				</section>
-				<section data-transition="fade-in">
-					<h2>Formatage</h2>
-				</section>
-				<section>
-					<img class="r-stretch w-50" src="/images/slide-3/not-formatted.png">
-				</section>
-				<section>
-					<img class="r-stretch w-50" src="/images/slide-3/formatted.png">
-				</section>
-				<section data-transition="fade-in">
-					<h2>Analyse statique</h2>
-				</section>
-				<section>
-					<div class="is-flex gap-2 align-items-center justify-content-space-between">
-						<img class="r-stretch w-50" src="/images/slide-3/linter-error.png">
-						<ul class="list-style-none f-size-1">
-							<li class="t-color-orange"><span class="mr-1">⚠</span>Utiliser une propriété de classe plus
-								explicite au lieu d'une propriété de paramètre.</li>
-							<li class="t-color-red"><span class="mr-1">✖</span>Les modèles littéraux sont préférés à la
-								concaténation de chaînes de caractères.</li>
-							<li class="t-color-red"><span class="mr-1">✖</span>Utilisez === au lieu de ==</li>
-							<li class="t-color-red"><span class="mr-1">✖</span>Utiliser let ou const au lieu de var.
-							</li>
-							<li class="t-color-orange"><span class="mr-1">⚠</span>Cette variable n'est pas utilisée.
-							</li>
+				<section class="h-50">
+					<pre class="h-inherit"><code data-line-numbers="all|3-7|12">// JavaScript
+const john	 =		{
+	firstname	: "John"  ,
+	lastname	 : 'Watson'		,
+    address  : {
+	streetName	 : 221	 + "B Baker Street" ,
+city	 : 'Londres'	 ,	} ,  } ;
+const usersReponse		=	[	{
+lastname  : "Holmes"	,
+firstname	 : 'Sherlock'  ,
+	address  :	{
+	streetName	 : 221 + 'B Baker Street'	 , city	: 'Londres', }, } ,	{ firstname	 : 'Lestrade'	}		,
+	john	 ,	]		;
+						</code></pre>
+					<p class="t-font-size-1">Pour la création du chaos : https://github.com/rohitdhas/shittier</p>
+					<aside class="notes">
+						<ul>
+							<li>Demande plus effort de lecture</li>
+							<li>ne tiens pas sur l'écran</li>
 						</ul>
+					</aside>
+				</section>
+				<section class="h-70">
+					<pre class="h-inherit"><code data-line-numbers="all|3-8|11-20">// JavaScript
+const john = {
+	firstname: 'John',
+	lastname: 'Watson',
+	address: {
+		streetName: 221 + 'B Baker Street',
+		city: 'Londres',
+	},
+};
+const usersReponse = [
+	{
+		lastname: 'Holmes',
+		firstname: 'Sherlock',
+		address: {
+			streetName: 221 + 'B Baker Street',
+			city: 'Londres',
+		},
+	},
+	{ firstname: 'Lestrade' },
+	john,
+];					
+						</code></pre>
+					<p class="t-font-size-1">Pour la mise en forme : https://biomejs.dev/</p>
+					<aside class="notes">
+						<ol>
+							<li>Plus claire au premier coup d'oeil</li>
+							<li>Meilleur lecture et moins fastidieux des PR</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<h2>Analyse statique</h2>
+					<aside class="notes">
+						<ol>
+							<li>consiste à examiner le code source d'un programme sans l'exécuter, afin de détecter les
+								erreurs potentielles et les problèmes de qualité.</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<div>
+						<img class="r-stretch" src="/images/slide-3/linter-error.png">
+						<aside class="notes">
+							<ul class="list-style-none f-size-1">
+								<li class="t-color-red"><span class="mr-1">✖</span>Utilisez === au lieu de ==</li>
+								<li class="t-color-red"><span class="mr-1">✖</span>Utiliser let ou const au lieu de var.
+								</li>
+							</ul>
+						</aside>
 					</diV>
 				</section>
 				<section>
 					<h2>Les outils</h2>
-					<ul>
-						<li>Site web</li>
-						<li>Intégré au environnements de développement (Intellij, Visuel Studio Code, ...)</li>
-						<li>Librairies (Prettier, ESLint, Biome, ...)</li>
-					</ul>
+					<p class="fragment">Site web</p>
+					<p class="fragment">Intégré au environnements de développement (Intellij, Visuel Studio Code, ...)
+					</p>
+					<p class="fragment">Librairies (Prettier, ESLint, Biome, ...) npm</p>
 					<aside class="notes">
-						<p>+ et -</p>
-						<ul>
-							<li>Site web -> zero conf ; copier/coller ; fastidieux ; uniformité </li>
-							<li>IDE -> conf ; Integré ; automatisable à la sauvegarde, commit ; utilisatation de
-								différent ide ; pas de CI/CD</li>
-							<li>Librairies -> conf ; automatisable ; CI/CD ; librairis en plus</li>
-						</ul>
+						<ol>
+							<li>
+								SITE WEB : zero conf | copier/coller | fastidieux | uniformité | sécurité
+							</li>
+							<li>
+								IDE : automatisable commit ou sauvegarde | changement d'IDE | configuration | pas de
+								CI/CD
+							</li>
+							<li>
+								LIBRAIRIE : Configuration partagé | CI/CD bloquante | librairis en plus | ligne de
+								commande CLI
+							</li>
+							<li>La configuration bien car communicatoin d'équipe</li>
+						</ol>
 					</aside>
 				</section>
 			</section>
 
 			<!-- 4 -->
-			<section data-transition="fade-int">
-				<section data-transition="fade-in">
-					<img class="r-stretch bk-color-black p-2" src="/images/slide-4/logo-biome.svg">
+			<section id="slide-4">
+				<section data-background-transition="zoom" data-background="images/slide-4/bg-prettier-defi.png">
+					<aside class="notes">
+						<ol>
+							<li>fin année 2023</li>
+						</ol>
+					</aside>
 				</section>
-				<section data-transition="fade-in">
-					<h2>Remporte le défi Prettier 🎉</h2>
-					<img class="r-stretch bk-color-black p-2" src="/images/slide-4/bg-prettier-defi.png">
+				<section>
+					<p>Écrire un formatteur conforme > 95 % de Prettier en Rust</p>
+					<p class="fragment">En JavaScript ES6</p>
+					<p class="fragment">Toutes les options de formatage prises en charge, ...</p>
 				</section>
-				<section data-transition="fade-in">
-					<ul>
-						<li>Écrire un formatteur conforme > 95 % de Prettier en Rust</li>
-						<li>En JavaScript ES6</li>
-						<li>Toutes les options de formatage prises en charge, ...</li>
-					</ul>
-					<p class="t-color-rainbow t-bold">$25 000</p>
+				<section data-transition="zoom">
+					<img class="r-stretch bk-color-black p-2" src="images/slide-4/logo-biome.svg">
+					<aside class="notes">
+						<ol>
+							<li>+96% compatibilité</li>
+							<li>+96% ligne compatibilité</li>
+							<li>42 PR</li>
+							<li>9 contributeurs</li>
+						</ol>
+					</aside>
 				</section>
-				<section data-transition="fade-in">
-					<h2>Pourquoi Biome</h2>
-				</section>
-				<section data-transition="fade-in">
+				<section>
 					<h2>Rapide</h2>
 					<figure>
-						<img class="r-stretch" src="/images/slide-4/performance.png">
+						<img class="r-stretch" src="images/slide-4/performance.png">
 						<figcaption class="t-font-size-2">
 							Plus rapide que Prettier lors du formatage de 171 127 lignes de code dans 2 104 fichiers
 							avec un Intel Core i7 1270P.
@@ -123,33 +182,50 @@
 					</figure>
 					<p class="t-font-size-1">*source https://biomejs.dev/</p>
 				</section>
-				<section data-transition="fade-in">
-					<h3>Résoudre les problèmes et apprendre les meilleures pratiques</h2>
-						<img class="r-stretch w-25" src="/images/slide-4/fix-and-learn.png">
-				</section>
-				<section data-transition="fade-in">
-					<h2>Accessibilité</h2>
-					<img class="r-stretch w-25" src="/images/slide-4/accessibilite.png">
-				</section>
-				<section data-transition="fade-in">
-					<h2>Feuille de route 2024</h2>
-					<ul>
-						<li>Faciliter la migration des outils existants tels que Prettier et ESLint vers Biome</li>
-						<li>L'ajout de fonctionnalités en ligne de commande (CLI)</li>
-						<li>Supporter plus de languages : css, html, et Markdown</li>
-						<li>Faire du "cross-linting"</li>
-						<li>Détection des dépendances non utilisées dans un projet</li>
-					</ul>
+				<section>
+					<h2>J'ai testé</h2>
+					<h3 class="fragment">Du code réal</h3>
+					<p class="fragment">420 fichier</p>
+					<p class="fragment">temps</p>
+					<h3 class="fragment">node_module</h3>
+					<p class="fragment">temps</p>
 					<aside class="notes">
-						<ul>
+						<ol>
+							<li>3 fois pour les chiffres</li>
+							<li>node_module pour le fun</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<h3>Résoudre les problèmes et apprendre les meilleures pratiques</h2>
+						<img class="r-stretch w-25" src="images/slide-4/fix-and-learn.png">
+						<aside class="notes">
+							<ol>
+								<li>inspiré rust compilateur sortie console</li>
+							</ol>
+						</aside>
+				</section>
+				<section>
+					<h2>2024</h2>
+					<p class="fragment">Faciliter la migration des outils existants tels que Prettier et ESLint vers
+						Biome</p>
+					<p class="fragment">L'ajout de fonctionnalités en ligne de commande (CLI)</p>
+					<p class="fragment">Supporter plus de languages : css, html, et Markdown</p>
+					<p class="fragment">Faire du "cross-linting</p>
+					<p class="fragment">Détection des dépendances non utilisées dans un projet</p>
+					<aside class="notes">
+						<ol>
+							<li>Feuille de route</li>
 							<li>"cross-linting" -> class css non utilisée dans du html</li>
-						</ul>
+						</ol>
 					</aside>
 				</section>
 			</section>
 
-			<!-- 6 -->
-			<section data-transition="fade-in"><h2 class="">Merci</h2></section>
+			<!-- 5 -->
+			<section id="slide-5" data-transition="zoom">
+				<h2 class="">Merci à vous</h2>
+			</section>
 		</div>
 	</div>
 
@@ -163,8 +239,10 @@
 		// - https://revealjs.com/config/
 		Reveal.initialize({
 			hash: true,
+			transition: 'fade',
+			transitionSpeed: 'slow',
 			// Learn about plugins: https://revealjs.com/plugins/
-			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
 		});
 	</script>
 </body>
