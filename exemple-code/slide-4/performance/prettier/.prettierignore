@@ -15,4 +15,10 @@ package-lock.json
 // AJOUTER
 *.scss
 *.html
+*.md
+*.json
+*.yml
+*.yaml
+*.css
+
 

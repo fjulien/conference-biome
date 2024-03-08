@@ -12,6 +12,7 @@ function os_func() {
     exec(cmd, (error, stdout, stderr) => {
       if (error) {
         console.error(`exec error: ${error}`);
+        console.timeLog('Timer');
         return;
       }
       callback(stdout);

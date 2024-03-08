@@ -21,6 +21,14 @@
     &.gap-2 {
         gap: 2em;
     }
+
+    &.direction-column {
+        flex-direction: column;
+    }
+
+    &.justify-content-center {
+        justify-content: center;
+    }
 }
 
 .w {
@@ -113,6 +121,10 @@
             }
         }
     }
+
+    &-0 {
+        margin: 0 !important;
+    }
 }
 
 .t {
@@ -175,11 +187,15 @@
 }
 
 .size {
+    width: 75px;
+    max-width: 75px;
+
     &-1 {
         width: 150px;
         max-width: 150px;
     }
 }
+
 
 footer {
     h6 {
@@ -191,4 +207,23 @@ footer {
     flex-direction: column-reverse;
     top: 60vh;
     width: 100%;
+}
+
+figcaption {
+    margin-left: 1rem;
+}
+
+.r {
+    &-90 {
+        transform: rotate(90deg);
+    }
+}
+
+table {
+    font-size: 1.5rem;
+
+    caption {
+        caption-side: bottom;
+        padding: 10px;
+    }
 }

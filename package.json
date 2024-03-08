@@ -28,6 +28,8 @@
     "colors": "^1.4.0",
     "core-js": "^3.33.1",
     "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1",
     "fitty": "^2.3.7",
     "glob": "^10.3.10",
     "gulp": "^4.0.2",

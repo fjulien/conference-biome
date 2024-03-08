@@ -25,17 +25,12 @@
 				<h2>Julien</h3>
 					<div class="is-flex align-items-center">
 						<div>
-							<p>Développeur JS/TS</p>
+							<p>Développeur senior JS/TS</p>
 							<img class="r-stretch w-50 my-1-n" src="images/slide-2/onepoint.png">
 						</div>
 						<img class="r-stretch rounded" src="images/slide-2/moi.jpg">
 					</div>
 					<aside class="notes">
-						<ol>
-							<li>Avant Electromécanicien cuisisne de restauration</li>
-							<li>Reconversion WCS de 5 mois</li>
-							<li>Quelque entreprises</li>
-						</ol>
 					</aside>
 			</section>
 
@@ -47,19 +42,23 @@
 					</aside>
 				</section>
 				<section class="h-50">
-					<pre class="h-inherit"><code data-line-numbers="all|3-7|12">// JavaScript
-const john	 =		{
-	firstname	: "John"  ,
-	lastname	 : 'Watson'		,
-    address  : {
-	streetName	 : 221	 + "B Baker Street" ,
-city	 : 'Londres'	 ,	} ,  } ;
-const usersReponse		=	[	{
-lastname  : "Holmes"	,
-firstname	 : 'Sherlock'  ,
-	address  :	{
-	streetName	 : 221 + 'B Baker Street'	 , city	: 'Londres', }, } ,	{ firstname	 : 'Lestrade'	}		,
-	john	 ,	]		;
+					<pre class="h-inherit"><code data-line-numbers="0|3-8|15">// JavaScript
+const cafe	 =		{
+	nom:'café long',
+	type	: 'dosette'  ,
+	taille	 : 'court'		,
+	autre  : {
+	description	 : "On le prépare en servant un double expresso sur de l'eau chaude" ,
+	prix	 : 1.5	 ,	devise:'$'} ,  
+} ;
+	const boissonChaudes		=	[	{
+	nom:'cappuccino',
+		type	: 'machine'  ,
+	taille	 : 'court'		,
+	autre  : {
+	description: "Cette boisson est composé à 1/3 de café expresso, 1/3 de lait chaud et 1/3 de mousse de lait. " , prix	 : 3	 ,	devise:'$'} ,  }		,
+	cafe
+];
 						</code></pre>
 					<p class="t-font-size-1">Pour la création du chaos : https://github.com/rohitdhas/shittier</p>
 					<aside class="notes">
@@ -70,38 +69,44 @@ firstname	 : 'Sherlock'  ,
 					</aside>
 				</section>
 				<section class="h-70">
-					<pre class="h-inherit"><code data-line-numbers="all|3-8|11-20">// JavaScript
-const john = {
-	firstname: 'John',
-	lastname: 'Watson',
-	address: {
-		streetName: 221 + 'B Baker Street',
-		city: 'Londres',
+					<pre class="h-inherit"><code data-line-numbers="all|3-11|19-22">// JavaScript
+const cafe = {
+	nom: 'café long',
+	type: 'dosette',
+	taille: 'court',
+	autre: {
+		description:
+			"On le prépare en servant un double expresso sur de l'eau chaude",
+		prix: 1.5,
+		devise: '$',
 	},
 };
-const usersReponse = [
+const boissonChaudes = [
 	{
-		lastname: 'Holmes',
-		firstname: 'Sherlock',
-		address: {
-			streetName: 221 + 'B Baker Street',
-			city: 'Londres',
+		nom: 'cappuccino',
+		type: 'machine',
+		taille: 'court',
+		autre: {
+			description:
+				'Cette boisson est composé à 1/3 de café expresso, 1/3 de lait chaud et 1/3 de mousse de lait. ',
+			prix: 3,
+			devise: '$',
 		},
 	},
-	{ firstname: 'Lestrade' },
-	john,
-];					
+	cafe,
+];			
 						</code></pre>
 					<p class="t-font-size-1">Pour la mise en forme : https://biomejs.dev/</p>
 					<aside class="notes">
 						<ol>
 							<li>Plus claire au premier coup d'oeil</li>
+							<li>Coloration synthaxial</li>
 							<li>Meilleur lecture et moins fastidieux des PR</li>
 						</ol>
 					</aside>
 				</section>
 				<section>
-					<h2>Analyse statique</h2>
+					<h2>Analyse statique / Linter</h2>
 					<aside class="notes">
 						<ol>
 							<li>
@@ -113,7 +118,7 @@ const usersReponse = [
 				</section>
 				<section>
 					<div>
-						<img class="r-stretch" src="/images/slide-3/linter-error.png">
+						<img class="r-stretch" src="images/slide-3/linter-error.png">
 						<aside class="notes">
 							<ol class="list-style-none f-size-1">
 								<li>égalité abstraite (==) -> a égalité stricte (===)</li>
@@ -142,18 +147,20 @@ const usersReponse = [
 
 					<aside class="notes">
 						<ol>
+							<li>avec quelle outils</li>
 							<li>
 								SITE WEB : zero conf | copier/coller | fastidieux | uniformité | sécurité
 							</li>
 							<li>
 								IDE : automatisable commit ou sauvegarde | changement d'IDE | configuration | pas de
-								CI/CD
+								CI/CD | coloration linter
 							</li>
 							<li>
-								LIBRAIRIE : Configuration partagé | CI/CD bloquante | librairis en plus | ligne de
-								commande CLI
+								LIBRAIRIE : Configuration partagé | CI/CD controle bloquante | librairis en plus | ligne
+								de commande CLI | branhe à IDE
 							</li>
 							<li>La configuration bien car communicatoin d'équipe</li>
+							<li>exemple de lib : prettier, eslint sont les plus connus</li>
 						</ol>
 					</aside>
 				</section>
@@ -190,7 +197,7 @@ const usersReponse = [
 						<aside class="notes">
 							<ol>
 								<li>En rust</li>
-								<li>+96% compatibilité tests JavaScript de prettier</li>
+								<li>+95% compatibilité tests JavaScript de prettier</li>
 								<li>Toutes les options de formatage</li>
 								<li>seule la syntaxe ES6 est requise.</li>
 							</ol>
@@ -219,83 +226,215 @@ const usersReponse = [
 					</aside>
 				</section>
 				<section>
-					<p>Projet actuel</p>
-					<div class="is-flex justify-content-space-evenly">
-						<figure class="fragment is-flex align-items-center">
-							<img class="r-stretch size-1" src="images/slide-4/prettier.png">
-							<figcaption>10,858s</figcaption>
-						</figure>
-						<figure class="fragment is-flex align-items-center">
-							<img class="r-stretch size-1" src="icones/biome.svg">
-							<figcaption>2,311s</figcaption>
-						</figure>
-					</div>
-					
-					<p class="fragment">Projet Nodejs</p>
-					<div class="is-flex justify-content-space-evenly">
-						<figure class="fragment is-flex align-items-center">
-							<img class="r-stretch size-1" src="images/slide-4/prettier.png">
-							<figcaption>10,858s</figcaption>
-						</figure>
-						<figure class="fragment is-flex align-items-center">
-							<img class="r-stretch size-1" src="icones/biome.svg">
-							<figcaption>2,311s</figcaption>
-						</figure>
-					</div>
-
+					<h2>J'ai test</h2>
+					<pre class="h-inherit">
+						<code data-line-numbers="all|18-19">// JavaScript
+const { exec } = require('child_process');
+function os_func() {
+	this.execCommand = (cmd, callback) => {
+	console.log('Start test');
+	console.time('Timer');
+	exec(cmd, (error, stdout, stderr) => {
+		if (error) {
+		console.error(`exec error: ${error}`);
+		console.timeLog('Timer');
+		return;
+		}
+		callback(stdout);
+	});
+	};
+}
+const os = new os_func();
+os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
+// os.execCommand('npx @biomejs/biome format . --write --log-level=none', returnvalue => {
+	console.timeLog('Timer');
+});	
+						</code>
+					</pre>
 					<aside class="notes">
 						<ol>
-							<li>j'ai testé, mon projet 420 fichiers</li>
+							<li>formmatage</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<h3>Projet actuel</h3>
+					<div class="is-flex justify-content-space-evenly">
+						<figure class="fragment is-flex align-items-center">
+							<img class="r-stretch size-1" src="images/prettier.png">
+							<figcaption>10,858s</figcaption>
+						</figure>
+						<figure class="fragment is-flex align-items-center">
+							<img class="r-stretch size-1" src="icones/biome.svg">
+							<figcaption>2,311s</figcaption>
+						</figure>
+					</div>
+					<aside class="notes">
+						<ol>
+							<li>j'ai testé, mon projet ~420 fichiers sous VDI</li>
 							<li>3 fois tests</li>
-							<li>modfier la conf prettier car prend plus de fichier</li>
-							<li>nodejs xxx fichiers</li>
-							<li>1 fois test</li>
 							<li>modfier la conf prettier car prend plus de fichier</li>
 						</ol>
 					</aside>
 				</section>
 				<section>
-					<h3>Résoudre les problèmes et apprendre les meilleures pratiques</h2>
-						<img class="r-stretch w-25" src="images/slide-4/fix-and-learn.png">
-						<aside class="notes">
-							<ol>
-								<li>inspiré rust compilateur sortie console</li>
-							</ol>
-						</aside>
-				</section>
-				<section>
-					<h2>2024</h2>
-					<p class="fragment">Faciliter la migration des outils existants tels que Prettier et ESLint vers
-						Biome</p>
-					<p class="fragment">L'ajout de fonctionnalités en ligne de commande (CLI)</p>
-					<p class="fragment">Supporter plus de languages : css, html, et Markdown</p>
-					<p class="fragment">Faire du "cross-linting</p>
-					<p class="fragment">Détection des dépendances non utilisées dans un projet</p>
+					<h2>NodeJS</h2>
+					<table>
+						<thead>
+							<tr>
+								<th scope="col">Type</th>
+								<th scope="col">Biome</th>
+								<th scope="col">Prettier</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">Fichiers modifiés</th>
+								<td>11_139</td>
+								<td>13_929</td>
+							</tr>
+							<tr>
+								<th scope="row">Insertions(+)</th>
+								<td>859_784</td>
+								<td>1_542_560</td>
+							</tr>
+							<tr>
+								<th scope="row">Suppressions(-)</th>
+								<td>475_103</td>
+								<td>827_217</td>
+							</tr>
+						</tbody>
+						<caption>
+							<p class="t-font-size-1">Retour après formatage de git (git --no-pager diff --shortstat
+								main)</p>
+						</caption>
+					</table>
+					<div class="is-flex justify-content-space-evenly">
+						<figure class="fragment is-flex align-items-center">
+							<img class="r-stretch size-1" src="icones/biome.svg">
+							<figcaption>2:38 (m:ss)</figcaption>
+						</figure>
+						<figure class="fragment is-flex align-items-center">
+							<img class="r-stretch size-1" src="images/prettier.png">
+							<figcaption class="t-color-red">4:20 (m:ss)</figcaption>
+						</figure>
+					</div>
 					<aside class="notes">
 						<ol>
-							<li>Feuille de route</li>
-							<li>"cross-linting" -> class css non utilisée dans du html</li>
+							<li>Avoir la même configuration</li>
+							<li>Avoir la même fichier ignorés</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<h3>Analise static</h3>
+					<img class="r-stretch" src="images/slide-4/eslint-eqeq.png">
+					<img class="r-stretch" src="images/slide-4/biome-eqeq.png">
+					<aside class="notes">
+						<ol>
+							<li>au survole</li>
+							<li>Biome communique plus</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<img class="r-stretch w-100" src="images/slide-4/eslint-return.png">
+					<aside class="notes">
+						<ol>
+							<li>en console</li>
+							<li>Résoudre les problèmes et apprendre les meilleures pratiques</li>
+							<li>inspiré rust compilateur sortie console</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<img class="r-stretch w-100" src="images/slide-4/biome-return-1.png">
+					<aside class="notes">
+						<ol>
+							<li>Résoudre les problèmes et apprendre les meilleures pratiques</li>
+							<li>inspiré rust compilateur sortie console</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<img class="r-stretch w-100" src="images/slide-4/biome-return-2.png">
+					<aside class="notes">
+						<ol>
+							<li>Résoudre les problèmes et apprendre les meilleures pratiques</li>
+							<li>inspiré rust compilateur sortie console</li>
 						</ol>
 					</aside>
 				</section>
 			</section>
+			<section>
+				<h2>2024</h2>
+				<div class="r-stack">
+					<div class="fragment fade-out" data-fragment-index="0">
+						<div class="is-flex">
+							<div>
+								<img class="r-stretch size-1" src="images/prettier.png">
+								<img class="r-stretch size-1" src="icones/eslint.svg">
+							</div>
+							<div class="is-flex justify-content-center align-items-center size-1">
+								<img class="m-0 w-25" src="icones/configuration.svg">
+								<img class="m-0 w-50" src="icones/fleche-droite.png">
+							</div>
+							<img class="r-stretch size-1" src="icones/biome.svg">
+						</div>
+						<p class="t-font-size-2">Aide à la migration</p>
+					</div>
+					<div data-fragment-index="0" class="fragment current-visible">
+						<div class="is-flex justify-content-space-evenly">
+							<img class="size-1" src="icones/css.svg">
+							<img class="size-1" src="icones/html.svg">
+							<img class="w-100" src="icones/markdown.png">
+							<img class="size" src="icones/vue-js.svg">
+							<img class="size" src="icones/svelte.svg">
+							<img class="size" src="icones/astro.svg">
+						</div>
+						<p class="t-font-size-2">Prise en change de plus de languages</p>
+					</div>
+					<div class="fragment">
+						<div class="is-flex justify-content-space-evenly">
+							<div class="is-flex justify-content-center direction-column align-items-center size-1">
+								<img src="icones/css.svg">
+								<img src="icones/javascript.svg">
+							</div>
+							<img class="r-90 w-75" src="icones/double-fleche.png">
+							<div class="is-flex justify-content-center direction-column align-items-center size-1">
+								<img src="icones/html.svg">
+								<img src="icones/npm.svg">
+							</div>
+						</div>
+						<p class="t-font-size-2">Analise croisée entre languages</p>
+					</div>
+				</div>
+				<aside class="notes">
+					<ol>
+						<li>Ordre des priorités</li>
+						<li>"cross-linting"</li>
+						<li>class css non utilisée dans du html</li>
+						<li>détecter les dépendances qui ne sont pas utilisées dans un projet</li>
+					</ol>
+				</aside>
+			</section>
+			</section>
 
 			<!-- 5 -->
-			<section id="slide-5" data-transition="zoom">
-				<h2 class="">Merci à vous</h2>
-				<!-- <footer>
-					<div>
-						<h6>Liste des sources</h6>
-						<ul class="sources justify-content-space-evenly">
-							<li><a href="https://console.algora.io/challenges/prettier">console.algora</a></li>
-							<li><a href="https://biomejs.dev/">biomejs</a></li>
-							<li><a href="https://eslint.org/">eslint</a></li>
-							<li><a href="https://prettier.io/">prettier</a></li>
-							<li><a href="https://github.com/rohitdhas/shittier">shittier</a></li>
-							<li><a href="https://github.com/nodejs/node">node</a></li>
-						</ul>
-					</div>
-					</footer> -->
+			<section id="slide-5">
+				<section>
+					<h2>Conclution</h2>
+					<aside class="notes">
+						<ol>
+							<li>Installation en CLI est légère, pas de conf conparé à eslint</li>
+							<li>Pas tous les languages</li>
+							<li>Prometteur mais pas mature</li>
+						</ol>
+					</aside>
+				</section>
+				<section data-transition="zoom">
+					<h2>Merci à vous</h2>
+				</section>
 			</section>
 		</div>
 	</div>
