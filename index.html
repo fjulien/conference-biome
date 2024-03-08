@@ -104,8 +104,10 @@ const usersReponse = [
 					<h2>Analyse statique</h2>
 					<aside class="notes">
 						<ol>
-							<li>consiste à examiner le code source d'un programme sans l'exécuter, afin de détecter les
-								erreurs potentielles et les problèmes de qualité.</li>
+							<li>
+								Consiste à examiner le code source d'un programme sans l'exécuter, afin de détecter les
+								erreurs potentielles et les problèmes de qualité.
+							</li>
 						</ol>
 					</aside>
 				</section>
@@ -113,20 +115,31 @@ const usersReponse = [
 					<div>
 						<img class="r-stretch" src="/images/slide-3/linter-error.png">
 						<aside class="notes">
-							<ul class="list-style-none f-size-1">
-								<li class="t-color-red"><span class="mr-1">✖</span>Utilisez === au lieu de ==</li>
-								<li class="t-color-red"><span class="mr-1">✖</span>Utiliser let ou const au lieu de var.
-								</li>
-							</ul>
+							<ol class="list-style-none f-size-1">
+								<li>égalité abstraite (==) -> a égalité stricte (===)</li>
+								<li>Utiliser let ou const au lieu de var</li>
+								<li>Les règles sont paramétrales</li>
+							</ol>
 						</aside>
 					</diV>
 				</section>
 				<section>
 					<h2>Les outils</h2>
-					<p class="fragment">Site web</p>
-					<p class="fragment">Intégré au environnements de développement (Intellij, Visuel Studio Code, ...)
-					</p>
-					<p class="fragment">Librairies (Prettier, ESLint, Biome, ...) npm</p>
+					<div class="is-flex justify-content-space-evenly">
+						<figure class="fragment">
+							<img class="r-stretch size-1" src="icones/chrome.svg">
+							<figcaption>Internet</figcaption>
+						</figure>
+						<figure class="fragment">
+							<img class="r-stretch size-1" src="icones/vsc.svg">
+							<figcaption>IDE</figcaption>
+						</figure>
+						<figure class="fragment">
+							<img class="r-stretch size-1" src="icones/npm.svg">
+							<figcaption>Librairies</figcaption>
+						</figure>
+					</div>
+
 					<aside class="notes">
 						<ol>
 							<li>
@@ -152,23 +165,41 @@ const usersReponse = [
 					<aside class="notes">
 						<ol>
 							<li>fin année 2023</li>
+							<li>Chanllenge d'une librairis</li>
 						</ol>
 					</aside>
 				</section>
 				<section>
-					<p>Écrire un formatteur conforme > 95 % de Prettier en Rust</p>
-					<p class="fragment">En JavaScript ES6</p>
-					<p class="fragment">Toutes les options de formatage prises en charge, ...</p>
+					<div class="is-flex justify-content-space-evenly">
+						<figure>
+							<img class="r-stretch size-1" src="icones/rust.png">
+							<figcaption>Rust</figcaption>
+						</figure>
+						<figure class="fragment">
+							<img class="r-stretch size-1" src="images//slide-3/prettier-95.png">
+							<figcaption>> 95%</figcaption>
+						</figure>
+						<figure class="fragment">
+							<img class="r-stretch size-1" src="icones/option.svg">
+							<figcaption>Formatage</figcaption>
+						</figure>
+						<figure class="fragment">
+							<img class="r-stretch size-1" src="icones/javascript.svg">
+							<figcaption>ES6</figcaption>
+						</figure>
+						<aside class="notes">
+							<ol>
+								<li>En rust</li>
+								<li>+96% compatibilité tests JavaScript de prettier</li>
+								<li>Toutes les options de formatage</li>
+								<li>seule la syntaxe ES6 est requise.</li>
+							</ol>
+						</aside>
+					</div>
 				</section>
 				<section data-transition="zoom">
-					<img class="r-stretch bk-color-black p-2" src="images/slide-4/logo-biome.svg">
+					<img class="r-stretch bk-color-black p-2 w-95" src="images/slide-4/logo-biome.svg">
 					<aside class="notes">
-						<ol>
-							<li>+96% compatibilité</li>
-							<li>+96% ligne compatibilité</li>
-							<li>42 PR</li>
-							<li>9 contributeurs</li>
-						</ol>
 					</aside>
 				</section>
 				<section>
@@ -181,18 +212,45 @@ const usersReponse = [
 						</figcaption>
 					</figure>
 					<p class="t-font-size-1">*source https://biomejs.dev/</p>
-				</section>
-				<section>
-					<h2>J'ai testé</h2>
-					<h3 class="fragment">Du code réal</h3>
-					<p class="fragment">420 fichier</p>
-					<p class="fragment">temps</p>
-					<h3 class="fragment">node_module</h3>
-					<p class="fragment">temps</p>
 					<aside class="notes">
 						<ol>
-							<li>3 fois pour les chiffres</li>
-							<li>node_module pour le fun</li>
+							<li>forcement ils sont beaux /100</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<p>Projet actuel</p>
+					<div class="is-flex justify-content-space-evenly">
+						<figure class="fragment is-flex align-items-center">
+							<img class="r-stretch size-1" src="images/slide-4/prettier.png">
+							<figcaption>10,858s</figcaption>
+						</figure>
+						<figure class="fragment is-flex align-items-center">
+							<img class="r-stretch size-1" src="icones/biome.svg">
+							<figcaption>2,311s</figcaption>
+						</figure>
+					</div>
+					
+					<p class="fragment">Projet Nodejs</p>
+					<div class="is-flex justify-content-space-evenly">
+						<figure class="fragment is-flex align-items-center">
+							<img class="r-stretch size-1" src="images/slide-4/prettier.png">
+							<figcaption>10,858s</figcaption>
+						</figure>
+						<figure class="fragment is-flex align-items-center">
+							<img class="r-stretch size-1" src="icones/biome.svg">
+							<figcaption>2,311s</figcaption>
+						</figure>
+					</div>
+
+					<aside class="notes">
+						<ol>
+							<li>j'ai testé, mon projet 420 fichiers</li>
+							<li>3 fois tests</li>
+							<li>modfier la conf prettier car prend plus de fichier</li>
+							<li>nodejs xxx fichiers</li>
+							<li>1 fois test</li>
+							<li>modfier la conf prettier car prend plus de fichier</li>
 						</ol>
 					</aside>
 				</section>
@@ -225,6 +283,19 @@ const usersReponse = [
 			<!-- 5 -->
 			<section id="slide-5" data-transition="zoom">
 				<h2 class="">Merci à vous</h2>
+				<!-- <footer>
+					<div>
+						<h6>Liste des sources</h6>
+						<ul class="sources justify-content-space-evenly">
+							<li><a href="https://console.algora.io/challenges/prettier">console.algora</a></li>
+							<li><a href="https://biomejs.dev/">biomejs</a></li>
+							<li><a href="https://eslint.org/">eslint</a></li>
+							<li><a href="https://prettier.io/">prettier</a></li>
+							<li><a href="https://github.com/rohitdhas/shittier">shittier</a></li>
+							<li><a href="https://github.com/nodejs/node">node</a></li>
+						</ul>
+					</div>
+					</footer> -->
 			</section>
 		</div>
 	</div>

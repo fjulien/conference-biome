@@ -1,5 +1,4 @@
-
-.rounded{
+.rounded {
     border-radius: 50%;
 
 }
@@ -13,7 +12,10 @@
 
     &.justify-content-space-between {
         justify-content: space-between;
-        row-gap: 50px;
+    }
+
+    &.justify-content-space-evenly {
+        justify-content: space-evenly;
     }
 
     &.gap-2 {
@@ -37,15 +39,25 @@
     &-25 {
         width: 25%;
     }
+
+    &-95 {
+        width: 95% !important;
+    }
+
+    &-max-1 {
+        max-width: 50px;
+    }
 }
 
 .h {
     &-70 {
         height: 70vh;
     }
+
     &-50 {
         height: 50vh;
     }
+
     &-inherit {
         height: inherit;
     }
@@ -92,11 +104,12 @@
             margin-right: 1rem;
         }
     }
-    &y{
-        &-1{
-            &-n{
-            margin-top: -1rem !important;
-            margin-bottom: -1rem !important;
+
+    &y {
+        &-1 {
+            &-n {
+                margin-top: -1rem !important;
+                margin-bottom: -1rem !important;
             }
         }
     }
@@ -145,8 +158,37 @@
     }
 }
 
+.sources {
+    display: flex !important;
+    justify-content: space-evenly;
+
+    li {
+        list-style: none;
+        font-size: 1rem;
+    }
+}
+
 @keyframes move {
     to {
         background-position: 4500vh;
     }
+}
+
+.size {
+    &-1 {
+        width: 150px;
+        max-width: 150px;
+    }
+}
+
+footer {
+    h6 {
+        font-size: 2rem;
+    }
+
+    position: fixed;
+    display: flex;
+    flex-direction: column-reverse;
+    top: 60vh;
+    width: 100%;
 }
