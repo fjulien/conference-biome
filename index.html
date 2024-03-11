@@ -51,7 +51,7 @@ const cafe	 =		{
 	description	 : "On le prépare en servant un double expresso sur de l'eau chaude" ,
 	prix	 : 1.5	 ,	devise:'$'} ,  
 } ;
-	const boissonChaudes		=	[	{
+	const boissonsChaudes		=	[	{
 	nom:'cappuccino',
 		type	: 'machine'  ,
 	taille	 : 'court'		,
@@ -81,14 +81,14 @@ const cafe = {
 		devise: '$',
 	},
 };
-const boissonChaudes = [
+const boissonsChaudes = [
 	{
 		nom: 'cappuccino',
 		type: 'machine',
 		taille: 'court',
 		autre: {
 			description:
-				'Cette boisson est composé à 1/3 de café expresso, 1/3 de lait chaud et 1/3 de mousse de lait. ',
+				'Cette boisson est composée à 1/3 de café expresso, 1/3 de lait chaud et 1/3 de mousse de lait. ',
 			prix: 3,
 			devise: '$',
 		},
@@ -110,8 +110,8 @@ const boissonChaudes = [
 					<aside class="notes">
 						<ol>
 							<li>
-								Consiste à examiner le code source d'un programme sans l'exécuter, afin de détecter les
-								erreurs potentielles et les problèmes de qualité.
+								Examiner du code sans l'exécuter, détecter les
+								erreurs potentielles et problèmes de qualité.
 							</li>
 						</ol>
 					</aside>
@@ -121,8 +121,8 @@ const boissonChaudes = [
 						<img class="r-stretch" src="images/slide-3/linter-error.png">
 						<aside class="notes">
 							<ol class="list-style-none f-size-1">
-								<li>égalité abstraite (==) -> a égalité stricte (===)</li>
-								<li>Utiliser let ou const au lieu de var</li>
+								<li>égalité faible -> égalité stricte</li>
+								<li>let ou const au lieu de var</li>
 								<li>Les règles sont paramétrales</li>
 							</ol>
 						</aside>
@@ -147,7 +147,6 @@ const boissonChaudes = [
 
 					<aside class="notes">
 						<ol>
-							<li>avec quelle outils</li>
 							<li>
 								SITE WEB : zero conf | copier/coller | fastidieux | uniformité | sécurité
 							</li>
@@ -156,11 +155,10 @@ const boissonChaudes = [
 								CI/CD | coloration linter
 							</li>
 							<li>
-								LIBRAIRIE : Configuration partagé | CI/CD controle bloquante | librairis en plus | ligne
-								de commande CLI | branhe à IDE
+								LIBRAIRIE : Configuration partagé | CI/CD controle bloquante | librairis en plus |  CLI | branche à IDE
 							</li>
 							<li>La configuration bien car communicatoin d'équipe</li>
-							<li>exemple de lib : prettier, eslint plus connus et bien installés </li>
+							<li>exemple : prettier, eslint</li>
 						</ol>
 					</aside>
 				</section>
@@ -172,7 +170,6 @@ const boissonChaudes = [
 					<aside class="notes">
 						<ol>
 							<li>fin année 2023</li>
-							<li>Chanllenge d'une librairis</li>
 						</ol>
 					</aside>
 				</section>
@@ -199,7 +196,7 @@ const boissonChaudes = [
 								<li>En rust</li>
 								<li>+95% compatibilité tests JavaScript de prettier</li>
 								<li>Toutes les options de formatage</li>
-								<li>seule la syntaxe ES6 est requise.</li>
+								<li>seule la syntaxe ES6 est requise</li>
 							</ol>
 						</aside>
 					</div>
@@ -221,7 +218,7 @@ const boissonChaudes = [
 					<p class="t-font-size-1">*source https://biomejs.dev/</p>
 					<aside class="notes">
 						<ol>
-							<li>forcement ils sont beaux /100</li>
+							<li></li>
 						</ol>
 					</aside>
 				</section>
@@ -271,9 +268,8 @@ os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
 					</div>
 					<aside class="notes">
 						<ol>
-							<li>j'ai testé, mon projet ~420 fichiers sous VDI</li>
-							<li>3 fois tests</li>
-							<li>modfier la conf prettier car prend plus de fichier</li>
+							<li>~420 fichiers</li>
+							<li>3 x et moyenne</li>
 						</ol>
 					</aside>
 				</section>
@@ -321,8 +317,8 @@ os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
 					</div>
 					<aside class="notes">
 						<ol>
-							<li>Avoir la même configuration</li>
-							<li>Avoir la même fichier ignorés</li>
+							<li>même configuration</li>
+							<li>même fichier ignorés</li>
 						</ol>
 					</aside>
 				</section>
@@ -341,9 +337,7 @@ os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
 					<img class="r-stretch w-100" src="images/slide-4/eslint-return.png">
 					<aside class="notes">
 						<ol>
-							<li>en console</li>
-							<li>Résoudre les problèmes et apprendre les meilleures pratiques</li>
-							<li>inspiré rust compilateur sortie console</li>
+							<li></li>
 						</ol>
 					</aside>
 				</section>
@@ -351,7 +345,7 @@ os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
 					<img class="r-stretch w-100" src="images/slide-4/biome-return-1.png">
 					<aside class="notes">
 						<ol>
-							<li>Résoudre les problèmes et apprendre les meilleures pratiques</li>
+							<li>Résoudre les problèmes et apprendre</li>
 							<li>inspiré rust compilateur sortie console</li>
 						</ol>
 					</aside>
@@ -360,8 +354,7 @@ os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
 					<img class="r-stretch w-100" src="images/slide-4/biome-return-2.png">
 					<aside class="notes">
 						<ol>
-							<li>Résoudre les problèmes et apprendre les meilleures pratiques</li>
-							<li>inspiré rust compilateur sortie console</li>
+							<li></li>
 						</ol>
 					</aside>
 				</section>
@@ -414,7 +407,7 @@ os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
 						<li>Ordre des priorités</li>
 						<li>"cross-linting"</li>
 						<li>class css non utilisée dans du html</li>
-						<li>détecter les dépendances qui ne sont pas utilisées dans un projet</li>
+						<li>détecter les dépendances pas utilisées dans un projet</li>
 					</ol>
 				</aside>
 			</section>
@@ -427,9 +420,9 @@ os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
 					<p>Nouvelle <a href="https://biomejs.dev/blog/biome-v1-6/" >version v1.6</a> sortie le 8 mars 2024</p>
 					<aside class="notes">
 						<ol>
-							<li>Installation en CLI est légère, pas de conf conparé à eslint</li>
+							<li>Installation, pas de conf comparé à eslint</li>
 							<li>Pas tous les languages</li>
-							<li>Prometteur mais pas mature</li>
+							<li>Prometteur, murise</li>
 						</ol>
 					</aside>
 				</section>

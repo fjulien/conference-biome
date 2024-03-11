@@ -5,7 +5,7 @@
  	autre  : {
 	 description	 : "On le prépare en servant un double expresso sur de l'eau chaude" ,
   prix	 : 1.5	 ,	devise:'$'} ,  } ;
-	const boissonChaudes		=	[	{
+	const boissonsChaudes		=	[	{
 	nom:'cappuccino',
 		type	: 'machine'  ,
 	 taille	 : 'court'		,
