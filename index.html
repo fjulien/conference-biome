@@ -45,7 +45,7 @@
 					<pre class="h-inherit"><code data-line-numbers="0|3-8|15">// JavaScript
 const cafe	 =		{
 	nom:'café long',
-	type	: 'dosette'  ,
+	typePreparation	: 'dosette'  ,
 	taille	 : 'court'		,
 	autre  : {
 	description	 : "On le prépare en servant un double expresso sur de l'eau chaude" ,
@@ -53,14 +53,13 @@ const cafe	 =		{
 } ;
 	const boissonsChaudes		=	[	{
 	nom:'cappuccino',
-		type	: 'machine'  ,
+	typePreparation	: 'machine'  ,
 	taille	 : 'court'		,
 	autre  : {
-	description: "Cette boisson est composé à 1/3 de café expresso, 1/3 de lait chaud et 1/3 de mousse de lait. " , prix	 : 3	 ,	devise:'$'} ,  }		,
+	description: "Cette boisson est composée à 1/3 de café expresso." , prix	 : 3	 ,	devise:'$'} ,  }		,
 	cafe
 ];
 						</code></pre>
-					<p class="t-font-size-1">Pour la création du chaos : https://github.com/rohitdhas/shittier</p>
 					<aside class="notes">
 						<ul>
 							<li>Demande plus effort de lecture</li>
@@ -72,7 +71,7 @@ const cafe	 =		{
 					<pre class="h-inherit"><code data-line-numbers="all|3-11|19-22">// JavaScript
 const cafe = {
 	nom: 'café long',
-	type: 'dosette',
+	typePreparation: 'dosette',
 	taille: 'court',
 	autre: {
 		description:
@@ -84,11 +83,11 @@ const cafe = {
 const boissonsChaudes = [
 	{
 		nom: 'cappuccino',
-		type: 'machine',
+		typePreparation: 'machine',
 		taille: 'court',
 		autre: {
 			description:
-				'Cette boisson est composée à 1/3 de café expresso, 1/3 de lait chaud et 1/3 de mousse de lait. ',
+				'Cette boisson est composée à 1/3 de café expresso.',
 			prix: 3,
 			devise: '$',
 		},
@@ -96,7 +95,6 @@ const boissonsChaudes = [
 	cafe,
 ];			
 						</code></pre>
-					<p class="t-font-size-1">Pour la mise en forme : https://biomejs.dev/</p>
 					<aside class="notes">
 						<ol>
 							<li>Plus claire au premier coup d'oeil</li>
@@ -131,7 +129,7 @@ const boissonsChaudes = [
 				<section>
 					<h2>Les outils</h2>
 					<div class="is-flex justify-content-space-evenly">
-						<figure class="fragment">
+						<figure>
 							<img class="r-stretch size-1" src="icones/chrome.svg">
 							<figcaption>Internet</figcaption>
 						</figure>
@@ -154,10 +152,10 @@ const boissonsChaudes = [
 								IDE : automatisable commit ou sauvegarde | changement d'IDE | configuration | pas de
 								CI/CD | coloration linter
 							</li>
+							<li>La configuration bien car communicatoin d'équipe</li>
 							<li>
 								LIBRAIRIE : Configuration partagé | CI/CD controle bloquante | librairis en plus |  CLI | branche à IDE
 							</li>
-							<li>La configuration bien car communicatoin d'équipe</li>
 							<li>exemple : prettier, eslint</li>
 						</ol>
 					</aside>
@@ -193,10 +191,10 @@ const boissonsChaudes = [
 						</figure>
 						<aside class="notes">
 							<ol>
-								<li>En rust</li>
+								<li>En rust, prettier en js</li>
 								<li>+95% compatibilité tests JavaScript de prettier</li>
 								<li>Toutes les options de formatage</li>
-								<li>seule la syntaxe ES6 est requise</li>
+								<li>seule la syntaxe ecmascript est requise</li>
 							</ol>
 						</aside>
 					</div>
@@ -210,12 +208,8 @@ const boissonsChaudes = [
 					<h2>Rapide</h2>
 					<figure>
 						<img class="r-stretch" src="images/slide-4/performance.png">
-						<figcaption class="t-font-size-2">
-							Plus rapide que Prettier lors du formatage de 171 127 lignes de code dans 2 104 fichiers
-							avec un Intel Core i7 1270P.
-						</figcaption>
+						<figcaption>171 127 lignes, 2 104 fichiers</figcaption>
 					</figure>
-					<p class="t-font-size-1">*source https://biomejs.dev/</p>
 					<aside class="notes">
 						<ol>
 							<li></li>
@@ -301,7 +295,7 @@ os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
 							</tr>
 						</tbody>
 						<caption>
-							<p class="t-font-size-1">Retour après formatage de git (git --no-pager diff --shortstat
+							<p>Retour après formatage de git (git --no-pager diff --shortstat
 								main)</p>
 						</caption>
 					</table>
@@ -317,13 +311,14 @@ os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
 					</div>
 					<aside class="notes">
 						<ol>
+							<li>million (1 000 000)</li>
 							<li>même configuration</li>
 							<li>même fichier ignorés</li>
 						</ol>
 					</aside>
 				</section>
 				<section>
-					<h3>Analise static</h3>
+					<h3>Analyse static</h3>
 					<img class="r-stretch" src="images/slide-4/eslint-eqeq.png">
 					<img class="r-stretch" src="images/slide-4/biome-eqeq.png">
 					<aside class="notes">
@@ -374,7 +369,6 @@ os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
 							</div>
 							<img class="r-stretch size-1" src="icones/biome.svg">
 						</div>
-						<p class="t-font-size-2">Aide à la migration</p>
 					</div>
 					<div data-fragment-index="0" class="fragment current-visible">
 						<div class="is-flex justify-content-space-evenly">
@@ -385,7 +379,6 @@ os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
 							<img class="size" src="icones/svelte.svg">
 							<img class="size" src="icones/astro.svg">
 						</div>
-						<p class="t-font-size-2">Prise en change de plus de languages</p>
 					</div>
 					<div class="fragment">
 						<div class="is-flex justify-content-space-evenly">
@@ -399,13 +392,15 @@ os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
 								<img src="icones/npm.svg">
 							</div>
 						</div>
-						<p class="t-font-size-2">Analise croisée entre languages</p>
 					</div>
 				</div>
 				<aside class="notes">
 					<ol>
-						<li>Ordre des priorités</li>
+						<li>Migration facilité Prettier. Pas eslint</li>
+						<li>>Prise en change de plus de languages</li>
+						<li>partielle des fichiers Astro, Svelte et Vue</li>
 						<li>"cross-linting"</li>
+						<li>Analyse croisée entre languages</li>
 						<li>class css non utilisée dans du html</li>
 						<li>détecter les dépendances pas utilisées dans un projet</li>
 					</ol>
@@ -416,7 +411,7 @@ os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
 			<!-- 5 -->
 			<section id="slide-5">
 				<section>
-					<h2>Conclution</h2>
+					<h2>Conclusion</h2>
 					<p>Nouvelle <a href="https://biomejs.dev/blog/biome-v1-6/" >version v1.6</a> sortie le 8 mars 2024</p>
 					<aside class="notes">
 						<ol>

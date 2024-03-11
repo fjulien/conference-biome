@@ -45,3 +45,19 @@ init biome ???
 pas slide formatge
 slide formattage
 faire du vrai code  a place iamge
+
+
+// 11/03
+faire un check visuel
+remplacer type
+descripiton trop long   
+retirer les sources
+préciser le == s    nq le code
+numero 
+mezilleur plascement
+deirect web
+racourcir
+teck lead 
+plus d'indo sur le cpncpur
+plus parler 
+pourquoi la diff
