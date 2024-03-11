@@ -30,9 +30,6 @@ pas de puce des icones
 moins de texte
 jouer sur le concour, creer une histoire sur les 25000
 background image du prix
-
-
-resume 
 zen
 demo
 exemple exterieur
@@ -41,23 +38,18 @@ init eslint facile et complete
 init prettier ???
 init biome ???
 
-# fait
-pas slide formatge
-slide formattage
-faire du vrai code  a place iamge
 
-
-// 11/03
+## 11/03
 faire un check visuel
 remplacer type
-descripiton trop long   
+description trop long
 retirer les sources
-préciser le == s    nq le code
-numero 
-mezilleur plascement
-deirect web
-racourcir
+préciser le == s
+numéro de ligne sur le code
+meilleur placement
+direct web
+raccourcir texte
 teck lead 
-plus d'indo sur le cpncpur
+plus d'info sur le concour
 plus parler 
 pourquoi la diff
