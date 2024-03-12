@@ -53,3 +53,16 @@ teck lead
 plus d'info sur le concour
 plus parler 
 pourquoi la diff
+
+respire
+petite phase de dzébut contexte
+analise staitiue 
+j'ai testé
+steck lead
+exemple de commande et conf
+ avant les 
+ commande git beau 
+ revoir la presentation des perfs
+les fichiers supporté biome
+image rust et formatage
+erreur

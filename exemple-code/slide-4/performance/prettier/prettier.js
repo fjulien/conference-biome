@@ -9,19 +9,19 @@ function os_func() {
   this.execCommand = (cmd, callback) => {
     console.log('Start test');
     console.time('Timer');
-    exec(cmd, (error, stdout, stderr) => {
+    exec(cmd, (error) => {
       if (error) {
         console.error(`exec error: ${error}`);
         console.timeLog('Timer');
         return;
       }
-      callback(stdout);
+      callback();
     });
   };
 }
 
 const os = new os_func();
 
-os.execCommand('npx prettier . --write --log-level=silent', returnvalue => {
+os.execCommand('npx prettier . --write --log-level=silent', () => {
   console.timeLog('Timer');
 });

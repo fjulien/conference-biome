@@ -192,7 +192,9 @@
 
     &-1 {
         width: 150px;
-        max-width: 150px;
+    }
+    &-2 {
+        width: 210px;
     }
 }
 
@@ -223,7 +225,6 @@ table {
     font-size: 1.5rem;
 
     caption {
-        caption-side: bottom;
-        padding: 10px;
+        font-size: 1.5rem;
     }
 }
