@@ -203,43 +203,145 @@ const cafe = {
 				<section>
 					<h2>J'ai testé</h2>
 					<pre class="h-inherit">
-						<code data-line-numbers="all|6|19|20|22">// JavaScript
-const { exec } = require('child_process');
-function os_func() {
-	this.execCommand = (cmd, callback) => {
-		console.log('Start test');
-		console.time('Timer');
-		exec(cmd, (error) => {
-			if (error) {
-				console.error(`exec error: ${error}`);
-				console.timeLog('Timer');
-				return;
-			}
-			callback();
-		});
-	};
-}
-const os = new os_func();
-os.execCommand(
+						<code data-line-numbers="all|5|16-17|19">// JavaScript
+const { exec } = require("child_process");
+const execCommand = (cmd, callback) => {
+	console.log("Start test");
+	console.time("Timer");
+	exec(cmd, (error) => {
+		if (error) {
+			console.error(`exec error: ${error}`);
+			console.timeLog("Timer");
+			return;
+		}
+		callback();
+	});
+};
+execCommand(
 	'npx prettier . --write --log-level=silent',
 	'npx @biomejs/biome format . --write --log-level=none',
 	() => {
-		console.timeLog('Timer');
+		console.timeLog("Timer");
 	},
 );
 						</code>
 					</pre>
+				</section>
+				<section>
+					<h2>Configuration</h2>
+					<pre>
+						<code >
+							npx @biomejs/biome migrate prettier --write
+						</code>
+					</pre>
+					<img class="r-stretch" src="images/slide-4/migration-prettier-conf.png">
 					<aside class="notes">
 						<ol>
-							<li>formmatage</li>
-							<li>171 127 lignes, 2 104 fichiers</li>
+							<li>disponible depuis peu iso</li>
+							<li>Faut déjà avoir un fichier de configuration Biome</li>
 						</ol>
 					</aside>
 				</section>
 				<section>
+					<div class="is-flex">
+						<div class="w-100">
+							<p>.prettierrc.json</p>
+							<pre>
+								<code>{
+	"trailingComma":"none",
+	"tabWidth": 4,
+	"semi": true,
+	"singleQuote": true
+}
+								</code>
+							</pre>
+						</div>
+						<div >
+							<p>.prettierignore.json</p>
+							<pre>
+								<code data-line-numbers="all|12" class="w-100 h-70">node_modules
+dist
+reports
+config
+package-lock.json
+.git
+.project
+.idea
+.vscode
+.nyc_output
+.stats
+// AJOUTER
+*.scss
+*.html
+*.md
+*.json
+*.yml
+*.yaml
+*.css
+								</code>
+							</pre>
+						</div>
+					</div>
+				</section>
+				<section>
+					<p>biome.json</p>
+					<pre>
+						<code data-line-numbers="all|11|31">{
+	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+	"files": {
+		"ignore": [
+			"node_modules",
+			"..."
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": true,
+		"indentStyle": "space",
+		"indentWidth": 4,
+		"lineEnding": "lf",
+		"lineWidth": 80,
+		"attributePosition": "auto",
+		"ignore": [
+			"node_modules",
+			"...",
+			"// AJOUTER",
+			"*.scss",
+			"*.html",
+			"*.md",
+			"*.json",
+			"*.yml",
+			"*.yaml",
+			"*.css"
+		]
+	},
+	"organizeImports": { "enabled": true },
+	"javascript": {
+		"formatter": {
+			"jsxQuoteStyle": "double",
+			"quoteProperties": "asNeeded",
+			"trailingComma": "none",
+			"semicolons": "always",
+			"arrowParentheses": "always",
+			"bracketSpacing": true,
+			"bracketSameLine": false,
+			"enabled": true,
+			"indentStyle": "space",
+			"indentWidth": 2,
+			"lineWidth": 140,
+			"quoteStyle": "single",
+			"attributePosition": "auto"
+		}
+	}
+}
+							
+						</code>
+					</pre>
+				</section>
+				<section>
 					<h3>Projet actuel</h3>
 					<div class="is-flex justify-content-space-evenly">
-						<figure class="fragment is-flex align-items-center">
+						<figure class="is-flex align-items-center">
 							<img class="r-stretch size-1" src="images/prettier.png">
 							<figcaption>10,858s</figcaption>
 						</figure>
@@ -268,18 +370,18 @@ os.execCommand(
 						<tbody>
 							<tr>
 								<th scope="row">Fichiers modifiés</th>
-								<td>11_139</td>
-								<td>13_929</td>
+								<td>14_210</td>
+								<td>14_811</td>
 							</tr>
 							<tr>
 								<th scope="row">Insertions(+)</th>
-								<td>859_784</td>
-								<td>1_542_560</td>
+								<td>1_002_307</td>
+								<td>2_215_537</td>
 							</tr>
 							<tr>
 								<th scope="row">Suppressions(-)</th>
-								<td>475_103</td>
-								<td>827_217</td>
+								<td>577_831</td>
+								<td>1_172_530</td>
 							</tr>
 						</tbody>
 						<caption>
@@ -289,14 +391,14 @@ os.execCommand(
 							</pre>
 						</caption>
 					</table>
-					<div class="is-flex justify-content-space-evenly">
-						<figure class="fragment is-flex align-items-center">
+					<div class="fragment is-flex justify-content-space-evenly">
+						<figure class="is-flex align-items-center">
 							<img class="r-stretch size-1" src="icones/biome.svg">
-							<figcaption>2:38 (m:ss)</figcaption>
+							<figcaption>2:44 (m:ss)</figcaption>
 						</figure>
-						<figure class="fragment is-flex align-items-center">
+						<figure class="is-flex align-items-center">
 							<img class="r-stretch size-1" src="images/prettier.png">
-							<figcaption class="t-color-red">4:20 (m:ss)</figcaption>
+							<figcaption>3:59 (m:ss)</figcaption>
 						</figure>
 					</div>
 					<aside class="notes">
@@ -328,8 +430,28 @@ class ChocolatChaud {
 					<pre><code>npx @biomejs/biome lint .\exemple-code\slide-3\linter.js</code></pre>
 				</section>
 				<section>
-					// la config
-					
+					<h2>Configuration</h2>
+					<pre>
+						<code>
+							npx @biomejs/biome init
+						</code>
+					</pre>
+					<pre>
+						<code>
+{
+	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true
+		}
+	}
+}
+						</code>
+					</pre>
 				</section>
 				<section>
 					<img class="r-stretch" src="images/slide-4/eslint-eqeq.png">

@@ -3,25 +3,23 @@
 // Timer: 3.254s | 1.793s | 1.887s
 // Nombre de fichier 420
 
-const { exec } = require('child_process');
-
-function os_func() {
-  this.execCommand = (cmd, callback) => {
-    console.log('Start test');
-    console.time('Timer');
-    exec(cmd, (error) => {
-      if (error) {
-        console.error(`exec error: ${error}`);
-        console.timeLog('Timer');
-        return;
-      }
-      callback();
-    });
-  };
-}
-
-const os = new os_func();
-
-os.execCommand('npx @biomejs/biome format . --write --log-level=none', () => {
-  console.timeLog('Timer');
-});
+const { exec } = require("child_process");
+const execCommand = (cmd, callback) => {
+	console.log("Start test");
+	console.time("Timer");
+	exec(cmd, (error) => {
+		if (error) {
+			console.error(`exec error: ${error}`);
+			console.timeLog("Timer");
+			return;
+		}
+		callback();
+	});
+};
+execCommand(
+	"npx prettier . --write --log-level=silent",
+	// 'npx @biomejs/biome format . --write --log-level=none',
+	() => {
+		console.timeLog("Timer");
+	},
+);
