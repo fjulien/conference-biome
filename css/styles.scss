@@ -193,6 +193,7 @@
     &-1 {
         width: 150px;
     }
+
     &-2 {
         width: 210px;
     }
@@ -225,6 +226,20 @@ table {
     font-size: 1.5rem;
 
     caption {
+        font-size: 1.5rem;
+    }
+}
+
+.language-support {
+    tr {
+
+        td:not(:first-child) {
+            text-align: center !important;
+        }
+    }
+
+    caption {
+        caption-side: bottom;
         font-size: 1.5rem;
     }
 }

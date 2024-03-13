@@ -45,14 +45,13 @@
 					</aside>
 				</section>
 				<section class="">
-					<pre class="h-inherit"><code data-line-numbers="0|3-8|7">// JavaScript
+					<pre class="h-inherit"><code data-line-numbers="0|3-7|7">// JavaScript
 const cafe	 =		{
 	nom:'café long',
 	typePreparation	: 'dosette'  ,
 	taille	 : 'court'		,
 	autre  : {
-		description:"On le prépare en servant un double expresso",prix  : 1.5	 ,	devise:'$'
-	} ,  
+	description  :   "On le prépare en servant un double expresso   ☕☕",prix  : 1.5	 ,	devise:'$'} ,  
 } ;
 						</code></pre>
 					<aside class="notes">
@@ -71,7 +70,7 @@ const cafe = {
 	taille: 'court',
 	autre: {
 		description:
-			"On le prépare en servant un double expresso",
+			"On le prépare en servant un double expresso ☕☕",
 		prix: 1.5,
 		devise: '$',
 	},
@@ -256,10 +255,10 @@ execCommand(
 								</code>
 							</pre>
 						</div>
-						<div >
+						<div>
 							<p>.prettierignore.json</p>
 							<pre>
-								<code data-line-numbers="all|12" class="w-100 h-70">node_modules
+								<code data-line-numbers="all|12-19" class="w-100 h-70">node_modules
 dist
 reports
 config
@@ -286,7 +285,7 @@ package-lock.json
 				<section>
 					<p>biome.json</p>
 					<pre>
-						<code data-line-numbers="all|11|31">{
+						<code data-line-numbers="all|11|31-46">{
 	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
 	"files": {
 		"ignore": [
@@ -430,26 +429,38 @@ class ChocolatChaud {
 					<pre><code>npx @biomejs/biome lint .\exemple-code\slide-3\linter.js</code></pre>
 				</section>
 				<section>
-					<h2>Configuration</h2>
+					<h2>Configuration eslint</h2>
 					<pre>
-						<code>
-							npx @biomejs/biome init
-						</code>
-					</pre>
+							<code data-line-numbers="1|2-8">npm init @eslint/config
+√ How would you like to use ESLint? · problems
+√ What type of modules does your project use? · esm
+√ Which framework does your project use? · none
+√ Does your project use TypeScript? · No / Yes
+√ Where does your code run? · browser
+√ What format do you want your config file to be in? · JavaScript
+Successfully created .eslintrc.js file in C:\Users\j.fettinger\projets\talks\Biome
+PS C:\Users\j.fettinger\projets\talks\Biome> 
+							</code>
+						</pre>
+				</section>
+
+				<section>
+					<h2>Configuration biome</h2>
 					<pre>
-						<code>
-{
-	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
-	"organizeImports": {
-		"enabled": true
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true
-		}
-	}
-}
+						<code data-line-numbers="1|6-14">npx @biomejs/biome init
+Welcome to Biome! Let's get you started...
+Files created ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	- biome.json: Your project configuration. Documentation: https://biomejs.dev/reference/configuration
+Next Steps ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	1. Setup an editor extension
+		Get live errors as you type and format when you save. Learn more: https://biomejs.dev/guides/getting-started#editor-setup      
+	2. Try a command
+		biome ci checks for lint errors and verifies formatting. Run biome --help for a full list of commands and options.
+	3. Read the documentation
+		Our website serves as a comprehensive source of guides and documentation: https://biomejs.dev
+	4. Get involved in the community
+		Ask questions, get support, or contribute by participating on GitHub (https://github.com/biomejs/biome),
+		or join our community Discord (https://discord.gg/BypW39g6Yc)
 						</code>
 					</pre>
 				</section>
@@ -490,7 +501,6 @@ class ChocolatChaud {
 					<div class="fragment fade-out" data-fragment-index="0">
 						<div class="is-flex">
 							<div>
-								<img class="r-stretch size-1" src="images/prettier.png">
 								<img class="r-stretch size-1" src="icones/eslint.svg">
 							</div>
 							<div class="is-flex justify-content-center align-items-center size-1">
@@ -501,14 +511,96 @@ class ChocolatChaud {
 						</div>
 					</div>
 					<div data-fragment-index="0" class="fragment current-visible">
-						<div class="is-flex justify-content-space-evenly">
-							<img class="size-1" src="icones/css.svg">
-							<img class="size-1" src="icones/html.svg">
-							<img class="w-100" src="icones/markdown.png">
-							<img class="size" src="icones/vue-js.svg">
-							<img class="size" src="icones/svelte.svg">
-							<img class="size" src="icones/astro.svg">
-						</div>
+							<table class="language-support">
+								<thead>
+									<tr>
+										<th>Langue</th>
+										<th>Analyse syntaxique</th>
+										<th>Formatage</th>
+										<th>Analyse statique</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Javascript</td>
+										<td>✅</td>
+										<td>✅</td>
+										<td>✅</td>
+									</tr>
+									<tr>
+										<td>TypeScript</td>
+										<td>✅</td>
+										<td>✅</td>
+										<td>✅</td>
+									</tr>
+									<tr>
+										<td>JSX</td>
+										<td>✅</td>
+										<td>✅</td>
+										<td>✅</td>
+									</tr>
+									<tr>
+										<td>TSX</td>
+										<td>✅</td>
+										<td>✅</td>
+										<td>✅</td>
+									</tr>
+									<tr>
+										<td>JSON</td>
+										<td>✅</td>
+										<td>✅</td>
+										<td>✅</td>
+									</tr>
+									<tr>
+										<td>JSONC</td>
+										<td>✅</td>
+										<td>✅</td>
+										<td>✅</td>
+									</tr>
+									<tr>
+										<td>HTML</td>
+										<td>⌛️</td>
+										<td>🚫</td>
+										<td>🚫</td>
+									</tr>
+									<tr>
+										<td>Vue</td>
+										<td>⚠️</td>
+										<td>⚠️</td>
+										<td>⚠️</td>
+									</tr>
+									<tr>
+										<td>Svelte</td>
+										<td>⚠️</td>
+										<td>⚠️</td>
+										<td>⚠️</td>
+									</tr>
+									<tr>
+										<td>Astro</td>
+										<td>⚠️</td>
+										<td>⚠️</td>
+										<td>⚠️</td>
+									</tr>
+									<tr>
+										<td>CSS</td>
+										<td>✅️</td>
+										<td>⌛️</td>
+										<td>🚫</td>
+									</tr>
+									<tr>
+										<td>Markdown</td>
+										<td>🚫</td>
+										<td>🚫</td>
+										<td>🚫</td>
+									</tr>
+								</tbody>
+								<caption>
+									✅: OK
+									🚫: Pas en cours
+									⌛️: En cours
+									⚠️: Partiellement 
+								</caption>
+							</table>
 					</div>
 					<div class="fragment">
 						<div class="is-flex justify-content-space-evenly">
@@ -546,8 +638,10 @@ class ChocolatChaud {
 					</p>
 					<aside class="notes">
 						<ol>
-							<li>Installation, pas de conf comparé à eslint</li>
-							<li>Pas tous les languages</li>
+							<li>Projet existant</li>
+							<li>Nouveau projet</li>
+							<li>Manque des languages</li>
+							<li>Pas iso règles Eslint</li>
 							<li>Prometteur, murisse</li>
 						</ol>
 					</aside>
