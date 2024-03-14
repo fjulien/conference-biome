@@ -44,7 +44,7 @@
 						<p>Avant de parler de biome</p>
 					</aside>
 				</section>
-				<section class="">
+				<section>
 					<pre class="h-inherit"><code data-line-numbers="0|3-7|7">// JavaScript
 const cafe	 =		{
 	nom:'café long',
@@ -55,13 +55,13 @@ const cafe	 =		{
 } ;
 						</code></pre>
 					<aside class="notes">
-						<ul>
+						<ol>
 							<li>Demande plus effort de lecture</li>
 							<li>ne tiens pas sur l'écran</li>
-						</ul>
+						</ol>
 					</aside>
 				</section>
-				<section class="">
+				<section>
 					<pre class="h-inherit">
 						<code data-line-numbers="0|6-11|8">// JavaScript
 const cafe = {
@@ -80,7 +80,7 @@ const cafe = {
 					<aside class="notes">
 						<ol>
 							<li>Plus claire au premier coup d'oeil</li>
-							<li>Coloration synthaxial</li>
+							<li>Pas besoin coloration synthaxial</li>
 							<li>Meilleur lecture et moins fastidieux des PR</li>
 						</ol>
 					</aside>
@@ -101,8 +101,8 @@ const cafe = {
 						<img class="r-stretch" src="images/slide-3/linter-error.png">
 						<aside class="notes">
 							<ol class="list-style-none f-size-1">
-								<li>égalité faible -> égalité stricte</li>
 								<li>let ou const au lieu de var</li>
+								<li>égalité faible -> égalité stricte</li>
 								<li>Les règles sont paramétrales</li>
 							</ol>
 						</aside>
@@ -132,14 +132,13 @@ const cafe = {
 							</li>
 							<li>
 								IDE : automatisable commit ou sauvegarde | changement d'IDE | configuration | pas de
-								CI/CD | coloration linter
+								CI/CD
 							</li>
-							<li>La configuration bien car communicatoin d'équipe</li>
 							<li>
-								LIBRAIRIE : Configuration partagé | CI/CD controle bloquante | librairis en plus | CLI |
-								branche à IDE
+								LIBRAIRIE : Configuration partagé | CI/CD bloquante | branche à IDE | librairies en plus | CLI 
 							</li>
 							<li>exemple : prettier, eslint</li>
+							<li>La configuration bien car communicatoin d'équipe</li>
 						</ol>
 					</aside>
 				</section>
@@ -178,6 +177,7 @@ const cafe = {
 								<li>+95% compatibilité tests JavaScript de prettier</li>
 								<li>Toutes les options de formatage</li>
 								<li>seule la syntaxe ecmascript est requise</li>
+								<li>but gagner en rapidité</li>
 							</ol>
 						</aside>
 					</div>
@@ -186,14 +186,13 @@ const cafe = {
 					<img class="r-stretch bk-color-black p-2 w-95" src="images/slide-4/logo-biome.svg">
 					<aside class="notes">
 						<ol>
-							<li>1 mois</li>
 							<li>42 PR</li>
 							<li>9 contributeurs</li>
 						</ol>
 					</aside>
 				</section>
 				<section>
-					<h2>Rapide</h2>
+					<h2>Rapide?</h2>
 					<figure>
 						<img class="r-stretch" src="images/slide-4/performance.png">
 						<figcaption>171 127 lignes, 2 104 fichiers</figcaption>
@@ -236,7 +235,8 @@ execCommand(
 					<img class="r-stretch" src="images/slide-4/migration-prettier-conf.png">
 					<aside class="notes">
 						<ol>
-							<li>disponible depuis peu iso</li>
+							<li>disponible depuis peu</li>
+							<li>iso</li>
 							<li>Faut déjà avoir un fichier de configuration Biome</li>
 						</ol>
 					</aside>
@@ -352,7 +352,7 @@ package-lock.json
 					<aside class="notes">
 						<ol>
 							<li>~420 fichiers</li>
-							<li>3 x et moyenne</li>
+							<li>3 x</li>
 						</ol>
 					</aside>
 				</section>
@@ -425,8 +425,6 @@ class ChocolatChaud {
   }
 }
 				</code></pre>
-					<pre><code>npx eslint .\exemple-code\slide-3\linter.js</code></pre>
-					<pre><code>npx @biomejs/biome lint .\exemple-code\slide-3\linter.js</code></pre>
 				</section>
 				<section>
 					<h2>Configuration eslint</h2>
@@ -443,7 +441,6 @@ PS C:\Users\j.fettinger\projets\talks\Biome>
 							</code>
 						</pre>
 				</section>
-
 				<section>
 					<h2>Configuration biome</h2>
 					<pre>
@@ -463,6 +460,11 @@ Next Steps ━━━━━━━━━━━━━━━━━━━━━━━
 		or join our community Discord (https://discord.gg/BypW39g6Yc)
 						</code>
 					</pre>
+					<aside class="notes">
+						<ol>
+							<li>Installer des extensions</li>
+						</ol>
+					</aside>
 				</section>
 				<section>
 					<img class="r-stretch" src="images/slide-4/eslint-eqeq.png">
@@ -475,9 +477,11 @@ Next Steps ━━━━━━━━━━━━━━━━━━━━━━━
 					</aside>
 				</section>
 				<section>
+					<pre><code>npx eslint .\exemple-code\slide-3\linter.js</code></pre>
 					<img class="r-stretch w-100" src="images/slide-4/eslint-return.png">
 				</section>
 				<section>
+					<pre><code>npx @biomejs/biome lint .\exemple-code\slide-3\linter.js</code></pre>
 					<img class="r-stretch w-100" src="images/slide-4/biome-return-1.png">
 					<aside class="notes">
 						<ol>
@@ -596,7 +600,7 @@ Next Steps ━━━━━━━━━━━━━━━━━━━━━━━
 								</tbody>
 								<caption>
 									✅: OK
-									🚫: Pas en cours
+									🚫: Pas démarré 
 									⌛️: En cours
 									⚠️: Partiellement 
 								</caption>
@@ -638,10 +642,10 @@ Next Steps ━━━━━━━━━━━━━━━━━━━━━━━
 					</p>
 					<aside class="notes">
 						<ol>
-							<li>Projet existant</li>
-							<li>Nouveau projet</li>
+							<li>Projet existant non</li>
+							<li>Nouveau projet oui</li>
 							<li>Manque des languages</li>
-							<li>Pas iso règles Eslint</li>
+							<li>Eslint règle à fixé et pas sur</li>
 							<li>Prometteur, murisse</li>
 						</ol>
 					</aside>
