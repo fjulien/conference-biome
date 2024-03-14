@@ -135,7 +135,8 @@ const cafe = {
 								CI/CD
 							</li>
 							<li>
-								LIBRAIRIE : Configuration partagé | CI/CD bloquante | branche à IDE | librairies en plus | CLI 
+								LIBRAIRIE : Configuration partagé | CI/CD bloquante | branche à IDE | librairies en plus
+								| CLI
 							</li>
 							<li>exemple : prettier, eslint</li>
 							<li>La configuration bien car communicatoin d'équipe</li>
@@ -192,7 +193,7 @@ const cafe = {
 					</aside>
 				</section>
 				<section>
-					<h2>Rapide?</h2>
+					<h2>Rapide ?</h2>
 					<figure>
 						<img class="r-stretch" src="images/slide-4/performance.png">
 						<figcaption>171 127 lignes, 2 104 fichiers</figcaption>
@@ -232,16 +233,6 @@ execCommand(
 							npx @biomejs/biome migrate prettier --write
 						</code>
 					</pre>
-					<img class="r-stretch" src="images/slide-4/migration-prettier-conf.png">
-					<aside class="notes">
-						<ol>
-							<li>disponible depuis peu</li>
-							<li>iso</li>
-							<li>Faut déjà avoir un fichier de configuration Biome</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
 					<div class="is-flex">
 						<div class="w-100">
 							<p>.prettierrc.json</p>
@@ -258,17 +249,11 @@ execCommand(
 						<div>
 							<p>.prettierignore.json</p>
 							<pre>
-								<code data-line-numbers="all|12-19" class="w-100 h-70">node_modules
+								<code data-line-numbers="all|7-13" class="w-100">node_modules
 dist
-reports
-config
 package-lock.json
 .git
-.project
-.idea
-.vscode
-.nyc_output
-.stats
+...
 // AJOUTER
 *.scss
 *.html
@@ -281,6 +266,13 @@ package-lock.json
 							</pre>
 						</div>
 					</div>
+					<aside class="notes">
+						<ol>
+							<li>disponible depuis peu</li>
+							<li>iso</li>
+							<li>Faut déjà avoir un fichier de configuration Biome</li>
+						</ol>
+					</aside>
 				</section>
 				<section>
 					<p>biome.json</p>
@@ -386,7 +378,7 @@ package-lock.json
 						<caption>
 							<p>Retour après formatage de git</p>
 							<pre class="h-inherit">
-								<code class="t-size-2">git --no-pager diff --shortstat main</code>
+								<code class="t-font-size-3">git --no-pager diff --shortstat main</code>
 							</pre>
 						</caption>
 					</table>
@@ -403,8 +395,8 @@ package-lock.json
 					<aside class="notes">
 						<ol>
 							<li>million (1 000 000)</li>
-							<li>même configuration</li>
-							<li>même fichier ignorés</li>
+							<li>JavaScript runtime</li>
+							<li>pourquoi nodejs, plein de fichier js</li>
 						</ol>
 					</aside>
 				</section>
@@ -500,138 +492,144 @@ Next Steps ━━━━━━━━━━━━━━━━━━━━━━━
 				</section>
 			</section>
 			<section>
-				<h2>Feuille de route 2024</h2>
-				<div class="r-stack">
-					<div class="fragment fade-out" data-fragment-index="0">
-						<div class="is-flex">
-							<div>
-								<img class="r-stretch size-1" src="icones/eslint.svg">
-							</div>
-							<div class="is-flex justify-content-center align-items-center size-1">
-								<img class="m-0 w-25" src="icones/configuration.svg">
-								<img class="m-0 w-50" src="icones/fleche-droite.png">
-							</div>
-							<img class="r-stretch size-1" src="icones/biome.svg">
+				<section>
+					<h2>Feuille de route 2024</h2>
+					<div class="is-flex justify-content-center">
+						<div>
+							<img class="r-stretch size-1" src="icones/eslint.svg">
+						</div>
+						<div class="is-flex justify-content-center align-items-center size-1">
+							<img class="m-0 w-25" src="icones/configuration.svg">
+							<img class="m-0 w-50" src="icones/fleche-droite.png">
+						</div>
+						<img class="r-stretch size-1" src="icones/biome.svg">
+					</div>
+					<aside class="notes">
+						<ol>
+							<li>Migration facilité Prettier. Pas eslint</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<table class="language-support">
+						<thead>
+							<tr>
+								<th>Langue</th>
+								<th>Analyse syntaxique</th>
+								<th>Formatage</th>
+								<th>Analyse statique</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Javascript</td>
+								<td>✅</td>
+								<td>✅</td>
+								<td>✅</td>
+							</tr>
+							<tr>
+								<td>TypeScript</td>
+								<td>✅</td>
+								<td>✅</td>
+								<td>✅</td>
+							</tr>
+							<tr>
+								<td>JSX</td>
+								<td>✅</td>
+								<td>✅</td>
+								<td>✅</td>
+							</tr>
+							<tr>
+								<td>TSX</td>
+								<td>✅</td>
+								<td>✅</td>
+								<td>✅</td>
+							</tr>
+							<tr>
+								<td>JSON</td>
+								<td>✅</td>
+								<td>✅</td>
+								<td>✅</td>
+							</tr>
+							<tr>
+								<td>JSONC</td>
+								<td>✅</td>
+								<td>✅</td>
+								<td>✅</td>
+							</tr>
+							<tr>
+								<td>HTML</td>
+								<td>⌛️</td>
+								<td>🚫</td>
+								<td>🚫</td>
+							</tr>
+							<tr>
+								<td>Vue</td>
+								<td>⚠️</td>
+								<td>⚠️</td>
+								<td>⚠️</td>
+							</tr>
+							<tr>
+								<td>Svelte</td>
+								<td>⚠️</td>
+								<td>⚠️</td>
+								<td>⚠️</td>
+							</tr>
+							<tr>
+								<td>Astro</td>
+								<td>⚠️</td>
+								<td>⚠️</td>
+								<td>⚠️</td>
+							</tr>
+							<tr>
+								<td>CSS</td>
+								<td>✅️</td>
+								<td>⌛️</td>
+								<td>🚫</td>
+							</tr>
+							<tr>
+								<td>Markdown</td>
+								<td>🚫</td>
+								<td>🚫</td>
+								<td>🚫</td>
+							</tr>
+						</tbody>
+						<caption>
+							✅: OK
+							🚫: Pas démarré
+							⌛️: En cours
+							⚠️: Partiellement
+						</caption>
+					</table>
+					<aside class="notes">
+						<ol>
+							<li>partielle des fichiers Astro, Svelte et Vue</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<div class="is-flex justify-content-space-evenly">
+						<div class="is-flex justify-content-center direction-column align-items-center size-1">
+							<img src="icones/css.svg">
+							<img src="icones/javascript.svg">
+						</div>
+						<img class="size-1" src="icones/double-fleche.svg">
+						<div class="is-flex justify-content-center direction-column align-items-center size-1">
+							<img src="icones/html.svg">
+							<img src="icones/npm.svg">
 						</div>
 					</div>
-					<div data-fragment-index="0" class="fragment current-visible">
-							<table class="language-support">
-								<thead>
-									<tr>
-										<th>Langue</th>
-										<th>Analyse syntaxique</th>
-										<th>Formatage</th>
-										<th>Analyse statique</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Javascript</td>
-										<td>✅</td>
-										<td>✅</td>
-										<td>✅</td>
-									</tr>
-									<tr>
-										<td>TypeScript</td>
-										<td>✅</td>
-										<td>✅</td>
-										<td>✅</td>
-									</tr>
-									<tr>
-										<td>JSX</td>
-										<td>✅</td>
-										<td>✅</td>
-										<td>✅</td>
-									</tr>
-									<tr>
-										<td>TSX</td>
-										<td>✅</td>
-										<td>✅</td>
-										<td>✅</td>
-									</tr>
-									<tr>
-										<td>JSON</td>
-										<td>✅</td>
-										<td>✅</td>
-										<td>✅</td>
-									</tr>
-									<tr>
-										<td>JSONC</td>
-										<td>✅</td>
-										<td>✅</td>
-										<td>✅</td>
-									</tr>
-									<tr>
-										<td>HTML</td>
-										<td>⌛️</td>
-										<td>🚫</td>
-										<td>🚫</td>
-									</tr>
-									<tr>
-										<td>Vue</td>
-										<td>⚠️</td>
-										<td>⚠️</td>
-										<td>⚠️</td>
-									</tr>
-									<tr>
-										<td>Svelte</td>
-										<td>⚠️</td>
-										<td>⚠️</td>
-										<td>⚠️</td>
-									</tr>
-									<tr>
-										<td>Astro</td>
-										<td>⚠️</td>
-										<td>⚠️</td>
-										<td>⚠️</td>
-									</tr>
-									<tr>
-										<td>CSS</td>
-										<td>✅️</td>
-										<td>⌛️</td>
-										<td>🚫</td>
-									</tr>
-									<tr>
-										<td>Markdown</td>
-										<td>🚫</td>
-										<td>🚫</td>
-										<td>🚫</td>
-									</tr>
-								</tbody>
-								<caption>
-									✅: OK
-									🚫: Pas démarré 
-									⌛️: En cours
-									⚠️: Partiellement 
-								</caption>
-							</table>
-					</div>
-					<div class="fragment">
-						<div class="is-flex justify-content-space-evenly">
-							<div class="is-flex justify-content-center direction-column align-items-center size-1">
-								<img src="icones/css.svg">
-								<img src="icones/javascript.svg">
-							</div>
-							<img class="r-90 w-75" src="icones/double-fleche.png">
-							<div class="is-flex justify-content-center direction-column align-items-center size-1">
-								<img src="icones/html.svg">
-								<img src="icones/npm.svg">
-							</div>
-						</div>
-					</div>
-				</div>
-				<aside class="notes">
-					<ol>
-						<li>Migration facilité Prettier. Pas eslint</li>
-						<li>>Prise en change de plus de languages</li>
-						<li>partielle des fichiers Astro, Svelte et Vue</li>
-						<li>"cross-linting"</li>
-						<li>Analyse croisée entre languages</li>
-						<li>class css non utilisée dans du html</li>
-						<li>détecter les dépendances pas utilisées dans un projet</li>
-					</ol>
-				</aside>
+					<aside class="notes">
+						<ol>
+							<li>"cross-linting"</li>
+							<li>Analyse croisée entre languages</li>
+							<li>class css non utilisée dans du html</li>
+							<li>détecter les dépendances pas utilisées dans un projet</li>
+						</ol>
+					</aside>
+				</section>
 			</section>
+
 			</section>
 
 			<!-- 5 -->
