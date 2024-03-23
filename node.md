@@ -66,3 +66,8 @@ exemple de commande et conf
 les fichiers supporté biome
 image rust et formatage
 erreur
+
+## version 2
+changer l'ordre sur deux slides
+gif sur formatages et analyse
+live coding, avoir deux projet avec analyseur de code
