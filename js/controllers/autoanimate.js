@@ -1,11 +1,11 @@
-import {
-	queryAll,
-	extend,
-	createStyleSheet,
-	matches,
-	closest,
-} from "../utils/util.js";
 import { FRAGMENT_STYLE_REGEX } from "../utils/constants.js";
+import {
+	closest,
+	createStyleSheet,
+	extend,
+	matches,
+	queryAll,
+} from "../utils/util.js";
 
 // Counter used to generate unique IDs for auto-animated elements
 let autoAnimateCounter = 0;
@@ -29,9 +29,9 @@ export default class AutoAnimate {
 		// Clean up after prior animations
 		this.reset();
 
-		let allSlides = this.Reveal.getSlides();
-		let toSlideIndex = allSlides.indexOf(toSlide);
-		let fromSlideIndex = allSlides.indexOf(fromSlide);
+		const allSlides = this.Reveal.getSlides();
+		const toSlideIndex = allSlides.indexOf(toSlide);
+		const fromSlideIndex = allSlides.indexOf(fromSlide);
 
 		// Ensure that both slides are auto-animate targets with the same data-auto-animate-id value
 		// (including null if absent on both) and that data-auto-animate-restart isn't set on the
@@ -49,7 +49,7 @@ export default class AutoAnimate {
 			this.autoAnimateStyleSheet =
 				this.autoAnimateStyleSheet || createStyleSheet();
 
-			let animationOptions = this.getAutoAnimateOptions(toSlide);
+			const animationOptions = this.getAutoAnimateOptions(toSlide);
 
 			// Set our starting state
 			fromSlide.dataset.autoAnimate = "pending";
@@ -62,12 +62,12 @@ export default class AutoAnimate {
 			// If the from-slide is hidden because it has moved outside
 			// the view distance, we need to temporarily show it while
 			// measuring
-			let fromSlideIsHidden = fromSlide.style.display === "none";
+			const fromSlideIsHidden = fromSlide.style.display === "none";
 			if (fromSlideIsHidden)
 				fromSlide.style.display = this.Reveal.getConfig().display;
 
 			// Inject our auto-animate styles for this transition
-			let css = this.getAutoAnimatableElements(fromSlide, toSlide).map(
+			const css = this.getAutoAnimatableElements(fromSlide, toSlide).map(
 				(elements) => {
 					return this.autoAnimateElements(
 						elements.from,
@@ -87,12 +87,12 @@ export default class AutoAnimate {
 				this.Reveal.getConfig().autoAnimateUnmatched === true
 			) {
 				// Our default timings for unmatched elements
-				let defaultUnmatchedDuration = animationOptions.duration * 0.8,
-					defaultUnmatchedDelay = animationOptions.duration * 0.2;
+				const defaultUnmatchedDuration = animationOptions.duration * 0.8;
+				const defaultUnmatchedDelay = animationOptions.duration * 0.2;
 
 				this.getUnmatchedAutoAnimateElements(toSlide).forEach(
 					(unmatchedElement) => {
-						let unmatchedOptions = this.getAutoAnimateOptions(
+						const unmatchedOptions = this.getAutoAnimateOptions(
 							unmatchedElement,
 							animationOptions,
 						);
@@ -104,7 +104,7 @@ export default class AutoAnimate {
 							unmatchedOptions.duration !== animationOptions.duration ||
 							unmatchedOptions.delay !== animationOptions.delay
 						) {
-							id = "unmatched-" + autoAnimateCounter++;
+							id = `unmatched-${autoAnimateCounter++}`;
 							css.push(
 								`[data-auto-animate="running"] [data-auto-animate-target="${id}"] { transition: opacity ${unmatchedOptions.duration}s ease ${unmatchedOptions.delay}s; }`,
 							);
@@ -169,7 +169,7 @@ export default class AutoAnimate {
 		});
 
 		// Remove the animation sheet
-		if (this.autoAnimateStyleSheet && this.autoAnimateStyleSheet.parentNode) {
+		if (this.autoAnimateStyleSheet?.parentNode) {
 			this.autoAnimateStyleSheet.parentNode.removeChild(
 				this.autoAnimateStyleSheet,
 			);
@@ -197,7 +197,7 @@ export default class AutoAnimate {
 
 		// Each element may override any of the auto-animate options
 		// like transition easing, duration and delay via data-attributes
-		let options = this.getAutoAnimateOptions(to, animationOptions);
+		const options = this.getAutoAnimateOptions(to, animationOptions);
 
 		// If we're using a custom element matcher the element options
 		// may contain additional transition overrides
@@ -208,12 +208,12 @@ export default class AutoAnimate {
 		if (typeof elementOptions.easing !== "undefined")
 			options.easing = elementOptions.easing;
 
-		let fromProps = this.getAutoAnimatableProperties(
-				"from",
-				from,
-				elementOptions,
-			),
-			toProps = this.getAutoAnimatableProperties("to", to, elementOptions);
+		const fromProps = this.getAutoAnimatableProperties(
+			"from",
+			from,
+			elementOptions,
+		);
+		const toProps = this.getAutoAnimatableProperties("to", to, elementOptions);
 
 		// Maintain fragment visibility for matching elements when
 		// we're navigating forwards, this way the viewer won't need
@@ -221,13 +221,13 @@ export default class AutoAnimate {
 		if (to.classList.contains("fragment")) {
 			// Don't auto-animate the opacity of fragments to avoid
 			// conflicts with fragment animations
-			delete toProps.styles["opacity"];
+			toProps.styles.opacity = undefined;
 
 			if (from.classList.contains("fragment")) {
-				let fromFragmentStyle = (from.className.match(FRAGMENT_STYLE_REGEX) || [
-					"",
-				])[0];
-				let toFragmentStyle = (to.className.match(FRAGMENT_STYLE_REGEX) || [
+				const fromFragmentStyle = (from.className.match(
+					FRAGMENT_STYLE_REGEX,
+				) || [""])[0];
+				const toFragmentStyle = (to.className.match(FRAGMENT_STYLE_REGEX) || [
 					"",
 				])[0];
 
@@ -246,9 +246,9 @@ export default class AutoAnimate {
 		// the 'to' element so that it matches the position and size
 		// of the 'from' element
 		if (elementOptions.translate !== false || elementOptions.scale !== false) {
-			let presentationScale = this.Reveal.getScale();
+			const presentationScale = this.Reveal.getScale();
 
-			let delta = {
+			const delta = {
 				x: (fromProps.x - toProps.x) / presentationScale,
 				y: (fromProps.y - toProps.y) / presentationScale,
 				scaleX: fromProps.width / toProps.width,
@@ -261,29 +261,28 @@ export default class AutoAnimate {
 			delta.scaleX = Math.round(delta.scaleX * 1000) / 1000;
 			delta.scaleX = Math.round(delta.scaleX * 1000) / 1000;
 
-			let translate =
-					elementOptions.translate !== false &&
-					(delta.x !== 0 || delta.y !== 0),
-				scale =
-					elementOptions.scale !== false &&
-					(delta.scaleX !== 0 || delta.scaleY !== 0);
+			const translate =
+				elementOptions.translate !== false && (delta.x !== 0 || delta.y !== 0);
+			const scale =
+				elementOptions.scale !== false &&
+				(delta.scaleX !== 0 || delta.scaleY !== 0);
 
 			// No need to transform if nothing's changed
 			if (translate || scale) {
-				let transform = [];
+				const transform = [];
 
 				if (translate) transform.push(`translate(${delta.x}px, ${delta.y}px)`);
 				if (scale) transform.push(`scale(${delta.scaleX}, ${delta.scaleY})`);
 
-				fromProps.styles["transform"] = transform.join(" ");
+				fromProps.styles.transform = transform.join(" ");
 				fromProps.styles["transform-origin"] = "top left";
 
-				toProps.styles["transform"] = "none";
+				toProps.styles.transform = "none";
 			}
 		}
 
 		// Delete all unchanged 'to' styles
-		for (let propertyName in toProps.styles) {
+		for (const propertyName in toProps.styles) {
 			const toValue = toProps.styles[propertyName];
 			const fromValue = fromProps.styles[propertyName];
 
@@ -304,52 +303,34 @@ export default class AutoAnimate {
 
 		let css = "";
 
-		let toStyleProperties = Object.keys(toProps.styles);
+		const toStyleProperties = Object.keys(toProps.styles);
 
 		// Only create animate this element IF at least one style
 		// property has changed
 		if (toStyleProperties.length > 0) {
 			// Instantly move to the 'from' state
-			fromProps.styles["transition"] = "none";
+			fromProps.styles.transition = "none";
 
 			// Animate towards the 'to' state
-			toProps.styles["transition"] =
-				`all ${options.duration}s ${options.easing} ${options.delay}s`;
+			toProps.styles.transition = `all ${options.duration}s ${options.easing} ${options.delay}s`;
 			toProps.styles["transition-property"] = toStyleProperties.join(", ");
 			toProps.styles["will-change"] = toStyleProperties.join(", ");
 
 			// Build up our custom CSS. We need to override inline styles
 			// so we need to make our styles vErY IMPORTANT!1!!
-			let fromCSS = Object.keys(fromProps.styles)
+			const fromCSS = Object.keys(fromProps.styles)
 				.map((propertyName) => {
-					return (
-						propertyName +
-						": " +
-						fromProps.styles[propertyName] +
-						" !important;"
-					);
+					return `${propertyName}: ${fromProps.styles[propertyName]} !important;`;
 				})
 				.join("");
 
-			let toCSS = Object.keys(toProps.styles)
+			const toCSS = Object.keys(toProps.styles)
 				.map((propertyName) => {
-					return (
-						propertyName + ": " + toProps.styles[propertyName] + " !important;"
-					);
+					return `${propertyName}: ${toProps.styles[propertyName]} !important;`;
 				})
 				.join("");
 
-			css =
-				'[data-auto-animate-target="' +
-				id +
-				'"] {' +
-				fromCSS +
-				"}" +
-				'[data-auto-animate="running"] [data-auto-animate-target="' +
-				id +
-				'"] {' +
-				toCSS +
-				"}";
+			css = `[data-auto-animate-target="${id}"] {${fromCSS}}[data-auto-animate="running"] [data-auto-animate-target="${id}"] {${toCSS}}`;
 		}
 
 		return css;
@@ -374,7 +355,7 @@ export default class AutoAnimate {
 
 		// Inherit options from parent elements
 		if (element.parentNode) {
-			let autoAnimatedParent = closest(
+			const autoAnimatedParent = closest(
 				element.parentNode,
 				"[data-auto-animate-target]",
 			);
@@ -388,11 +369,11 @@ export default class AutoAnimate {
 		}
 
 		if (element.dataset.autoAnimateDuration) {
-			options.duration = parseFloat(element.dataset.autoAnimateDuration);
+			options.duration = Number.parseFloat(element.dataset.autoAnimateDuration);
 		}
 
 		if (element.dataset.autoAnimateDelay) {
-			options.delay = parseFloat(element.dataset.autoAnimateDelay);
+			options.delay = Number.parseFloat(element.dataset.autoAnimateDelay);
 		}
 
 		return options;
@@ -406,9 +387,9 @@ export default class AutoAnimate {
 	 * @param {String} direction 'from' or 'to'
 	 */
 	getAutoAnimatableProperties(direction, element, elementOptions) {
-		let config = this.Reveal.getConfig();
+		const config = this.Reveal.getConfig();
 
-		let properties = { styles: [] };
+		const properties = { styles: [] };
 
 		// Position and size
 		if (elementOptions.translate !== false || elementOptions.scale !== false) {
@@ -424,7 +405,7 @@ export default class AutoAnimate {
 					// with zoom for scaling the deck ¯\_(ツ)_/¯
 					bounds = element.getBoundingClientRect();
 				} else {
-					let scale = this.Reveal.getScale();
+					const scale = this.Reveal.getScale();
 					bounds = {
 						x: element.offsetLeft * scale,
 						y: element.offsetTop * scale,
@@ -458,11 +439,11 @@ export default class AutoAnimate {
 				// Use a unitless value for line-height so that it inherits properly
 				if (style.property === "line-height") {
 					value =
-						parseFloat(computedStyles["line-height"]) /
-						parseFloat(computedStyles["font-size"]);
+						Number.parseFloat(computedStyles["line-height"]) /
+						Number.parseFloat(computedStyles["font-size"]);
 				}
 
-				if (isNaN(value)) {
+				if (Number.isNaN(value)) {
 					value = computedStyles[style.property];
 				}
 			}
@@ -487,14 +468,14 @@ export default class AutoAnimate {
 	 * element we're animating to
 	 */
 	getAutoAnimatableElements(fromSlide, toSlide) {
-		let matcher =
+		const matcher =
 			typeof this.Reveal.getConfig().autoAnimateMatcher === "function"
 				? this.Reveal.getConfig().autoAnimateMatcher
 				: this.getAutoAnimatePairs;
 
-		let pairs = matcher.call(this, fromSlide, toSlide);
+		const pairs = matcher.call(this, fromSlide, toSlide);
 
-		let reserved = [];
+		const reserved = [];
 
 		// Remove duplicate pairs
 		return pairs.filter((pair, index) => {
@@ -512,7 +493,7 @@ export default class AutoAnimate {
 	 * the `autoAnimateMatcher` config option.
 	 */
 	getAutoAnimatePairs(fromSlide, toSlide) {
-		let pairs = [];
+		const pairs = [];
 
 		const codeNodes = "pre";
 		const textNodes = "h1, h2, h3, h4, h5, h6, p, li";
@@ -525,7 +506,7 @@ export default class AutoAnimate {
 			toSlide,
 			"[data-id]",
 			(node) => {
-				return node.nodeName + ":::" + node.getAttribute("data-id");
+				return `${node.nodeName}:::${node.getAttribute("data-id")}`;
 			},
 		);
 
@@ -536,7 +517,7 @@ export default class AutoAnimate {
 			toSlide,
 			textNodes,
 			(node) => {
-				return node.nodeName + ":::" + node.innerText;
+				return `${node.nodeName}:::${node.innerText}`;
 			},
 		);
 
@@ -547,11 +528,9 @@ export default class AutoAnimate {
 			toSlide,
 			mediaNodes,
 			(node) => {
-				return (
-					node.nodeName +
-					":::" +
-					(node.getAttribute("src") || node.getAttribute("data-src"))
-				);
+				return `${node.nodeName}:::${
+					node.getAttribute("src") || node.getAttribute("data-src")
+				}`;
 			},
 		);
 
@@ -562,7 +541,7 @@ export default class AutoAnimate {
 			toSlide,
 			codeNodes,
 			(node) => {
-				return node.nodeName + ":::" + node.innerText;
+				return `${node.nodeName}:::${node.innerText}`;
 			},
 		);
 
@@ -652,8 +631,8 @@ export default class AutoAnimate {
 		serializer,
 		animationOptions,
 	) {
-		let fromMatches = {};
-		let toMatches = {};
+		const fromMatches = {};
+		const toMatches = {};
 
 		[].slice
 			.call(fromScope.querySelectorAll(selector))

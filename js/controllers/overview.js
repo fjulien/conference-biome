@@ -89,7 +89,7 @@ export default class Overview {
 			hslide.setAttribute("data-index-h", h);
 			transformElement(
 				hslide,
-				"translate3d(" + h * this.overviewSlideWidth + "px, 0, 0)",
+				`translate3d(${h * this.overviewSlideWidth}px, 0, 0)`,
 			);
 
 			if (hslide.classList.contains("stack")) {
@@ -99,7 +99,7 @@ export default class Overview {
 
 					transformElement(
 						vslide,
-						"translate3d(0, " + v * this.overviewSlideHeight + "px, 0)",
+						`translate3d(0, ${v * this.overviewSlideHeight}px, 0)`,
 					);
 				});
 			}
@@ -110,13 +110,13 @@ export default class Overview {
 			(hbackground, h) => {
 				transformElement(
 					hbackground,
-					"translate3d(" + h * this.overviewSlideWidth + "px, 0, 0)",
+					`translate3d(${h * this.overviewSlideWidth}px, 0, 0)`,
 				);
 
 				queryAll(hbackground, ".slide-background").forEach((vbackground, v) => {
 					transformElement(
 						vbackground,
-						"translate3d(0, " + v * this.overviewSlideHeight + "px, 0)",
+						`translate3d(0, ${v * this.overviewSlideHeight}px, 0)`,
 					);
 				});
 			},
@@ -134,9 +134,9 @@ export default class Overview {
 
 		this.Reveal.transformSlides({
 			overview: [
-				"scale(" + scale + ")",
-				"translateX(" + -indices.h * this.overviewSlideWidth + "px)",
-				"translateY(" + -indices.v * this.overviewSlideHeight + "px)",
+				`scale(${scale})`,
+				`translateX(${-indices.h * this.overviewSlideWidth}px)`,
+				`translateY(${-indices.v * this.overviewSlideHeight}px)`,
 			].join(" "),
 		});
 	}
@@ -249,8 +249,8 @@ export default class Overview {
 				this.deactivate();
 
 				if (element.nodeName.match(/section/gi)) {
-					let h = parseInt(element.getAttribute("data-index-h"), 10),
-						v = parseInt(element.getAttribute("data-index-v"), 10);
+					const h = Number.parseInt(element.getAttribute("data-index-h"), 10);
+					const v = Number.parseInt(element.getAttribute("data-index-v"), 10);
 
 					this.Reveal.slide(h, v);
 				}

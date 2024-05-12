@@ -121,7 +121,7 @@ export default class Pointer {
 		if (Date.now() - this.lastMouseWheelStep > 1000) {
 			this.lastMouseWheelStep = Date.now();
 
-			let delta = event.detail || -event.wheelDelta;
+			const delta = event.detail || -event.wheelDelta;
 			if (delta > 0) {
 				this.Reveal.next();
 			} else if (delta < 0) {

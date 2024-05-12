@@ -44,7 +44,7 @@ export default class JumpToSlide {
 			this.jumpInput.value = "";
 
 			clearTimeout(this.jumpTimeout);
-			delete this.jumpTimeout;
+			this.jumpTimeout = undefined;
 		}
 	}
 
@@ -57,7 +57,7 @@ export default class JumpToSlide {
 	 */
 	jump() {
 		clearTimeout(this.jumpTimeout);
-		delete this.jumpTimeout;
+		this.jumpTimeout = undefined;
 
 		let query = this.jumpInput.value.trim("");
 		let indices;
@@ -71,7 +71,7 @@ export default class JumpToSlide {
 				slideNumberFormat === SLIDE_NUMBER_FORMAT_CURRENT ||
 				slideNumberFormat === SLIDE_NUMBER_FORMAT_CURRENT_SLASH_TOTAL
 			) {
-				const slide = this.Reveal.getSlides()[parseInt(query, 10) - 1];
+				const slide = this.Reveal.getSlides()[Number.parseInt(query, 10) - 1];
 				if (slide) {
 					indices = this.Reveal.getIndices(slide);
 				}
@@ -98,14 +98,13 @@ export default class JumpToSlide {
 		if (indices && query !== "") {
 			this.Reveal.slide(indices.h, indices.v, indices.f);
 			return true;
-		} else {
-			this.Reveal.slide(
-				this.indicesOnShow.h,
-				this.indicesOnShow.v,
-				this.indicesOnShow.f,
-			);
-			return false;
 		}
+		this.Reveal.slide(
+			this.indicesOnShow.h,
+			this.indicesOnShow.v,
+			this.indicesOnShow.f,
+		);
+		return false;
 	}
 
 	jumpAfter(delay) {
@@ -118,7 +117,7 @@ export default class JumpToSlide {
 	 * of our slides and returns the first match.
 	 */
 	search(query) {
-		const regex = new RegExp("\\b" + query.trim() + "\\b", "i");
+		const regex = new RegExp(`\\b${query.trim()}\\b`, "i");
 
 		const slide = this.Reveal.getSlides().find((slide) => {
 			return regex.test(slide.innerText);
@@ -126,9 +125,8 @@ export default class JumpToSlide {
 
 		if (slide) {
 			return this.Reveal.getIndices(slide);
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	/**

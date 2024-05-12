@@ -1,5 +1,5 @@
 import { SLIDES_SELECTOR } from "../utils/constants.js";
-import { queryAll, createStyleSheet } from "../utils/util.js";
+import { createStyleSheet, queryAll } from "../utils/util.js";
 
 /**
  * Setups up our presentation for printing/exporting to PDF.
@@ -27,38 +27,34 @@ export default class PrintView {
 		);
 
 		// Dimensions of the PDF pages
-		const pageWidth = Math.floor(slideSize.width * (1 + config.margin)),
-			pageHeight = Math.floor(slideSize.height * (1 + config.margin));
+		const pageWidth = Math.floor(slideSize.width * (1 + config.margin));
+		const pageHeight = Math.floor(slideSize.height * (1 + config.margin));
 
 		// Dimensions of slides within the pages
-		const slideWidth = slideSize.width,
-			slideHeight = slideSize.height;
+		const slideWidth = slideSize.width;
+		const slideHeight = slideSize.height;
 
 		await new Promise(requestAnimationFrame);
 
 		// Let the browser know what page size we want to print
 		createStyleSheet(
-			"@page{size:" + pageWidth + "px " + pageHeight + "px; margin: 0px;}",
+			`@page{size:${pageWidth}px ${pageHeight}px; margin: 0px;}`,
 		);
 
 		// Limit the size of certain elements to the dimensions of the slide
 		createStyleSheet(
-			".reveal section>img, .reveal section>video, .reveal section>iframe{max-width: " +
-				slideWidth +
-				"px; max-height:" +
-				slideHeight +
-				"px}",
+			`.reveal section>img, .reveal section>video, .reveal section>iframe{max-width: ${slideWidth}px; max-height:${slideHeight}px}`,
 		);
 
 		document.documentElement.classList.add("reveal-print", "print-pdf");
-		document.body.style.width = pageWidth + "px";
-		document.body.style.height = pageHeight + "px";
+		document.body.style.width = `${pageWidth}px`;
+		document.body.style.height = `${pageHeight}px`;
 
 		const viewportElement = this.Reveal.getViewportElement();
 		let presentationBackground;
 		if (viewportElement) {
 			const viewportStyles = window.getComputedStyle(viewportElement);
-			if (viewportStyles && viewportStyles.background) {
+			if (viewportStyles?.background) {
 				presentationBackground = viewportStyles.background;
 			}
 		}
@@ -82,7 +78,7 @@ export default class PrintView {
 			// children will be
 			if (slide.classList.contains("stack") === false) {
 				// Center the slide inside of the page, giving the slide some margin
-				let left = (pageWidth - slideWidth) / 2;
+				const left = (pageWidth - slideWidth) / 2;
 				let top = (pageHeight - slideHeight) / 2;
 
 				const contentHeight = slideScrollHeights[index];
@@ -105,8 +101,9 @@ export default class PrintView {
 				pages.push(page);
 
 				page.className = "pdf-page";
-				page.style.height =
-					(pageHeight + config.pdfPageHeightOffset) * numberOfPages + "px";
+				page.style.height = `${
+					(pageHeight + config.pdfPageHeightOffset) * numberOfPages
+				}px`;
 
 				// Copy the presentation-wide background to each individual
 				// page when printing
@@ -117,9 +114,9 @@ export default class PrintView {
 				page.appendChild(slide);
 
 				// Position the slide inside of the page
-				slide.style.left = left + "px";
-				slide.style.top = top + "px";
-				slide.style.width = slideWidth + "px";
+				slide.style.left = `${left}px`;
+				slide.style.top = `${top}px`;
+				slide.style.width = `${slideWidth}px`;
 
 				this.Reveal.slideContent.layout(slide);
 
@@ -146,9 +143,9 @@ export default class PrintView {
 						if (notesLayout === "separate-page") {
 							pages.push(notesElement);
 						} else {
-							notesElement.style.left = notesSpacing + "px";
-							notesElement.style.bottom = notesSpacing + "px";
-							notesElement.style.width = pageWidth - notesSpacing * 2 + "px";
+							notesElement.style.left = `${notesSpacing}px`;
+							notesElement.style.bottom = `${notesSpacing}px`;
+							notesElement.style.width = `${pageWidth - notesSpacing * 2}px`;
 							page.appendChild(notesElement);
 						}
 					}
@@ -178,13 +175,13 @@ export default class PrintView {
 					fragmentGroups.forEach(function (fragments, index) {
 						// Remove 'current-fragment' from the previous group
 						if (previousFragmentStep) {
-							previousFragmentStep.forEach(function (fragment) {
+							previousFragmentStep.forEach((fragment) => {
 								fragment.classList.remove("current-fragment");
 							});
 						}
 
 						// Show the fragments for the current index
-						fragments.forEach(function (fragment) {
+						fragments.forEach((fragment) => {
 							fragment.classList.add("visible", "current-fragment");
 						}, this);
 
@@ -196,7 +193,7 @@ export default class PrintView {
 							const numberElement =
 								clonedPage.querySelector(".slide-number-pdf");
 							const fragmentNumber = index + 1;
-							numberElement.innerHTML += "." + fragmentNumber;
+							numberElement.innerHTML += `.${fragmentNumber}`;
 						}
 
 						pages.push(clonedPage);
@@ -205,19 +202,17 @@ export default class PrintView {
 					}, this);
 
 					// Reset the first/original page so that all fragments are hidden
-					fragmentGroups.forEach(function (fragments) {
-						fragments.forEach(function (fragment) {
+					fragmentGroups.forEach((fragments) => {
+						fragments.forEach((fragment) => {
 							fragment.classList.remove("visible", "current-fragment");
 						});
 					});
 				}
 				// Show all fragments
 				else {
-					queryAll(page, ".fragment:not(.fade-out)").forEach(
-						function (fragment) {
-							fragment.classList.add("visible");
-						},
-					);
+					queryAll(page, ".fragment:not(.fade-out)").forEach((fragment) => {
+						fragment.classList.add("visible");
+					});
 				}
 			}
 		}, this);

@@ -50,10 +50,12 @@ export default class Fragments {
 	 * @return {{prev: boolean, next: boolean}}
 	 */
 	availableRoutes() {
-		let currentSlide = this.Reveal.getCurrentSlide();
+		const currentSlide = this.Reveal.getCurrentSlide();
 		if (currentSlide && this.Reveal.getConfig().fragments) {
-			let fragments = currentSlide.querySelectorAll(".fragment:not(.disabled)");
-			let hiddenFragments = currentSlide.querySelectorAll(
+			const fragments = currentSlide.querySelectorAll(
+				".fragment:not(.disabled)",
+			);
+			const hiddenFragments = currentSlide.querySelectorAll(
 				".fragment:not(.disabled):not(.visible)",
 			);
 
@@ -61,9 +63,8 @@ export default class Fragments {
 				prev: fragments.length - hiddenFragments.length > 0,
 				next: !!hiddenFragments.length,
 			};
-		} else {
-			return { prev: false, next: false };
 		}
+		return { prev: false, next: false };
 	}
 
 	/**
@@ -88,14 +89,17 @@ export default class Fragments {
 	sort(fragments, grouped = false) {
 		fragments = Array.from(fragments);
 
-		let ordered = [],
-			unordered = [],
-			sorted = [];
+		let ordered = [];
+		const unordered = [];
+		const sorted = [];
 
 		// Group ordered and unordered elements
 		fragments.forEach((fragment) => {
 			if (fragment.hasAttribute("data-fragment-index")) {
-				let index = parseInt(fragment.getAttribute("data-fragment-index"), 10);
+				const index = Number.parseInt(
+					fragment.getAttribute("data-fragment-index"),
+					10,
+				);
 
 				if (!ordered[index]) {
 					ordered[index] = [];
@@ -135,7 +139,7 @@ export default class Fragments {
 	 */
 	sortAll() {
 		this.Reveal.getHorizontalSlides().forEach((horizontalSlide) => {
-			let verticalSlides = queryAll(horizontalSlide, "section");
+			const verticalSlides = queryAll(horizontalSlide, "section");
 			verticalSlides.forEach((verticalSlide, y) => {
 				this.sort(verticalSlide.querySelectorAll(".fragment"));
 			}, this);
@@ -156,7 +160,7 @@ export default class Fragments {
 	 * @return {{shown: array, hidden: array}}
 	 */
 	update(index, fragments, slide = this.Reveal.getCurrentSlide()) {
-		let changedFragments = {
+		const changedFragments = {
 			shown: [],
 			hidden: [],
 		};
@@ -168,11 +172,11 @@ export default class Fragments {
 				let maxIndex = 0;
 
 				if (typeof index !== "number") {
-					let currentFragment = this.sort(
+					const currentFragment = this.sort(
 						slide.querySelectorAll(".fragment.visible"),
 					).pop();
 					if (currentFragment) {
-						index = parseInt(
+						index = Number.parseInt(
 							currentFragment.getAttribute("data-fragment-index") || 0,
 							10,
 						);
@@ -181,14 +185,14 @@ export default class Fragments {
 
 				Array.from(fragments).forEach((el, i) => {
 					if (el.hasAttribute("data-fragment-index")) {
-						i = parseInt(el.getAttribute("data-fragment-index"), 10);
+						i = Number.parseInt(el.getAttribute("data-fragment-index"), 10);
 					}
 
 					maxIndex = Math.max(maxIndex, i);
 
 					// Visible fragments
 					if (i <= index) {
-						let wasVisible = el.classList.contains("visible");
+						const wasVisible = el.classList.contains("visible");
 						el.classList.add("visible");
 						el.classList.remove("current-fragment");
 
@@ -211,7 +215,7 @@ export default class Fragments {
 					}
 					// Hidden fragments
 					else {
-						let wasVisible = el.classList.contains("visible");
+						const wasVisible = el.classList.contains("visible");
 						el.classList.remove("visible");
 						el.classList.remove("current-fragment");
 
@@ -263,20 +267,20 @@ export default class Fragments {
 	 * fragments visibility as part of this call
 	 */
 	goto(index, offset = 0) {
-		let currentSlide = this.Reveal.getCurrentSlide();
+		const currentSlide = this.Reveal.getCurrentSlide();
 		if (currentSlide && this.Reveal.getConfig().fragments) {
-			let fragments = this.sort(
+			const fragments = this.sort(
 				currentSlide.querySelectorAll(".fragment:not(.disabled)"),
 			);
 			if (fragments.length) {
 				// If no index is specified, find the current
 				if (typeof index !== "number") {
-					let lastVisibleFragment = this.sort(
+					const lastVisibleFragment = this.sort(
 						currentSlide.querySelectorAll(".fragment:not(.disabled).visible"),
 					).pop();
 
 					if (lastVisibleFragment) {
-						index = parseInt(
+						index = Number.parseInt(
 							lastVisibleFragment.getAttribute("data-fragment-index") || 0,
 							10,
 						);
@@ -288,7 +292,7 @@ export default class Fragments {
 				// Apply the offset if there is one
 				index += offset;
 
-				let changedFragments = this.update(index, fragments);
+				const changedFragments = this.update(index, fragments);
 
 				if (changedFragments.hidden.length) {
 					this.Reveal.dispatchEvent({

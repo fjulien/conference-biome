@@ -10,7 +10,7 @@ import Deck, { VERSION } from "./reveal.js";
  *   // reveal.js is ready
  * });
  */
-let Reveal = Deck;
+const Reveal = Deck;
 
 /**
  * The below is a thin shell that mimics the pre 4.0
@@ -24,7 +24,7 @@ let Reveal = Deck;
  * });
  */
 
-let enqueuedAPICalls = [];
+const enqueuedAPICalls = [];
 
 Reveal.initialize = (options) => {
 	// Create our singleton reveal.js instance

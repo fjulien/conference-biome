@@ -28,7 +28,7 @@ export const loadScript = (url, callback) => {
 			// Kill event listeners
 			script.onload = script.onreadystatechange = script.onerror = null;
 
-			callback(new Error("Failed loading script: " + script.src + "\n" + err));
+			callback(new Error(`Failed loading script: ${script.src}\n${err}`));
 		};
 	}
 

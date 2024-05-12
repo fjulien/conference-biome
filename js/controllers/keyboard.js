@@ -40,8 +40,8 @@ export default class Keyboard {
 		this.shortcuts["Shift + &#8592;/&#8593/&#8594;/&#8595;"] =
 			"Jump to first/last slide";
 		this.shortcuts["B  ,  ."] = "Pause";
-		this.shortcuts["F"] = "Fullscreen";
-		this.shortcuts["G"] = "Jump to slide";
+		this.shortcuts.F = "Fullscreen";
+		this.shortcuts.G = "Jump to slide";
 		this.shortcuts["ESC, O"] = "Slide overview";
 	}
 
@@ -119,7 +119,7 @@ export default class Keyboard {
 	 * @param {object} event
 	 */
 	onDocumentKeyDown(event) {
-		let config = this.Reveal.getConfig();
+		const config = this.Reveal.getConfig();
 
 		// If there's a condition specified and it returns false,
 		// ignore this event
@@ -137,32 +137,30 @@ export default class Keyboard {
 		}
 
 		// Shorthand
-		let keyCode = event.keyCode;
+		const keyCode = event.keyCode;
 
 		// Remember if auto-sliding was paused so we can toggle it
-		let autoSlideWasPaused = !this.Reveal.isAutoSliding();
+		const autoSlideWasPaused = !this.Reveal.isAutoSliding();
 
 		this.Reveal.onUserInput(event);
 
 		// Is there a focused element that could be using the keyboard?
-		let activeElementIsCE =
+		const activeElementIsCE =
 			document.activeElement &&
 			document.activeElement.isContentEditable === true;
-		let activeElementIsInput =
-			document.activeElement &&
-			document.activeElement.tagName &&
+		const activeElementIsInput =
+			document.activeElement?.tagName &&
 			/input|textarea/i.test(document.activeElement.tagName);
-		let activeElementIsNotes =
-			document.activeElement &&
-			document.activeElement.className &&
+		const activeElementIsNotes =
+			document.activeElement?.className &&
 			/speaker-notes/i.test(document.activeElement.className);
 
 		// Whitelist certain modifiers for slide navigation shortcuts
-		let keyCodeUsesModifier =
+		const keyCodeUsesModifier =
 			[32, 37, 38, 39, 40, 78, 80, 191].indexOf(event.keyCode) !== -1;
 
 		// Prevent all other events when a modifier is pressed
-		let unusedModifier =
+		const unusedModifier =
 			!((keyCodeUsesModifier && event.shiftKey) || event.altKey) &&
 			(event.shiftKey || event.altKey || event.ctrlKey || event.metaKey);
 
@@ -177,14 +175,14 @@ export default class Keyboard {
 			return;
 
 		// While paused only allow resume keyboard events; 'b', 'v', '.'
-		let resumeKeyCodes = [66, 86, 190, 191, 112];
+		const resumeKeyCodes = [66, 86, 190, 191, 112];
 		let key;
 
 		// Custom key bindings for togglePause should be able to resume
 		if (typeof config.keyboard === "object") {
 			for (key in config.keyboard) {
 				if (config.keyboard[key] === "togglePause") {
-					resumeKeyCodes.push(parseInt(key, 10));
+					resumeKeyCodes.push(Number.parseInt(key, 10));
 				}
 			}
 		}
@@ -195,7 +193,7 @@ export default class Keyboard {
 
 		// Use linear navigation if we're configured to OR if
 		// the presentation is one-dimensional
-		let useLinearMode =
+		const useLinearMode =
 			config.navigationMode === "linear" ||
 			!this.Reveal.hasHorizontalSlides() ||
 			!this.Reveal.hasVerticalSlides();
@@ -206,8 +204,8 @@ export default class Keyboard {
 		if (typeof config.keyboard === "object") {
 			for (key in config.keyboard) {
 				// Check if this binding matches the pressed key
-				if (parseInt(key, 10) === keyCode) {
-					let value = config.keyboard[key];
+				if (Number.parseInt(key, 10) === keyCode) {
+					const value = config.keyboard[key];
 
 					// Callback function
 					if (typeof value === "function") {
@@ -230,8 +228,8 @@ export default class Keyboard {
 		if (triggered === false) {
 			for (key in this.bindings) {
 				// Check if this binding matches the pressed key
-				if (parseInt(key, 10) === keyCode) {
-					let action = this.bindings[key].callback;
+				if (Number.parseInt(key, 10) === keyCode) {
+					const action = this.bindings[key].callback;
 
 					// Callback function
 					if (typeof action === "function") {
@@ -364,7 +362,7 @@ export default class Keyboard {
 		// If the input resulted in a triggered action we should prevent
 		// the browsers default behavior
 		if (triggered) {
-			event.preventDefault && event.preventDefault();
+			event.preventDefault?.();
 		}
 		// ESC or O key
 		else if (keyCode === 27 || keyCode === 79) {
@@ -372,7 +370,7 @@ export default class Keyboard {
 				this.Reveal.overview.toggle();
 			}
 
-			event.preventDefault && event.preventDefault();
+			event.preventDefault?.();
 		}
 
 		// If auto-sliding is enabled we need to cue up

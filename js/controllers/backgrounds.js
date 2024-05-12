@@ -1,5 +1,5 @@
+import { colorBrightness, colorToRgb } from "../utils/color.js";
 import { queryAll } from "../utils/util.js";
-import { colorToRgb, colorBrightness } from "../utils/color.js";
 
 /**
  * Creates and updates slide backgrounds.
@@ -27,7 +27,7 @@ export default class Backgrounds {
 
 		// Iterate over all horizontal slides
 		this.Reveal.getHorizontalSlides().forEach((slideh) => {
-			let backgroundStack = this.createBackground(slideh, this.element);
+			const backgroundStack = this.createBackground(slideh, this.element);
 
 			// Iterate over all vertical slides
 			queryAll(slideh, "section").forEach((slidev) => {
@@ -39,8 +39,9 @@ export default class Backgrounds {
 
 		// Add parallax background if specified
 		if (this.Reveal.getConfig().parallaxBackgroundImage) {
-			this.element.style.backgroundImage =
-				'url("' + this.Reveal.getConfig().parallaxBackgroundImage + '")';
+			this.element.style.backgroundImage = `url("${
+				this.Reveal.getConfig().parallaxBackgroundImage
+			}")`;
 			this.element.style.backgroundSize =
 				this.Reveal.getConfig().parallaxBackgroundSize;
 			this.element.style.backgroundRepeat =
@@ -73,12 +74,14 @@ export default class Backgrounds {
 	 */
 	createBackground(slide, container) {
 		// Main slide background element
-		let element = document.createElement("div");
-		element.className =
-			"slide-background " + slide.className.replace(/present|past|future/, "");
+		const element = document.createElement("div");
+		element.className = `slide-background ${slide.className.replace(
+			/present|past|future/,
+			"",
+		)}`;
 
 		// Inner background element that wraps images/videos/iframes
-		let contentElement = document.createElement("div");
+		const contentElement = document.createElement("div");
 		contentElement.className = "slide-background-content";
 
 		element.appendChild(contentElement);
@@ -100,8 +103,8 @@ export default class Backgrounds {
 	 * @param {HTMLElement} slide
 	 */
 	sync(slide) {
-		const element = slide.slideBackgroundElement,
-			contentElement = slide.slideBackgroundContentElement;
+		const element = slide.slideBackgroundElement;
+		const contentElement = slide.slideBackgroundContentElement;
 
 		const data = {
 			background: slide.getAttribute("data-background"),
@@ -226,8 +229,8 @@ export default class Backgrounds {
 
 		// If no bg color was found, or it cannot be converted by colorToRgb, check the computed background
 		if (!contrastColor || !colorToRgb(contrastColor)) {
-			let computedBackgroundStyle = window.getComputedStyle(element);
-			if (computedBackgroundStyle && computedBackgroundStyle.backgroundColor) {
+			const computedBackgroundStyle = window.getComputedStyle(element);
+			if (computedBackgroundStyle?.backgroundColor) {
 				contrastColor = computedBackgroundStyle.backgroundColor;
 			}
 		}
@@ -241,9 +244,8 @@ export default class Backgrounds {
 			if (rgb && rgb.a !== 0) {
 				if (colorBrightness(contrastColor) < 128) {
 					return "has-dark-background";
-				} else {
-					return "has-light-background";
 				}
+				return "has-light-background";
 			}
 		}
 
@@ -271,14 +273,14 @@ export default class Backgrounds {
 	 * all vertical slides (not just the present) will be updated.
 	 */
 	update(includeAll = false) {
-		let currentSlide = this.Reveal.getCurrentSlide();
-		let indices = this.Reveal.getIndices();
+		const currentSlide = this.Reveal.getCurrentSlide();
+		const indices = this.Reveal.getIndices();
 
 		let currentBackground = null;
 
 		// Reverse past/future classes when in RTL mode
-		let horizontalPast = this.Reveal.getConfig().rtl ? "future" : "past",
-			horizontalFuture = this.Reveal.getConfig().rtl ? "past" : "future";
+		const horizontalPast = this.Reveal.getConfig().rtl ? "future" : "past";
+		const horizontalFuture = this.Reveal.getConfig().rtl ? "past" : "future";
 
 		// Update the classes of all backgrounds to match the
 		// states of their slides (past/present/future)
@@ -329,11 +331,11 @@ export default class Backgrounds {
 		if (currentBackground) {
 			this.Reveal.slideContent.startEmbeddedContent(currentBackground);
 
-			let currentBackgroundContent = currentBackground.querySelector(
+			const currentBackgroundContent = currentBackground.querySelector(
 				".slide-background-content",
 			);
 			if (currentBackgroundContent) {
-				let backgroundImageURL =
+				const backgroundImageURL =
 					currentBackgroundContent.style.backgroundImage || "";
 
 				// Restart GIFs (doesn't work in Firefox)
@@ -346,10 +348,10 @@ export default class Backgrounds {
 
 			// Don't transition between identical backgrounds. This
 			// prevents unwanted flicker.
-			let previousBackgroundHash = this.previousBackground
+			const previousBackgroundHash = this.previousBackground
 				? this.previousBackground.getAttribute("data-background-hash")
 				: null;
-			let currentBackgroundHash = currentBackground.getAttribute(
+			const currentBackgroundHash = currentBackground.getAttribute(
 				"data-background-hash",
 			);
 			if (
@@ -383,27 +385,30 @@ export default class Backgrounds {
 	 * on the current slide index.
 	 */
 	updateParallax() {
-		let indices = this.Reveal.getIndices();
+		const indices = this.Reveal.getIndices();
 
 		if (this.Reveal.getConfig().parallaxBackgroundImage) {
-			let horizontalSlides = this.Reveal.getHorizontalSlides(),
-				verticalSlides = this.Reveal.getVerticalSlides();
+			const horizontalSlides = this.Reveal.getHorizontalSlides();
+			const verticalSlides = this.Reveal.getVerticalSlides();
 
-			let backgroundSize = this.element.style.backgroundSize.split(" "),
-				backgroundWidth,
-				backgroundHeight;
+			const backgroundSize = this.element.style.backgroundSize.split(" ");
+			let backgroundWidth;
+			let backgroundHeight;
 
 			if (backgroundSize.length === 1) {
-				backgroundWidth = backgroundHeight = parseInt(backgroundSize[0], 10);
+				backgroundWidth = backgroundHeight = Number.parseInt(
+					backgroundSize[0],
+					10,
+				);
 			} else {
-				backgroundWidth = parseInt(backgroundSize[0], 10);
-				backgroundHeight = parseInt(backgroundSize[1], 10);
+				backgroundWidth = Number.parseInt(backgroundSize[0], 10);
+				backgroundHeight = Number.parseInt(backgroundSize[1], 10);
 			}
 
-			let slideWidth = this.element.offsetWidth,
-				horizontalSlideCount = horizontalSlides.length,
-				horizontalOffsetMultiplier,
-				horizontalOffset;
+			const slideWidth = this.element.offsetWidth;
+			const horizontalSlideCount = horizontalSlides.length;
+			let horizontalOffsetMultiplier;
+			let horizontalOffset;
 
 			if (
 				typeof this.Reveal.getConfig().parallaxBackgroundHorizontal === "number"
@@ -419,10 +424,10 @@ export default class Backgrounds {
 
 			horizontalOffset = horizontalOffsetMultiplier * indices.h * -1;
 
-			let slideHeight = this.element.offsetHeight,
-				verticalSlideCount = verticalSlides.length,
-				verticalOffsetMultiplier,
-				verticalOffset;
+			const slideHeight = this.element.offsetHeight;
+			const verticalSlideCount = verticalSlides.length;
+			let verticalOffsetMultiplier;
+			let verticalOffset;
 
 			if (
 				typeof this.Reveal.getConfig().parallaxBackgroundVertical === "number"
@@ -437,8 +442,7 @@ export default class Backgrounds {
 			verticalOffset =
 				verticalSlideCount > 0 ? verticalOffsetMultiplier * indices.v : 0;
 
-			this.element.style.backgroundPosition =
-				horizontalOffset + "px " + -verticalOffset + "px";
+			this.element.style.backgroundPosition = `${horizontalOffset}px ${-verticalOffset}px`;
 		}
 	}
 

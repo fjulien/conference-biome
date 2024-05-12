@@ -50,7 +50,7 @@ const Plugin = () => {
 
 		searchInput.addEventListener(
 			"keyup",
-			function (event) {
+			(event) => {
 				switch (event.keyCode) {
 					case 13:
 						event.preventDefault();
@@ -95,7 +95,7 @@ const Plugin = () => {
 	function doSearch() {
 		//if there's been a change in the search term, perform a new search:
 		if (searchboxDirty) {
-			var searchstring = searchInput.value;
+			const searchstring = searchInput.value;
 
 			if (searchstring === "") {
 				if (hilitor) hilitor.remove();
@@ -127,51 +127,51 @@ const Plugin = () => {
 	// Please acknowledge use of this code by including this header.
 	// 2/2013 jon: modified regex to display any match, not restricted to word boundaries.
 	function Hilitor(id, tag) {
-		var targetNode = document.getElementById(id) || document.body;
-		var hiliteTag = tag || "EM";
-		var skipTags = new RegExp("^(?:" + hiliteTag + "|SCRIPT|FORM)$");
-		var colors = ["#ff6", "#a0ffff", "#9f9", "#f99", "#f6f"];
-		var wordColor = [];
-		var colorIdx = 0;
-		var matchRegex = "";
-		var matchingSlides = [];
+		const targetNode = document.getElementById(id) || document.body;
+		const hiliteTag = tag || "EM";
+		const skipTags = new RegExp(`^(?:${hiliteTag}|SCRIPT|FORM)$`);
+		const colors = ["#ff6", "#a0ffff", "#9f9", "#f99", "#f6f"];
+		const wordColor = [];
+		let colorIdx = 0;
+		let matchRegex = "";
+		const matchingSlides = [];
 
-		this.setRegex = function (input) {
+		this.setRegex = (input) => {
 			input = input.trim();
-			matchRegex = new RegExp("(" + input + ")", "i");
+			matchRegex = new RegExp(`(${input})`, "i");
 		};
 
-		this.getRegex = function () {
-			return matchRegex
+		this.getRegex = () =>
+			matchRegex
 				.toString()
 				.replace(/^\/\\b\(|\)\\b\/i$/g, "")
 				.replace(/\|/g, " ");
-		};
 
 		// recursively apply word highlighting
 		this.hiliteWords = function (node) {
-			if (node == undefined || !node) return;
+			if (node === undefined || !node) return;
 			if (!matchRegex) return;
 			if (skipTags.test(node.nodeName)) return;
 
 			if (node.hasChildNodes()) {
-				for (var i = 0; i < node.childNodes.length; i++)
+				for (let i = 0; i < node.childNodes.length; i++)
 					this.hiliteWords(node.childNodes[i]);
 			}
-			if (node.nodeType == 3) {
+			if (node.nodeType === 3) {
 				// NODE_TEXT
-				var nv, regs;
+				let nv;
+				let regs;
 				if ((nv = node.nodeValue) && (regs = matchRegex.exec(nv))) {
 					//find the slide's section element and save it in our list of matching slides
-					var secnode = node;
-					while (secnode != null && secnode.nodeName != "SECTION") {
+					let secnode = node;
+					while (secnode != null && secnode.nodeName !== "SECTION") {
 						secnode = secnode.parentNode;
 					}
 
-					var slideIndex = deck.getIndices(secnode);
-					var slidelen = matchingSlides.length;
-					var alreadyAdded = false;
-					for (var i = 0; i < slidelen; i++) {
+					const slideIndex = deck.getIndices(secnode);
+					const slidelen = matchingSlides.length;
+					let alreadyAdded = false;
+					for (let i = 0; i < slidelen; i++) {
 						if (
 							matchingSlides[i].h === slideIndex.h &&
 							matchingSlides[i].v === slideIndex.v
@@ -188,13 +188,13 @@ const Plugin = () => {
 							colors[colorIdx++ % colors.length];
 					}
 
-					var match = document.createElement(hiliteTag);
+					const match = document.createElement(hiliteTag);
 					match.appendChild(document.createTextNode(regs[0]));
 					match.style.backgroundColor = wordColor[regs[0].toLowerCase()];
 					match.style.fontStyle = "inherit";
 					match.style.color = "#000";
 
-					var after = node.splitText(regs.index);
+					const after = node.splitText(regs.index);
 					after.nodeValue = after.nodeValue.substring(regs[0].length);
 					node.parentNode.insertBefore(match, after);
 				}
@@ -202,9 +202,9 @@ const Plugin = () => {
 		};
 
 		// remove highlighting
-		this.remove = function () {
-			var arr = document.getElementsByTagName(hiliteTag);
-			var el;
+		this.remove = () => {
+			const arr = document.getElementsByTagName(hiliteTag);
+			let el;
 			while (arr.length && (el = arr[0])) {
 				el.parentNode.replaceChild(el.firstChild, el);
 			}
@@ -212,7 +212,7 @@ const Plugin = () => {
 
 		// start highlighting at target node
 		this.apply = function (input) {
-			if (input == undefined || !input) return;
+			if (input === undefined || !input) return;
 			this.remove();
 			this.setRegex(input);
 			this.hiliteWords(targetNode);
@@ -229,8 +229,8 @@ const Plugin = () => {
 
 			document.addEventListener(
 				"keydown",
-				function (event) {
-					if (event.key == "F" && (event.ctrlKey || event.metaKey)) {
+				(event) => {
+					if (event.key === "F" && (event.ctrlKey || event.metaKey)) {
 						//Control+Shift+f
 						event.preventDefault();
 						toggleSearch();

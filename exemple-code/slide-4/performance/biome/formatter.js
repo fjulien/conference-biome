@@ -3,7 +3,7 @@
 // Timer: 3.254s | 1.793s | 1.887s
 // Nombre de fichier 420
 
-const { exec } = require("child_process");
+const { exec } = require("node:child_process");
 const execCommand = (cmd, callback) => {
 	console.log("Start test");
 	console.time("Timer");

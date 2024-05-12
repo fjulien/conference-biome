@@ -32,8 +32,8 @@ export default class Playback {
 		this.canvas.className = "playback";
 		this.canvas.width = this.diameter;
 		this.canvas.height = this.diameter;
-		this.canvas.style.width = this.diameter2 + "px";
-		this.canvas.style.height = this.diameter2 + "px";
+		this.canvas.style.width = `${this.diameter2}px`;
+		this.canvas.style.height = `${this.diameter2}px`;
 		this.context = this.canvas.getContext("2d");
 
 		this.container.appendChild(this.canvas);
@@ -76,11 +76,11 @@ export default class Playback {
 	 * Renders the current progress and playback state.
 	 */
 	render() {
-		let progress = this.playing ? this.progress : 0,
-			radius = this.diameter2 - this.thickness,
-			x = this.diameter2,
-			y = this.diameter2,
-			iconSize = 28;
+		const progress = this.playing ? this.progress : 0;
+		const radius = this.diameter2 - this.thickness;
+		const x = this.diameter2;
+		const y = this.diameter2;
+		const iconSize = 28;
 
 		// Ease towards 1
 		this.progressOffset += (1 - this.progressOffset) * 0.1;

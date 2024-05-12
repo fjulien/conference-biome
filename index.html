@@ -2,208 +2,233 @@
 <html lang="fr">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>Conférence - Biome</title>
-	<link rel="stylesheet" href="dist/reset.css">
-	<link rel="stylesheet" href="dist/reveal.css">
-	<link rel="stylesheet" href="dist/theme/black.css">
-	<!-- Theme used for syntax highlighted code -->
-	<link rel="stylesheet" href="dist/theme/solarized.css">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <title>Conférence - Biome</title>
+    <link href="dist/reset.css" rel="stylesheet">
+    <link href="dist/reveal.css" rel="stylesheet">
+    <link href="dist/theme/black.css" rel="stylesheet">
+    <!-- Theme used for syntax highlighted code -->
+    <link href="dist/theme/solarized.css" rel="stylesheet">
 </head>
 
 <body>
-	<div class="reveal">
-		<div class="slides">
-			<!-- 1 -->
-			<section id="slide-1" class="slide-1">
-				<h2>Biome, votre nouvelle lib js (encore)</h2>
-				<aside class="notes">
-					<p>étendre écran -> window + p</p>
-					<p>plein écran navigateur -> fn + F11</p>
-				</aside>
-			</section>
+<div class="reveal">
+    <div class="slides">
+        <!-- 1 -->
+        <section class="slide-1" id="slide-1">
+            <h2>Biome, votre nouvelle lib js (encore)</h2>
+            <aside class="notes">
+                <p>étendre écran -> window + p</p>
+                <p>plein écran navigateur -> fn + F11</p>
+            </aside>
+        </section>
 
-			<!-- 2 MOI-->
-			<section id="slide-2" class="slide-2">
-				<h3>Julien</h3>
-				<div class="is-flex align-items-center">
-					<div>
-						<p>Tech lead JS/TS</p>
-						<img class="r-stretch w-50 my-1-n" src="images/slide-2/onepoint.png">
-					</div>
-					<img class="r-stretch rounded" src="images/slide-2/moi.jpg">
-				</div>
-			</section>
+        <!-- 2 MOI-->
+        <section class="slide-2" id="slide-2">
+            <h3>Julien</h3>
+            <div class="is-flex align-items-center">
+                <div>
+                    <p>Tech lead frontend</p>
+                    <img class="r-stretch w-50 my-1-n" src="images/slide-2/onepoint.png">
+                </div>
+                <img class="r-stretch rounded" src="images/slide-2/moi.jpg">
+            </div>
+        </section>
 
-			<!-- 3 -->
-			<section id="slide-3">
-				<section>
-					<h2>Formatage et analyse de code</h2>
-					<aside class="notes">
-						<p>Avant de parler de biome</p>
-					</aside>
-				</section>
-				<section>
-					<pre class="h-inherit"><code data-line-numbers="0|3-7|7">// JavaScript
-const cafe	 =		{
-	nom:'café long',
-	typePreparation	: 'dosette'  ,
-	taille	 : 'court'		,
-	autre  : {
-	description  :   "On le prépare en servant un double expresso   ☕☕",prix  : 1.5	 ,	devise:'$'} ,  
-} ;
+        <!-- 3 -->
+        <section id="slide-3">
+            <section>
+                <h2>Formatage et analyse de code</h2>
+            </section>
+            <section>
+					<pre class="h-inherit"><code data-line-numbers="0">function OnepointTalk	({
+  subject		= "Hello biome!"	,duration		,
+  description		,startTalk		,
+						}	) {
+ if		(duration		<= 1		||		!startTalk	 )	 {
+	 return  <p>Pas possible </p>  }
+
+		return (	 <div className="content" onClick={startTalk}>
+ <h1>{subject  .toUpperCase ( ) }</h1>
+  <strong>Le talk dure {duration }</strong>
+		<span>minute{duration > 1 ? "s" : ""	 }</span>
+ {Array	.isArray		(description	 )  ?	( <ul>
+	 {description .map  ((d , i )	=> ( <li key={i}>{d }</li>  )	)	 }
+		</ul>	 )	 :	( <p>{description		}</p>  )	 }
+  </div>	) ;	 }
 						</code></pre>
-					<aside class="notes">
-						<ol>
-							<li>Demande plus effort de lecture</li>
-							<li>ne tiens pas sur l'écran</li>
-							<li>analogie avec WORD</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
+                <aside class="notes">
+                    <ol>
+                        <li>Demande plus effort de lecture</li>
+                        <li>ne tiens pas sur l'écran</li>
+                        <li>analogie avec WORD</li>
+                        <li>>Pour la création du chaos shittier; https://github.com/rohitdhas/shittier</li>
+                    </ol>
+                </aside>
+            </section>
+            <section>
+                <img class="r-stretch" src="images/slide-3/bob-formatage-biome.jpg">
+            </section>
+            <section>
 					<pre class="h-inherit">
-						<code data-line-numbers="0|6-11|8">// JavaScript
-const cafe = {
-	nom: 'café long',
-	typePreparation: 'dosette',
-	taille: 'court',
-	autre: {
-		description:
-			"On le prépare en servant un double expresso ☕☕",
-		prix: 1.5,
-		devise: '$',
-	},
-};
+						<code data-line-numbers="0|1-6|11-29">function OnepointTalk({
+	subject = "Hello biome!",
+	duration,
+	description,
+	startTalk,
+}) {
+	if (duration <= 1 || !startTalk) {
+		return <p>Pas possible</p>;
+	}
+
+	return (
+		<div className="content" onClick={startTalk}>
+			<h1>{subject.toUpperCase()}</h1>
+			<strong>Le talk dure {duration}</strong>
+			<span>minute{duration > 1 ? "s" : ""}</span>
+			{Array.isArray(description) ? (
+				<ul>
+					{description.map((d, i) => (
+						<li key={i}>{d}</li>
+					))}
+				</ul>
+			) : (
+				<p>{description}</p>
+			)}
+		</div>
+	);
+}
 						</code>
 					</pre>
-					<aside class="notes">
-						<ol>
-							<li>Plus claire au premier coup d'oeil</li>
-							<li>Pas besoin coloration synthaxial</li>
-							<li>Meilleur lecture et moins fastidieux des PR</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
-					<h2>Analyse statique / Linter</h2>
-					<aside class="notes">
-						<ol>
-							<li>
-								Examiner du code sans l'exécuter, détecter les
-								erreurs potentielles et problèmes de qualité.
-							</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
-					<div>
-						<img class="r-stretch" src="images/slide-3/linter-error.png">
-						<aside class="notes">
-							<ol>
-								<li>let ou const au lieu de var</li>
-								<li>égalité faible -> égalité stricte</li>
-								<li>Les règles sont paramétrales</li>
-								<li>analogie avec word</li>
-							</ol>
-						</aside>
-					</diV>
-				</section>
-				<section>
-					<h2>Les outils</h2>
-					<div class="is-flex justify-content-space-evenly">
-						<figure>
-							<img class="r-stretch size-1" src="icones/chrome.svg">
-							<figcaption>Internet</figcaption>
-						</figure>
-						<figure class="fragment">
-							<img class="r-stretch size-1" src="icones/vsc.svg">
-							<figcaption>IDE</figcaption>
-						</figure>
-						<figure class="fragment">
-							<img class="r-stretch size-1" src="icones/npm.svg">
-							<figcaption>Librairies</figcaption>
-						</figure>
-					</div>
+                <aside class="notes">
+                    <ol>
+                        <li>Plus claire au premier coup d'oeil</li>
+                        <li>Pas besoin coloration synthaxial</li>
+                        <li>Meilleur lecture et moins fastidieux des PR</li>
+                    </ol>
+                </aside>
+            </section>
+            <section>
+                <h2>Analyse statique / Linter</h2>
+                <aside class="notes">
+                    <ol>
+                        <li>
+                            Examiner du code sans l'exécuter, détecter les
+                            erreurs potentielles et problèmes de qualité.
+                        </li>
+                    </ol>
+                </aside>
+            </section>
+            <section>
+                <div>
+                    <img class="r-stretch" src="images/slide-3/linter-error.png">
+                    <aside class="notes">
+                        <ol>
+                            <li>égalité faible -> égalité stricte</li>
+                            <li>analogie avec word</li>
+                        </ol>
+                    </aside>
+                </diV>
+            </section>
+            <section>
+                <h2>Les outils</h2>
+                <div class="is-flex justify-content-space-evenly">
+                    <figure>
+                        <img class="r-stretch size-1" src="icones/chrome.svg">
+                        <figcaption>Internet</figcaption>
+                    </figure>
+                    <figure class="fragment">
+                        <img class="r-stretch size-1" src="icones/vsc.svg">
+                        <figcaption>IDE</figcaption>
+                    </figure>
+                    <figure class="fragment">
+                        <img class="r-stretch size-1" src="icones/npm.svg">
+                        <figcaption>Librairies</figcaption>
+                    </figure>
+                </div>
+                <aside class="notes">
+                    <ol>
+                        <li>
+                            Il existe des outils de formatage et d'analyse un peu partout
+                        </li>
+                        <li>
+                            LIBRAIRIE : Configuration partagé | CI/CD bloquante | branche à IDE | librairies en plus
+                            | CLI
+                        </li>
+                    </ol>
+                </aside>
+            </section>
+        </section>
 
-					<aside class="notes">
-						<ol>
-							<li>
-								SITE WEB : zero conf | copier/coller | fastidieux | uniformité | sécurité
-							</li>
-							<li>
-								IDE : automatisable commit ou sauvegarde | changement d'IDE | configuration | pas de
-								CI/CD
-							</li>
-							<li>
-								LIBRAIRIE : Configuration partagé | CI/CD bloquante | branche à IDE | librairies en plus
-								| CLI
-							</li>
-							<li>exemple : prettier, eslint</li>
-							<li>La configuration bien car communicatoin d'équipe</li>
-						</ol>
-					</aside>
-				</section>
-			</section>
+        <!-- 4 -->
+        <section id="slide-4">
+            <section data-transition="zoom">
+                <img class="r-stretch bk-color-black p-2 w-95" src="images/slide-4/logo-biome.svg">
 
-			<!-- 4 -->
-			<section id="slide-4">
-				<section data-background-transition="zoom" data-background="images/slide-4/bg-prettier-defi.png">
-					<aside class="notes">
-						<ol>
-							<li>fin année 2023</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
-					<div class="is-flex justify-content-space-evenly">
-						<figure>
-							<img class="r-stretch size-2" src="icones/rust.svg">
-							<figcaption>Rust</figcaption>
-						</figure>
-						<figure class="fragment">
-							<img class="r-stretch size-1" src="images//slide-3/prettier-95.png">
-							<figcaption>> 95%</figcaption>
-						</figure>
-						<figure class="fragment">
-							<img class="r-stretch size-1" src="icones/option.svg">
-							<figcaption>Formatage</figcaption>
-						</figure>
-						<figure class="fragment">
-							<img class="r-stretch size-1" src="icones/javascript.svg">
-							<figcaption>ES6</figcaption>
-						</figure>
-						<aside class="notes">
-							<ol>
-								<li>En rust, prettier en js</li>
-								<li>+95% compatibilité tests JavaScript de prettier</li>
-								<li>Toutes les options de formatage</li>
-								<li>seule la syntaxe ecmascript est requise</li>
-								<li>but gagner en rapidité</li>
-							</ol>
-						</aside>
-					</div>
-				</section>
-				<section data-transition="zoom">
-					<img class="r-stretch bk-color-black p-2 w-95" src="images/slide-4/logo-biome.svg">
-					<aside class="notes">
-						<ol>
-							<li>42 PR</li>
-							<li>9 contributeurs</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
-					<h2>Rapide ?</h2>
-					<figure>
-						<img class="r-stretch" src="images/slide-4/performance.png">
-						<figcaption>171 127 lignes, 2 104 fichiers</figcaption>
-					</figure>
-				</section>
-				<section>
-					<h2>J'ai testé</h2>
-					<pre class="h-inherit">
+                <aside class="notes">
+                    <p>Pourquoi BIOME</p>
+                    <p>Prettier est le plus utilisé mais pb de perf</p>
+                    <p>open source</p>
+                    <p>combine formateur et analyse code static</p>
+                    <p>Message plus claire</p>
+                    <p>Prise en main rapide, car peu de conf de base</p>
+                    <p>Accessibilité a11y</p>
+                </aside>
+            </section>
+            <section data-background="images/slide-4/bg-prettier-defi.png" data-background-transition="zoom">
+                <aside class="notes">
+                    <ol>
+                        <li>un peu d'histoire</li>
+                        <li>Initier par un des fondateur de prettier</li>
+                        <li>fin année 2023</li>
+                    </ol>
+                </aside>
+            </section>
+            <section>
+                <div class="is-flex justify-content-space-evenly">
+                    <figure>
+                        <img class="r-stretch size-2" src="icones/rust.svg">
+                        <figcaption>Rust</figcaption>
+                    </figure>
+                    <figure class="fragment">
+                        <img class="r-stretch size-1" src="images//slide-3/prettier-95.png">
+                        <figcaption>> 95%</figcaption>
+                    </figure>
+                    <figure class="fragment">
+                        <img class="r-stretch size-1" src="icones/option.svg">
+                        <figcaption>Formatage</figcaption>
+                    </figure>
+                    <figure class="fragment">
+                        <img class="r-stretch size-1" src="icones/javascript.svg">
+                        <figcaption>ES6</figcaption>
+                    </figure>
+                    <aside class="notes">
+                        <ol>
+                            <li>En rust, prettier en js</li>
+                            <li>réputé pour sa rapidité et son efficacité et présente des avantages en termes de
+                                performances
+                            </li>
+                            <li>+95% compatibilité tests JavaScript de prettier</li>
+                            <li>Toutes les options de formatage</li>
+                            <li>seule la syntaxe ecmascript est requise</li>
+                            <li>but gagner en rapidité</li>
+                            <code class="t-font-size-3">git --no-pager diff --shortstat main</code>
+                        </ol>
+                    </aside>
+                </div>
+            </section>
+
+            <section>
+                <h2>Rapide ?</h2>
+                <figure>
+                    <img class="r-stretch" src="images/slide-4/performance.png">
+                    <figcaption>171 127 lignes, 2 104 fichiers</figcaption>
+                </figure>
+            </section>
+            <section>
+                <h2>J'ai testé</h2>
+                <pre class="h-inherit">
 						<code data-line-numbers="all|5|16-17|19">// JavaScript
 const { exec } = require("child_process");
 const execCommand = (cmd, callback) => {
@@ -227,457 +252,294 @@ execCommand(
 );
 						</code>
 					</pre>
-				</section>
-				<section>
-					<h2>Configuration</h2>
-					<pre>
-						<code >
-							npx @biomejs/biome migrate prettier --write
-						</code>
-					</pre>
-					<div class="is-flex">
-						<div class="w-100">
-							<p>.prettierrc.json</p>
-							<pre>
-								<code>{
-	"trailingComma":"none",
-	"tabWidth": 4,
-	"semi": true,
-	"singleQuote": true
-}
-								</code>
-							</pre>
-						</div>
-						<div>
-							<p>.prettierignore.json</p>
-							<pre>
-								<code data-line-numbers="all|7-13" class="w-100">node_modules
-dist
-package-lock.json
-.git
-...
-// AJOUTER
-*.scss
-*.html
-*.md
-*.json
-*.yml
-*.yaml
-*.css
-								</code>
-							</pre>
-						</div>
-					</div>
-					<aside class="notes">
-						<ol>
-							<li>disponible depuis peu</li>
-							<li>iso</li>
-							<li>Faut déjà avoir un fichier de configuration Biome</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
-					<p>biome.json</p>
-					<pre>
-						<code data-line-numbers="all|11|31-46">{
-	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
-	"files": {
-		"ignore": [
-			"node_modules",
-			"..."
-		]
-	},
-	"formatter": {
-		"enabled": true,
-		"formatWithErrors": true,
-		"indentStyle": "space",
-		"indentWidth": 4,
-		"lineEnding": "lf",
-		"lineWidth": 80,
-		"attributePosition": "auto",
-		"ignore": [
-			"node_modules",
-			"...",
-			"// AJOUTER",
-			"*.scss",
-			"*.html",
-			"*.md",
-			"*.json",
-			"*.yml",
-			"*.yaml",
-			"*.css"
-		]
-	},
-	"organizeImports": { "enabled": true },
-	"javascript": {
-		"formatter": {
-			"jsxQuoteStyle": "double",
-			"quoteProperties": "asNeeded",
-			"trailingComma": "none",
-			"semicolons": "always",
-			"arrowParentheses": "always",
-			"bracketSpacing": true,
-			"bracketSameLine": false,
-			"enabled": true,
-			"indentStyle": "space",
-			"indentWidth": 2,
-			"lineWidth": 140,
-			"quoteStyle": "single",
-			"attributePosition": "auto"
-		}
-	}
-}
-							
-						</code>
-					</pre>
-				</section>
-				<section>
-					<h3>Projet actuel</h3>
-					<div class="is-flex justify-content-space-evenly">
-						<figure class="is-flex align-items-center">
-							<img class="r-stretch size-1" src="images/prettier.png">
-							<figcaption>10,858s</figcaption>
-						</figure>
-						<figure class="fragment is-flex align-items-center">
-							<img class="r-stretch size-1" src="icones/biome.svg">
-							<figcaption>2,311s</figcaption>
-						</figure>
-					</div>
-					<aside class="notes">
-						<ol>
-							<li>~420 fichiers</li>
-							<li>3 x</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
-					<h2>NodeJS</h2>
-					<table>
-						<thead>
-							<tr>
-								<th scope="col">Type</th>
-								<th scope="col">Biome</th>
-								<th scope="col">Prettier</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">Fichiers modifiés</th>
-								<td>14_210</td>
-								<td>14_811</td>
-							</tr>
-							<tr>
-								<th scope="row">Insertions(+)</th>
-								<td>1_002_307</td>
-								<td>2_215_537</td>
-							</tr>
-							<tr>
-								<th scope="row">Suppressions(-)</th>
-								<td>577_831</td>
-								<td>1_172_530</td>
-							</tr>
-						</tbody>
-						<caption>
-							<p>Retour après formatage de git</p>
-							<pre class="h-inherit">
-								<code class="t-font-size-3">git --no-pager diff --shortstat main</code>
-							</pre>
-						</caption>
-					</table>
-					<div class="fragment is-flex justify-content-space-evenly">
-						<figure class="is-flex align-items-center">
-							<img class="r-stretch size-1" src="icones/biome.svg">
-							<figcaption>2:44 (m:ss)</figcaption>
-						</figure>
-						<figure class="is-flex align-items-center">
-							<img class="r-stretch size-1" src="images/prettier.png">
-							<figcaption>3:59 (m:ss)</figcaption>
-						</figure>
-					</div>
-					<aside class="notes">
-						<ol>
-							<li>million (1 000 000)</li>
-							<li>JavaScript runtime</li>
-							<li>pourquoi nodejs, plein de fichier js</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
-					<h3>Analyse statique</h3>
-					<pre><code>var chocolat = new ChocolatChaud(['lait', 'chocolat', 'miel'], 5);
-class ChocolatChaud {
-  constructor(
-    ingredients,
-    prix,
-  ) {
-    this.ingredients = ingredients;
-    this.prix = prix;
-  }
+            </section>
 
-  estBon() {
-    return this.ingredients.find((i) => i == 'lait');
-  }
-}
-				</code></pre>
-				</section>
-				<section>
-					<h2>Configuration eslint</h2>
-					<pre>
-							<code data-line-numbers="1|2-8">npm init @eslint/config
-√ How would you like to use ESLint? · problems
-√ What type of modules does your project use? · esm
-√ Which framework does your project use? · none
-√ Does your project use TypeScript? · No / Yes
-√ Where does your code run? · browser
-√ What format do you want your config file to be in? · JavaScript
-Successfully created .eslintrc.js file in C:\Users\j.fettinger\projets\talks\Biome
-PS C:\Users\j.fettinger\projets\talks\Biome> 
-							</code>
-						</pre>
-				</section>
-				<section>
-					<h2>Configuration biome</h2>
-					<pre>
-						<code data-line-numbers="1|6-14">npx @biomejs/biome init
-Welcome to Biome! Let's get you started...
-Files created ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	- biome.json: Your project configuration. Documentation: https://biomejs.dev/reference/configuration
-Next Steps ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	1. Setup an editor extension
-		Get live errors as you type and format when you save. Learn more: https://biomejs.dev/guides/getting-started#editor-setup      
-	2. Try a command
-		biome ci checks for lint errors and verifies formatting. Run biome --help for a full list of commands and options.
-	3. Read the documentation
-		Our website serves as a comprehensive source of guides and documentation: https://biomejs.dev
-	4. Get involved in the community
-		Ask questions, get support, or contribute by participating on GitHub (https://github.com/biomejs/biome),
-		or join our community Discord (https://discord.gg/BypW39g6Yc)
-						</code>
-					</pre>
-					<aside class="notes">
-						<ol>
-							<li>Installer des extensions</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
-					<img class="r-stretch" src="images/slide-4/eslint-eqeq.png">
-					<img class="r-stretch" src="images/slide-4/biome-eqeq.png">
-					<aside class="notes">
-						<ol>
-							<li>au survole</li>
-							<li>Biome communique plus</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
-					<pre><code>npx eslint .\exemple-code\slide-3\linter.js</code></pre>
-					<img class="r-stretch w-100" src="images/slide-4/eslint-return.png">
-				</section>
-				<section>
-					<pre><code>npx @biomejs/biome lint .\exemple-code\slide-3\linter.js</code></pre>
-					<img class="r-stretch w-100" src="images/slide-4/biome-return-1.png">
-					<aside class="notes">
-						<ol>
-							<li>Résoudre les problèmes et apprendre</li>
-							<li>inspiré rust compilateur sortie console</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
-					<img class="r-stretch w-100" src="images/slide-4/biome-return-2.png">
-					<aside class="notes">
-						<ol>
-							<li></li>
-						</ol>
-					</aside>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>Feuille de route 2024</h2>
-					<div class="is-flex justify-content-center">
-						<div>
-							<img class="r-stretch size-1" src="icones/eslint.svg">
-						</div>
-						<div class="is-flex justify-content-center align-items-center size-1">
-							<img class="m-0 w-25" src="icones/configuration.svg">
-							<img class="m-0 w-50" src="icones/fleche-droite.png">
-						</div>
-						<img class="r-stretch size-1" src="icones/biome.svg">
-					</div>
-					<aside class="notes">
-						<ol>
-							<li>Migration facilité Prettier. Pas eslint</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
-					<table class="language-support">
-						<thead>
-							<tr>
-								<th>Langue</th>
-								<th>Analyse syntaxique</th>
-								<th>Formatage</th>
-								<th>Analyse statique</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Javascript</td>
-								<td>✅</td>
-								<td>✅</td>
-								<td>✅</td>
-							</tr>
-							<tr>
-								<td>TypeScript</td>
-								<td>✅</td>
-								<td>✅</td>
-								<td>✅</td>
-							</tr>
-							<tr>
-								<td>JSX</td>
-								<td>✅</td>
-								<td>✅</td>
-								<td>✅</td>
-							</tr>
-							<tr>
-								<td>TSX</td>
-								<td>✅</td>
-								<td>✅</td>
-								<td>✅</td>
-							</tr>
-							<tr>
-								<td>JSON</td>
-								<td>✅</td>
-								<td>✅</td>
-								<td>✅</td>
-							</tr>
-							<tr>
-								<td>JSONC</td>
-								<td>✅</td>
-								<td>✅</td>
-								<td>✅</td>
-							</tr>
-							<tr>
-								<td>HTML</td>
-								<td>⌛️</td>
-								<td>🚫</td>
-								<td>🚫</td>
-							</tr>
-							<tr>
-								<td>Vue</td>
-								<td>⚠️</td>
-								<td>⚠️</td>
-								<td>⚠️</td>
-							</tr>
-							<tr>
-								<td>Svelte</td>
-								<td>⚠️</td>
-								<td>⚠️</td>
-								<td>⚠️</td>
-							</tr>
-							<tr>
-								<td>Astro</td>
-								<td>⚠️</td>
-								<td>⚠️</td>
-								<td>⚠️</td>
-							</tr>
-							<tr>
-								<td>CSS</td>
-								<td>✅️</td>
-								<td>⌛️</td>
-								<td>🚫</td>
-							</tr>
-							<tr>
-								<td>Markdown</td>
-								<td>🚫</td>
-								<td>🚫</td>
-								<td>🚫</td>
-							</tr>
-						</tbody>
-						<caption>
-							✅: OK
-							🚫: Pas démarré
-							⌛️: En cours
-							⚠️: Partiellement
-						</caption>
-					</table>
-					<aside class="notes">
-						<ol>
-							<li>partielle des fichiers Astro, Svelte et Vue</li>
-						</ol>
-					</aside>
-				</section>
-				<section>
-					<div class="is-flex justify-content-space-evenly">
-						<div class="is-flex justify-content-center direction-column align-items-center size-1">
-							<img src="icones/css.svg">
-							<img src="icones/javascript.svg">
-						</div>
-						<img class="size-1" src="icones/double-fleche.svg">
-						<div class="is-flex justify-content-center direction-column align-items-center size-1">
-							<img src="icones/html.svg">
-							<img src="icones/npm.svg">
-						</div>
-					</div>
-					<aside class="notes">
-						<ol>
-							<li>"cross-linting"</li>
-							<li>Analyse croisée entre languages</li>
-							<li>class css non utilisée dans du html</li>
-							<li>détecter les dépendances pas utilisées dans un projet</li>
-						</ol>
-					</aside>
-				</section>
-			</section>
+            <section>
+                <h3>Projet actuel</h3>
+                <div class="is-flex justify-content-space-evenly">
+                    <figure class="is-flex align-items-center">
+                        <img class="r-stretch size-1" src="images/prettier.png">
+                        <figcaption>10,858s</figcaption>
+                    </figure>
+                    <figure class="fragment is-flex align-items-center">
+                        <img class="r-stretch size-1" src="icones/biome.svg">
+                        <figcaption>2,311s</figcaption>
+                    </figure>
+                </div>
+                <aside class="notes">
+                    <ol>
+                        <li>~420 fichiers</li>
+                        <li>3 x</li>
+                    </ol>
+                </aside>
+            </section>
+            <section>
+                <h2>En utilisant les outils de benchmark de biome</h2>
+                <pre>
+                    <code>hyperfine --show-output --ignore-failure --runs 10 --export-markdown benchmark.md
+-n Prettier "npx prettier ./**/*.{js,ts} --write --log-level=error"
+-n Biome "npx @biomejs/biome format . --write  --max-diagnostics=0  --log-level=error"
+</code>
+                </pre>
+                <code class="t-font-size-3"></code>
+            </section>
+            <section>
+                <h2>NodeJS</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="border-bottom-separator" scope="col"></th>
+                        <th class="border-bottom-separator" scope="col">Biome</th>
+                        <th class="border-bottom-separator" scope="col">Prettier</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">Fichiers modifiés</th>
+                        <td>14_516</td>
+                        <td>14_127</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Insertions(+)</th>
+                        <td>1_198_125</td>
+                        <td>1_824_350</td>
+                    </tr>
+                    <tr>
+                        <th class="border-bottom-separator" scope="row">Suppressions(-)</th>
+                        <td class="border-bottom-separator">620_973</td>
+                        <td class="border-bottom-separator">857_413</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Moy [s]</th>
+                        <td>11.508</td>
+                        <td>147.050</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Min [s]</th>
+                        <td>11.034</td>
+                        <td>131.901</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Max [s]</th>
+                        <td>11.982</td>
+                        <td>162.199</td>
+                    </tr>
+                    <tr class="fragment">
+                        <th scope="row">Relative</th>
+                        <td>1.00</td>
+                        <td>12.78</td>
+                    </tr>
+                    </tbody>
+                </table>
 
-			</section>
+                <h3 class="fragment">Biome est 12.78 fois plus rapide que Prettier</h3>
+                <aside class="notes">
+                    <ol>
+                        <li>million (1 000 000)</li>
+                        <li>Bur sur prettier avec double quotes</li>
+                        <li>max-diagnostics=0 Biome imprime uniquement le nombre de diagnostics, ESLint imprime une
+                            ligne pour chaque erreur
+                        </li>
+                    </ol>
+                </aside>
+            </section>
+            <section>
+                <h2>Démo</h2>
+                <pre>
+                    <code data-line-numbers="1|2|3|4|5|6|7">npm install -g --save-dev --save-exact @biomejs/biome
+biome init --jsonc
+biome migrate eslint --write // avoir un fichier biome.jsonc
+biome migrate prettier --write
+biome format --write .
+biome lint --apply .
+biome check --apply .
+biome check --apply-unsafe .
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2> Feuille de route</h2>
+            </section>
+            <section>
+                <table class="language-support">
+                    <thead>
+                    <tr>
+                        <th>Langue</th>
+                        <th>Analyse syntaxique</th>
+                        <th>Formatage</th>
+                        <th>Analyse statique</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Javascript</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td>TypeScript</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td>JSX</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td>TSX</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td>JSON</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td>JSONC</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td>HTML</td>
+                        <td>⌛️</td>
+                        <td>🚫</td>
+                        <td>🚫</td>
+                    </tr>
+                    <tr>
+                        <td>Vue</td>
+                        <td>⚠️</td>
+                        <td>⚠️</td>
+                        <td>⚠️</td>
+                    </tr>
+                    <tr>
+                        <td>Svelte</td>
+                        <td>⚠️</td>
+                        <td>⚠️</td>
+                        <td>⚠️</td>
+                    </tr>
+                    <tr>
+                        <td>Astro</td>
+                        <td>⚠️</td>
+                        <td>⚠️</td>
+                        <td>⚠️</td>
+                    </tr>
+                    <tr>
+                        <td>CSS</td>
+                        <td>✅️</td>
+                        <td>⌛️</td>
+                        <td>⌛️</td>
+                    </tr>
+                    <tr>
+                        <td>YAML</td>
+                        <td>⌛️</td>
+                        <td>🚫</td>
+                        <td>🚫</td>
+                    </tr>
+                    <tr>
+                        <td>GraphQL</td>
+                        <td>⌛️</td>
+                        <td>🚫</td>
+                        <td>🚫</td>
+                    </tr>
+                    <tr>
+                        <td>Markdown</td>
+                        <td>🚫</td>
+                        <td>🚫</td>
+                        <td>🚫</td>
+                    </tr>
+                    </tbody>
+                    <caption>
+                        ✅: OK
+                        🚫: Pas démarré
+                        ⌛️: En cours
+                        ⚠️: Partiellement
+                    </caption>
+                </table>
+                <aside class="notes">
+                    <ol>
+                        <li>partielle des fichiers Astro, Svelte et Vue</li>
+                        <li>Des nouveaux languages comme GraphQL YAML</li>
+                    </ol>
+                </aside>
+            </section>
+            <section>
+                <div class="is-flex justify-content-space-evenly">
+                    <div class="is-flex justify-content-center direction-column align-items-center size-1">
+                        <img src="icones/css.svg">
+                        <img src="icones/javascript.svg">
+                    </div>
+                    <img class="size-1" src="icones/double-fleche.svg">
+                    <div class="is-flex justify-content-center direction-column align-items-center size-1">
+                        <img src="icones/html.svg">
+                        <img src="icones/npm.svg">
+                    </div>
+                </div>
+                <aside class="notes">
+                    <ol>
+                        <li>"cross-linting"</li>
+                        <li>Analyse croisée entre languages</li>
+                        <li>class css non utilisée dans du html</li>
+                        <li>détecter les dépendances pas utilisées dans un projet</li>
+                    </ol>
+                </aside>
+            </section>
+        </section>
 
-			<!-- 5 -->
-			<section id="slide-5">
-				<section>
-					<h2>Conclusion</h2>
-					<p>Nouvelle <a href="https://biomejs.dev/blog/biome-v1-6/">version v1.6</a> sortie le 8 mars 2024
-					</p>
-					<aside class="notes">
-						<ol>
-							<li>Projet existant non</li>
-							<li>Nouveau projet oui</li>
-							<li>Manque des languages</li>
-							<li>Eslint règle à fixé et pas sur</li>
-							<li>Prometteur, murisse</li>
-						</ol>
-					</aside>
-				</section>
-				<section data-transition="zoom">
-					<h2>Merci à vous</h2>
-					<aside class="notes">
-						<ol>
-							<li>merci à ceux qui m'ont aidée</li>
-						</ol>
-					</aside>
-				</section>
-			</section>
-		</div>
-	</div>
 
-	<script src="dist/reveal.js"></script>
-	<script src="plugin/notes/notes.js"></script>
-	<script src="plugin/markdown/markdown.js"></script>
-	<script src="plugin/highlight/highlight.js"></script>
-	<script>
-		// More info about initialization & config:
-		// - https://revealjs.com/initialization/
-		// - https://revealjs.com/config/
-		Reveal.initialize({
-			hash: true,
-			transition: 'fade',
-			transitionSpeed: 'slow',
-			// Learn about plugins: https://revealjs.com/plugins/
-			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
-		});
-	</script>
+        <!-- 5 -->
+        <section id="slide-5">
+            <section>
+                <h2>Conclusion</h2>
+                <p>Dernière <a href="https://biomejs.dev/blog/biome-v1-7/">version v1.7</a> sortie le 15 avril 2024
+                </p>
+                <aside class="notes">
+                    <ol>
+                        <li>Nouveau projet oui</li>
+                        <li>Manque des languages</li>
+                        <li>Prometteur, murisse</li>
+                        <li>Open source</li>
+                    </ol>
+                </aside>
+            </section>
+            <section data-transition="zoom">
+                <h2>Merci à vous</h2>
+                <aside class="notes">
+                    <ol>
+                        <li>3 versions mineurs cette année</li>
+                        <li>merci à ceux qui m'ont aidée</li>
+                    </ol>
+                </aside>
+            </section>
+        </section>
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+        transition: 'fade',
+        transitionSpeed: 'slow',
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+    });
+</script>
 </body>
 
 </html>

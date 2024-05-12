@@ -36,7 +36,7 @@ export default class Location {
 	getIndicesFromHash(hash = window.location.hash, options = {}) {
 		// Attempt to parse the hash as either an index or name
 		let name = hash.replace(/^#\/?/, "");
-		let bits = name.split("/");
+		const bits = name.split("/");
 
 		// If the first bit is not fully numeric and there is a name we
 		// can assume that this is a named link
@@ -47,8 +47,8 @@ export default class Location {
 
 			// Parse named links with fragments (#/named-link/2)
 			if (/\/[-\d]+$/g.test(name)) {
-				f = parseInt(name.split("/").pop(), 10);
-				f = isNaN(f) ? undefined : f;
+				f = Number.parseInt(name.split("/").pop(), 10);
+				f = Number.isNaN(f) ? undefined : f;
 				name = name.split("/").shift();
 			}
 
@@ -64,17 +64,17 @@ export default class Location {
 			}
 		} else {
 			const config = this.Reveal.getConfig();
-			let hashIndexBase =
+			const hashIndexBase =
 				config.hashOneBasedIndex || options.oneBasedIndex ? 1 : 0;
 
 			// Read the index components of the hash
-			let h = parseInt(bits[0], 10) - hashIndexBase || 0,
-				v = parseInt(bits[1], 10) - hashIndexBase || 0,
-				f;
+			const h = Number.parseInt(bits[0], 10) - hashIndexBase || 0;
+			const v = Number.parseInt(bits[1], 10) - hashIndexBase || 0;
+			let f;
 
 			if (config.fragmentInURL) {
-				f = parseInt(bits[2], 10);
-				if (isNaN(f)) {
+				f = Number.parseInt(bits[2], 10);
+				if (Number.isNaN(f)) {
 					f = undefined;
 				}
 			}
@@ -117,8 +117,8 @@ export default class Location {
 	 * writing the hash
 	 */
 	writeURL(delay) {
-		let config = this.Reveal.getConfig();
-		let currentSlide = this.Reveal.getCurrentSlide();
+		const config = this.Reveal.getConfig();
+		const currentSlide = this.Reveal.getCurrentSlide();
 
 		// Make sure there's never more than one timeout running
 		clearTimeout(this.writeURLTimeout);
@@ -127,7 +127,7 @@ export default class Location {
 		if (typeof delay === "number") {
 			this.writeURLTimeout = setTimeout(this.writeURL, delay);
 		} else if (currentSlide) {
-			let hash = this.getHash();
+			const hash = this.getHash();
 
 			// If we're configured to push to history OR the history
 			// API is not available.
@@ -143,7 +143,7 @@ export default class Location {
 						window.location.pathname + window.location.search,
 					);
 				} else {
-					this.debouncedReplaceState("#" + hash);
+					this.debouncedReplaceState(`#${hash}`);
 				}
 			}
 			// UPDATE: The below nuking of all hash changes breaks
@@ -189,13 +189,13 @@ export default class Location {
 		let url = "/";
 
 		// Attempt to create a named link based on the slide's ID
-		let s = slide || this.Reveal.getCurrentSlide();
+		const s = slide || this.Reveal.getCurrentSlide();
 		let id = s ? s.getAttribute("id") : null;
 		if (id) {
 			id = encodeURIComponent(id);
 		}
 
-		let index = this.Reveal.getIndices(slide);
+		const index = this.Reveal.getIndices(slide);
 		if (!this.Reveal.getConfig().fragmentInURL) {
 			index.f = undefined;
 		}
@@ -203,19 +203,19 @@ export default class Location {
 		// If the current slide has an ID, use that as a named link,
 		// but we don't support named links with a fragment index
 		if (typeof id === "string" && id.length) {
-			url = "/" + id;
+			url = `/${id}`;
 
 			// If there is also a fragment, append that at the end
 			// of the named link, like: #/named-link/2
-			if (index.f >= 0) url += "/" + index.f;
+			if (index.f >= 0) url += `/${index.f}`;
 		}
 		// Otherwise use the /h/v index
 		else {
-			let hashIndexBase = this.Reveal.getConfig().hashOneBasedIndex ? 1 : 0;
+			const hashIndexBase = this.Reveal.getConfig().hashOneBasedIndex ? 1 : 0;
 			if (index.h > 0 || index.v > 0 || index.f >= 0)
 				url += index.h + hashIndexBase;
-			if (index.v > 0 || index.f >= 0) url += "/" + (index.v + hashIndexBase);
-			if (index.f >= 0) url += "/" + index.f;
+			if (index.v > 0 || index.f >= 0) url += `/${index.v + hashIndexBase}`;
+			if (index.f >= 0) url += `/${index.f}`;
 		}
 
 		return url;

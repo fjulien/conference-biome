@@ -1,186 +1,196 @@
 .rounded {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .is-flex {
-    display: flex;
+  display: flex;
 
-    &.align-items-center {
-        align-items: center;
-    }
+  &.align-items-center {
+    align-items: center;
+  }
 
-    &.justify-content-space-evenly {
-        justify-content: space-evenly;
-    }
+  &.justify-content-space-evenly {
+    justify-content: space-evenly;
+  }
 
-    &.direction-column {
-        flex-direction: column;
-    }
+  &.direction-column {
+    flex-direction: column;
+  }
 
-    &.justify-content-center {
-        justify-content: center;
-    }
+  &.justify-content-center {
+    justify-content: center;
+  }
 }
 
 .w {
-    &-75 {
-        width: 75%;
-    }
+  &-75 {
+    width: 75%;
+  }
 
-    &-100 {
-        width: 100%;
-    }
+  &-100 {
+    width: 100%;
+  }
 
-    &-50 {
-        width: 50%;
-    }
+  &-50 {
+    width: 50%;
+  }
 
-    &-25 {
-        width: 25%;
-    }
+  &-25 {
+    width: 25%;
+  }
 
-    &-95 {
-        width: 95% !important;
-    }
+  &-95 {
+    width: 95% !important;
+  }
 
-    &-max-1 {
-        max-width: 50px;
-    }
+  &-max-1 {
+    max-width: 50px;
+  }
 }
 
 .h {
-    &-70 {
-        height: 70vh;
-    }
+  &-70 {
+    height: 70vh;
+  }
 
-    &-50 {
-        height: 50vh;
-    }
+  &-50 {
+    height: 50vh;
+  }
 
-    &-inherit {
-        height: inherit;
-    }
+  &-inherit {
+    height: inherit;
+  }
 }
 
 .f-size-1 {
-    font-size: 1.25rem;
+  font-size: 1.25rem;
 }
 
 .bk {
-    &-color {
-        &-black {
-            background-color: black;
-        }
+  &-color {
+    &-black {
+      background-color: black;
     }
+  }
 }
 
 .p {
-    &-1 {
-        padding: 1rem;
-    }
+  &-1 {
+    padding: 1rem;
+  }
 
-    &-2 {
-        padding: 2rem;
-    }
+  &-2 {
+    padding: 2rem;
+  }
 }
 
 .m {
-    &l {
-        &-1 {
-            margin-left: 1rem;
-        }
+  &l {
+    &-1 {
+      margin-left: 1rem;
     }
+  }
 
-    &r {
-        &-1 {
-            margin-right: 1rem;
-        }
+  &b {
+    &-2 {
+      margin-bottom: 2rem;
     }
+  }
 
-    &y {
-        &-1 {
-            &-n {
-                margin-top: -1rem !important;
-                margin-bottom: -1rem !important;
-            }
-        }
+  &r {
+    &-1 {
+      margin-right: 1rem;
     }
+  }
 
-    &-0 {
-        margin: 0 !important;
+  &y {
+    &-1 {
+      &-n {
+        margin-top: -1rem !important;
+        margin-bottom: -1rem !important;
+      }
     }
+  }
+
+  &-0 {
+    margin: 0 !important;
+  }
 }
 
 .t {
-    &-color {
-        &-red {
-            color: red;
-        }
-
-        &-orange {
-            color: rgb(199, 113, 0);
-        }
-
+  &-color {
+    &-red {
+      color: red;
     }
 
-    &-font {
-        &-size {
-            &-3 {
-                font-size: x-large;
-            }
-
-            &-2 {
-                font-size: large;
-            }
-
-            &-1 {
-                font-size: small;
-            }
-        }
+    &-orange {
+      color: rgb(199, 113, 0);
     }
+
+  }
+
+  &-font {
+    &-size {
+      &-3 {
+        font-size: x-large;
+      }
+
+      &-2 {
+        font-size: large;
+      }
+
+      &-1 {
+        font-size: small;
+      }
+    }
+  }
 }
 
 .size {
-    width: 75px;
-    max-width: 75px;
+  width: 75px;
+  max-width: 75px;
 
-    &-1 {
-        width: 150px;
-    }
+  &-1 {
+    width: 150px;
+  }
 
-    &-2 {
-        width: 210px;
-    }
+  &-2 {
+    width: 210px;
+  }
 }
 
 figcaption {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 
 .r {
-    &-90 {
-        transform: rotate(90deg);
-    }
+  &-90 {
+    transform: rotate(90deg);
+  }
 }
 
 table {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 
-    caption {
-        font-size: 1.5rem;
-    }
+  caption {
+    font-size: 1.5rem;
+  }
 }
 
 .language-support {
-    tr {
+  tr {
 
-        td:not(:first-child) {
-            text-align: center !important;
-        }
+    td:not(:first-child) {
+      text-align: center !important;
     }
+  }
 
-    caption {
-        caption-side: bottom;
-        font-size: 1.5rem;
-    }
+  caption {
+    caption-side: bottom;
+    font-size: 1.5rem;
+  }
+}
+
+.border-bottom-separator {
+  border-bottom: 2px solid black !important;
 }

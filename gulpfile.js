@@ -68,7 +68,7 @@ babelConfigESM.presets[0][1].targets = {
 	],
 };
 
-let cache = {};
+const cache = {};
 
 // Creates a bundle with broad browser support, exposed
 // as UMD
@@ -158,13 +158,13 @@ gulp.task("plugins", () => {
 			}).then((bundle) => {
 				cache[plugin.input] = bundle.cache;
 				bundle.write({
-					file: plugin.output + ".esm.js",
+					file: `${plugin.output}.esm.js`,
 					name: plugin.name,
 					format: "es",
 				});
 
 				bundle.write({
-					file: plugin.output + ".js",
+					file: `${plugin.output}.js`,
 					name: plugin.name,
 					format: "umd",
 				});
@@ -216,21 +216,21 @@ gulp.task("css-core", () =>
 gulp.task("css", gulp.parallel("css-themes", "css-core"));
 
 gulp.task("qunit", () => {
-	let serverConfig = {
+	const serverConfig = {
 		root,
 		port: 8009,
 		host: "localhost",
 		name: "test-server",
 	};
 
-	let server = connect.server(serverConfig);
+	const server = connect.server(serverConfig);
 
-	let testFiles = glob.sync("test/*.html");
+	const testFiles = glob.sync("test/*.html");
 
 	let totalTests = 0;
 	let failingTests = 0;
 
-	let tests = Promise.all(
+	const tests = Promise.all(
 		testFiles.map((filename) => {
 			return new Promise((resolve, reject) => {
 				qunit
@@ -332,11 +332,11 @@ gulp.task("serve", () => {
 		livereload: true,
 	});
 
-	const slidesRoot = root.endsWith("/") ? root : root + "/";
+	const slidesRoot = root.endsWith("/") ? root : `${root}/`;
 	gulp.watch(
 		[
-			slidesRoot + "**/*.html",
-			slidesRoot + "**/*.md",
+			`${slidesRoot}**/*.html`,
+			`${slidesRoot}**/*.md`,
 			`!${slidesRoot}**/node_modules/**`, // ignore node_modules
 		],
 		gulp.series("reload"),

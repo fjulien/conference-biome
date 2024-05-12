@@ -1,11 +1,11 @@
-import {
-	extend,
-	queryAll,
-	closest,
-	getMimeTypeFromFile,
-	encodeRFC3986URI,
-} from "../utils/util.js";
 import { isMobile } from "../utils/device.js";
+import {
+	closest,
+	encodeRFC3986URI,
+	extend,
+	getMimeTypeFromFile,
+	queryAll,
+} from "../utils/util.js";
 
 import fitty from "fitty";
 
@@ -90,25 +90,25 @@ export default class SlideContent {
 		});
 
 		// Show the corresponding background element
-		let background = slide.slideBackgroundElement;
+		const background = slide.slideBackgroundElement;
 		if (background) {
 			background.style.display = "block";
 
-			let backgroundContent = slide.slideBackgroundContentElement;
-			let backgroundIframe = slide.getAttribute("data-background-iframe");
+			const backgroundContent = slide.slideBackgroundContentElement;
+			const backgroundIframe = slide.getAttribute("data-background-iframe");
 
 			// If the background contains media, load it
 			if (background.hasAttribute("data-loaded") === false) {
 				background.setAttribute("data-loaded", "true");
 
-				let backgroundImage = slide.getAttribute("data-background-image"),
-					backgroundVideo = slide.getAttribute("data-background-video"),
-					backgroundVideoLoop = slide.hasAttribute(
-						"data-background-video-loop",
-					),
-					backgroundVideoMuted = slide.hasAttribute(
-						"data-background-video-muted",
-					);
+				const backgroundImage = slide.getAttribute("data-background-image");
+				const backgroundVideo = slide.getAttribute("data-background-video");
+				const backgroundVideoLoop = slide.hasAttribute(
+					"data-background-video-loop",
+				);
+				const backgroundVideoMuted = slide.hasAttribute(
+					"data-background-video-muted",
+				);
 
 				// Images
 				if (backgroundImage) {
@@ -122,7 +122,7 @@ export default class SlideContent {
 							.split(",")
 							.map((background) => {
 								// Decode URL(s) that are already encoded first
-								let decoded = decodeURI(background.trim());
+								const decoded = decodeURI(background.trim());
 								return `url(${encodeRFC3986URI(decoded)})`;
 							})
 							.join(",");
@@ -130,7 +130,7 @@ export default class SlideContent {
 				}
 				// Videos
 				else if (backgroundVideo && !this.Reveal.isSpeakerNotes()) {
-					let video = document.createElement("video");
+					const video = document.createElement("video");
 
 					if (backgroundVideoLoop) {
 						video.setAttribute("loop", "");
@@ -155,7 +155,7 @@ export default class SlideContent {
 						const sourceElement = document.createElement("source");
 						sourceElement.setAttribute("src", source);
 
-						let type = getMimeTypeFromFile(source);
+						const type = getMimeTypeFromFile(source);
 						if (type) {
 							sourceElement.setAttribute("type", type);
 						}
@@ -167,7 +167,7 @@ export default class SlideContent {
 				}
 				// Iframes
 				else if (backgroundIframe && options.excludeIframes !== true) {
-					let iframe = document.createElement("iframe");
+					const iframe = document.createElement("iframe");
 					iframe.setAttribute("allowfullscreen", "");
 					iframe.setAttribute("mozallowfullscreen", "");
 					iframe.setAttribute("webkitallowfullscreen", "");
@@ -185,7 +185,7 @@ export default class SlideContent {
 			}
 
 			// Start loading preloadable iframes
-			let backgroundIframeElement =
+			const backgroundIframeElement =
 				backgroundContent.querySelector("iframe[data-src]");
 			if (backgroundIframeElement) {
 				// Check if this iframe is eligible to be preloaded
@@ -235,7 +235,7 @@ export default class SlideContent {
 		slide.style.display = "none";
 
 		// Hide the corresponding background element
-		let background = this.Reveal.getSlideBackground(slide);
+		const background = this.Reveal.getSlideBackground(slide);
 		if (background) {
 			background.style.display = "none";
 
@@ -268,12 +268,12 @@ export default class SlideContent {
 	 * Enforces origin-specific format rules for embedded media.
 	 */
 	formatEmbeddedContent() {
-		let _appendParamToIframeSource = (sourceAttribute, sourceURL, param) => {
+		const _appendParamToIframeSource = (sourceAttribute, sourceURL, param) => {
 			queryAll(
 				this.Reveal.getSlidesElement(),
-				"iframe[" + sourceAttribute + '*="' + sourceURL + '"]',
+				`iframe[${sourceAttribute}*="${sourceURL}"]`,
 			).forEach((el) => {
-				let src = el.getAttribute(sourceAttribute);
+				const src = el.getAttribute(sourceAttribute);
 				if (src && src.indexOf(param) === -1) {
 					el.setAttribute(
 						sourceAttribute,
@@ -336,7 +336,7 @@ export default class SlideContent {
 					// Mobile devices never fire a loaded event so instead
 					// of waiting, we initiate playback
 					else if (isMobile) {
-						let promise = el.play();
+						const promise = el.play();
 
 						// If autoplay does not work, ensure that the controls are visible so
 						// that the viewer can start the media on their own
@@ -394,8 +394,8 @@ export default class SlideContent {
 	 * @param {object} event
 	 */
 	startEmbeddedMedia(event) {
-		let isAttachedToDOM = !!closest(event.target, "html"),
-			isVisible = !!closest(event.target, ".present");
+		const isAttachedToDOM = !!closest(event.target, "html");
+		const isVisible = !!closest(event.target, ".present");
 
 		if (isAttachedToDOM && isVisible) {
 			event.target.currentTime = 0;
@@ -412,11 +412,11 @@ export default class SlideContent {
 	 * @param {object} event
 	 */
 	startEmbeddedIframe(event) {
-		let iframe = event.target;
+		const iframe = event.target;
 
-		if (iframe && iframe.contentWindow) {
-			let isAttachedToDOM = !!closest(event.target, "html"),
-				isVisible = !!closest(event.target, ".present");
+		if (iframe?.contentWindow) {
+			const isAttachedToDOM = !!closest(event.target, "html");
+			const isVisible = !!closest(event.target, ".present");
 
 			if (isAttachedToDOM && isVisible) {
 				// Prefer an explicit global autoplay setting
@@ -470,7 +470,7 @@ export default class SlideContent {
 			options,
 		);
 
-		if (element && element.parentNode) {
+		if (element?.parentNode) {
 			// HTML5 media elements
 			queryAll(element, "video, audio").forEach((el) => {
 				if (!el.hasAttribute("data-ignore") && typeof el.pause === "function") {

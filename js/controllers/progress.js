@@ -49,7 +49,7 @@ export default class Progress {
 				scale = 0;
 			}
 
-			this.bar.style.transform = "scaleX(" + scale + ")";
+			this.bar.style.transform = `scaleX(${scale})`;
 		}
 	}
 
@@ -70,8 +70,8 @@ export default class Progress {
 
 		event.preventDefault();
 
-		let slides = this.Reveal.getSlides();
-		let slidesTotal = slides.length;
+		const slides = this.Reveal.getSlides();
+		const slidesTotal = slides.length;
 		let slideIndex = Math.floor(
 			(event.clientX / this.getMaxWidth()) * slidesTotal,
 		);
@@ -80,7 +80,7 @@ export default class Progress {
 			slideIndex = slidesTotal - slideIndex;
 		}
 
-		let targetIndices = this.Reveal.getIndices(slides[slideIndex]);
+		const targetIndices = this.Reveal.getIndices(slides[slideIndex]);
 		this.Reveal.slide(targetIndices.h, targetIndices.v);
 	}
 

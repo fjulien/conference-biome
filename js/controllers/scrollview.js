@@ -1,6 +1,6 @@
 import {
-	HORIZONTAL_SLIDES_SELECTOR,
 	HORIZONTAL_BACKGROUNDS_SELECTOR,
+	HORIZONTAL_SLIDES_SELECTOR,
 } from "../utils/constants.js";
 import { queryAll } from "../utils/util.js";
 
@@ -52,7 +52,7 @@ export default class ScrollView {
 		let presentationBackground;
 
 		const viewportStyles = window.getComputedStyle(this.viewportElement);
-		if (viewportStyles && viewportStyles.background) {
+		if (viewportStyles?.background) {
 			presentationBackground = viewportStyles.background;
 		}
 
@@ -93,7 +93,7 @@ export default class ScrollView {
 					const slideBackground = horizontalBackgrounds[h];
 					const pageBackground = window.getComputedStyle(slideBackground);
 
-					if (pageBackground && pageBackground.background) {
+					if (pageBackground?.background) {
 						page.style.background = pageBackground.background;
 					} else if (presentationBackground) {
 						page.style.background = presentationBackground;
@@ -293,7 +293,7 @@ export default class ScrollView {
 			? compactHeight
 			: viewportHeight;
 
-		this.viewportElement.style.setProperty("--page-height", pageHeight + "px");
+		this.viewportElement.style.setProperty("--page-height", `${pageHeight}px`);
 		this.viewportElement.style.scrollSnapType =
 			typeof config.scrollSnap === "string" ? `y ${config.scrollSnap}` : "";
 
@@ -319,7 +319,7 @@ export default class ScrollView {
 
 			page.pageElement.style.setProperty(
 				"--slide-height",
-				config.center === true ? "auto" : slideSize.height + "px",
+				config.center === true ? "auto" : `${slideSize.height}px`,
 			);
 
 			this.slideTriggers.push({
@@ -357,14 +357,14 @@ export default class ScrollView {
 			for (let i = 0; i < totalScrollTriggerCount + 1; i++) {
 				const triggerStick = document.createElement("div");
 				triggerStick.className = "scroll-snap-point";
-				triggerStick.style.height = this.scrollTriggerHeight + "px";
+				triggerStick.style.height = `${this.scrollTriggerHeight}px`;
 				triggerStick.style.scrollSnapAlign = useCompactLayout
 					? "center"
 					: "start";
 				page.pageElement.appendChild(triggerStick);
 
 				if (i === 0) {
-					triggerStick.style.marginTop = -this.scrollTriggerHeight + "px";
+					triggerStick.style.marginTop = `${-this.scrollTriggerHeight}px`;
 				}
 			}
 
@@ -375,7 +375,7 @@ export default class ScrollView {
 				page.pageHeight = viewportHeight;
 				page.pageElement.style.setProperty(
 					"--page-height",
-					viewportHeight + "px",
+					`${viewportHeight}px`,
 				);
 			} else {
 				page.pageHeight = pageHeight;
@@ -391,14 +391,16 @@ export default class ScrollView {
 			// This is used to pad the height of our page in CSS
 			page.pageElement.style.setProperty(
 				"--page-scroll-padding",
-				page.scrollPadding + "px",
+				`${page.scrollPadding}px`,
 			);
 
 			// If this is a sticky page, stick it to the vertical center
 			if (totalScrollTriggerCount > 0) {
 				page.stickyElement.style.position = "sticky";
-				page.stickyElement.style.top =
-					Math.max((viewportHeight - page.pageHeight) / 2, 0) + "px";
+				page.stickyElement.style.top = `${Math.max(
+					(viewportHeight - page.pageHeight) / 2,
+					0,
+				)}px`;
 			} else {
 				page.stickyElement.style.position = "relative";
 				page.pageElement.style.scrollSnapAlign =
@@ -527,7 +529,7 @@ export default class ScrollView {
 			// Triggers for each subsequent auto-animate slide
 			this.slideTriggers.push(
 				...Array.from(page.autoAnimateElements).map((autoAnimateElement, i) => {
-					let autoAnimatePage = this.createPage({
+					const autoAnimatePage = this.createPage({
 						slideElement: autoAnimateElement.querySelector("section"),
 						contentElement: autoAnimateElement,
 						backgroundElement:
@@ -559,8 +561,14 @@ export default class ScrollView {
 	 */
 	createPage(page) {
 		page.scrollTriggers = [];
-		page.indexh = parseInt(page.slideElement.getAttribute("data-index-h"), 10);
-		page.indexv = parseInt(page.slideElement.getAttribute("data-index-v"), 10);
+		page.indexh = Number.parseInt(
+			page.slideElement.getAttribute("data-index-h"),
+			10,
+		);
+		page.indexv = Number.parseInt(
+			page.slideElement.getAttribute("data-index-v"),
+			10,
+		);
 
 		return page;
 	}
@@ -590,8 +598,9 @@ export default class ScrollView {
 			(viewportHeight / scrollHeight) * this.progressBarHeight;
 		const spacing = Math.min(progressSegmentHeight / 8, MAX_PROGRESS_SPACING);
 
-		this.progressBarPlayhead.style.height =
-			this.playheadHeight - spacing + "px";
+		this.progressBarPlayhead.style.height = `${
+			this.playheadHeight - spacing
+		}px`;
 
 		// Don't show individual segments if they're too small
 		if (progressSegmentHeight > MIN_PROGRESS_SEGMENT_HEIGHT) {
@@ -601,13 +610,14 @@ export default class ScrollView {
 				// Visual representation of a slide
 				page.progressBarSlide = document.createElement("div");
 				page.progressBarSlide.className = "scrollbar-slide";
-				page.progressBarSlide.style.top =
-					slideTrigger.range[0] * this.progressBarHeight + "px";
-				page.progressBarSlide.style.height =
+				page.progressBarSlide.style.top = `${
+					slideTrigger.range[0] * this.progressBarHeight
+				}px`;
+				page.progressBarSlide.style.height = `${
 					(slideTrigger.range[1] - slideTrigger.range[0]) *
 						this.progressBarHeight -
-					spacing +
-					"px";
+					spacing
+				}px`;
 				page.progressBarSlide.classList.toggle(
 					"has-triggers",
 					page.scrollTriggers.length > 0,
@@ -618,14 +628,13 @@ export default class ScrollView {
 				page.scrollTriggerElements = page.scrollTriggers.map((trigger, i) => {
 					const triggerElement = document.createElement("div");
 					triggerElement.className = "scrollbar-trigger";
-					triggerElement.style.top =
-						(trigger.range[0] - slideTrigger.range[0]) *
-							this.progressBarHeight +
-						"px";
-					triggerElement.style.height =
+					triggerElement.style.top = `${
+						(trigger.range[0] - slideTrigger.range[0]) * this.progressBarHeight
+					}px`;
+					triggerElement.style.height = `${
 						(trigger.range[1] - trigger.range[0]) * this.progressBarHeight -
-						spacing +
-						"px";
+						spacing
+					}px`;
 					page.progressBarSlide.appendChild(triggerElement);
 
 					if (i === 0) triggerElement.style.display = "none";
@@ -832,7 +841,7 @@ export default class ScrollView {
 			scrollPosition &&
 			scrollOrigin === location.origin + location.pathname
 		) {
-			this.viewportElement.scrollTop = parseInt(scrollPosition, 10);
+			this.viewportElement.scrollTop = Number.parseInt(scrollPosition, 10);
 		}
 	}
 

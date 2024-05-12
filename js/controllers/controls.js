@@ -1,5 +1,5 @@
-import { queryAll } from "../utils/util.js";
 import { isAndroid } from "../utils/device.js";
+import { queryAll } from "../utils/util.js";
 
 /**
  * Manages our presentation controls. This includes both
@@ -129,7 +129,7 @@ export default class Controls {
 	 * Updates the state of all control/navigation arrows.
 	 */
 	update() {
-		let routes = this.Reveal.availableRoutes();
+		const routes = this.Reveal.availableRoutes();
 
 		// Remove the 'enabled' class from all directions
 		[
@@ -181,9 +181,9 @@ export default class Controls {
 			});
 
 		// Highlight fragment directions
-		let currentSlide = this.Reveal.getCurrentSlide();
+		const currentSlide = this.Reveal.getCurrentSlide();
 		if (currentSlide) {
-			let fragmentsRoutes = this.Reveal.fragments.availableRoutes();
+			const fragmentsRoutes = this.Reveal.fragments.availableRoutes();
 
 			// Always apply fragment decorator to prev/next buttons
 			if (fragmentsRoutes.prev)
@@ -225,7 +225,7 @@ export default class Controls {
 		}
 
 		if (this.Reveal.getConfig().controlsTutorial) {
-			let indices = this.Reveal.getIndices();
+			const indices = this.Reveal.getIndices();
 
 			// Highlight control arrows with an animation to ensure
 			// that the viewer knows how to navigate

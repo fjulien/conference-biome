@@ -70,14 +70,10 @@ const Plugin = () => {
 		const url =
 			typeof presentationURL === "string"
 				? presentationURL
-				: window.location.protocol +
-				  "//" +
-				  window.location.host +
-				  window.location.pathname +
-				  window.location.search;
+				: `${window.location.protocol}//${window.location.host}${window.location.pathname}${window.location.search}`;
 
 		// Keep trying to connect until we get a 'connected' message back
-		connectInterval = setInterval(function () {
+		connectInterval = setInterval(() => {
 			speakerWindow.postMessage(
 				JSON.stringify({
 					namespace: "reveal-notes",
@@ -97,7 +93,7 @@ const Plugin = () => {
 	 * and then pushes the result to the notes frame.
 	 */
 	function callRevealApi(methodName, methodArguments, callId) {
-		let result = deck[methodName].apply(deck, methodArguments);
+		const result = deck[methodName].apply(deck, methodArguments);
 		speakerWindow.postMessage(
 			JSON.stringify({
 				namespace: "reveal-notes",
@@ -113,11 +109,11 @@ const Plugin = () => {
 	 * Posts the current slide data to the notes window.
 	 */
 	function post(event) {
-		let slideElement = deck.getCurrentSlide(),
-			notesElements = slideElement.querySelectorAll("aside.notes"),
-			fragmentElement = slideElement.querySelector(".current-fragment");
+		const slideElement = deck.getCurrentSlide();
+		let notesElements = slideElement.querySelectorAll("aside.notes");
+		const fragmentElement = slideElement.querySelector(".current-fragment");
 
-		let messageData = {
+		const messageData = {
 			namespace: "reveal-notes",
 			type: "state",
 			notes: "",
@@ -134,7 +130,7 @@ const Plugin = () => {
 
 		// Look for notes defined in a fragment
 		if (fragmentElement) {
-			let fragmentNotes = fragmentElement.querySelector("aside.notes");
+			const fragmentNotes = fragmentElement.querySelector("aside.notes");
 			if (fragmentNotes) {
 				messageData.notes = fragmentNotes.innerHTML;
 				messageData.markdown =
@@ -152,7 +148,7 @@ const Plugin = () => {
 		}
 
 		// Look for notes defined in an aside element
-		if (notesElements && notesElements.length) {
+		if (notesElements?.length) {
 			// Ignore notes inside of fragments since those are shown
 			// individually when stepping through fragments
 			notesElements = Array.from(notesElements).filter(
@@ -186,7 +182,7 @@ const Plugin = () => {
 		// Only allow same-origin messages
 		// (added 12/5/22 as a XSS safeguard)
 		if (isSameOriginEvent(event)) {
-			let data = JSON.parse(event.data);
+			const data = JSON.parse(event.data);
 			if (
 				data &&
 				data.namespace === "reveal-notes" &&
@@ -225,7 +221,7 @@ const Plugin = () => {
 	return {
 		id: "notes",
 
-		init: function (reveal) {
+		init: (reveal) => {
 			deck = reveal;
 
 			if (!/receiver/i.test(window.location.search)) {
@@ -259,7 +255,7 @@ const Plugin = () => {
 				// Open the notes when the 's' key is hit
 				deck.addKeyBinding(
 					{ keyCode: 83, key: "S", description: "Speaker notes view" },
-					function () {
+					() => {
 						openSpeakerWindow();
 					},
 				);

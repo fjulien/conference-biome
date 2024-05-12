@@ -6,7 +6,7 @@
  * @param {object} b
  */
 export const extend = (a, b) => {
-	for (let i in b) {
+	for (const i in b) {
 		a[i] = b[i];
 	}
 
@@ -40,9 +40,9 @@ export const toggleClass = (el, className, value) => {
 export const deserialize = (value) => {
 	if (typeof value === "string") {
 		if (value === "null") return null;
-		else if (value === "true") return true;
-		else if (value === "false") return false;
-		else if (value.match(/^-?[\d\.]+$/)) return parseFloat(value);
+		if (value === "true") return true;
+		if (value === "false") return false;
+		if (value.match(/^-?[\d\.]+$/)) return Number.parseFloat(value);
 	}
 
 	return value;
@@ -58,8 +58,8 @@ export const deserialize = (value) => {
  * @return {number}
  */
 export const distanceBetween = (a, b) => {
-	let dx = a.x - b.x,
-		dy = a.y - b.y;
+	const dx = a.x - b.x;
+	const dy = a.y - b.y;
 
 	return Math.sqrt(dx * dx + dy * dy);
 };
@@ -84,10 +84,10 @@ export const transformElement = (element, transform) => {
  * @return {Boolean}
  */
 export const matches = (target, selector) => {
-	let matchesMethod =
+	const matchesMethod =
 		target.matches || target.matchesSelector || target.msMatchesSelector;
 
-	return !!(matchesMethod && matchesMethod.call(target, selector));
+	return !!matchesMethod?.call(target, selector);
 };
 
 /**
@@ -130,7 +130,7 @@ export const enterFullscreen = (element) => {
 	element = element || document.documentElement;
 
 	// Check which implementation is available
-	let requestMethod =
+	const requestMethod =
 		element.requestFullscreen ||
 		element.webkitRequestFullscreen ||
 		element.webkitRequestFullScreen ||
@@ -161,19 +161,19 @@ export const createSingletonNode = (
 	innerHTML = "",
 ) => {
 	// Find all nodes matching the description
-	let nodes = container.querySelectorAll("." + classname);
+	const nodes = container.querySelectorAll(`.${classname}`);
 
 	// Check all matches to find one which is a direct child of
 	// the specified container
 	for (let i = 0; i < nodes.length; i++) {
-		let testNode = nodes[i];
+		const testNode = nodes[i];
 		if (testNode.parentNode === container) {
 			return testNode;
 		}
 	}
 
 	// If no node was found, create it now
-	let node = document.createElement(tagname);
+	const node = document.createElement(tagname);
 	node.className = classname;
 	node.innerHTML = innerHTML;
 	container.appendChild(node);
@@ -187,7 +187,7 @@ export const createSingletonNode = (
  * @param {string} value
  */
 export const createStyleSheet = (value) => {
-	let tag = document.createElement("style");
+	const tag = document.createElement("style");
 	tag.type = "text/css";
 
 	if (value && value.length > 0) {
@@ -207,23 +207,22 @@ export const createStyleSheet = (value) => {
  * Returns a key:value hash of all query params.
  */
 export const getQueryHash = () => {
-	let query = {};
+	const query = {};
 
 	location.search.replace(/[A-Z0-9]+?=([\w\.%-]*)/gi, (a) => {
 		query[a.split("=").shift()] = a.split("=").pop();
 	});
 
 	// Basic deserialization
-	for (let i in query) {
-		let value = query[i];
+	for (const i in query) {
+		const value = query[i];
 
 		query[i] = deserialize(unescape(value));
 	}
 
 	// Do not accept new dependencies via query config to avoid
 	// the potential of malicious script injection
-	if (typeof query["dependencies"] !== "undefined")
-		delete query["dependencies"];
+	if (typeof query.dependencies !== "undefined") query.dependencies = undefined;
 
 	return query;
 };
@@ -239,8 +238,8 @@ export const getQueryHash = () => {
  */
 export const getRemainingHeight = (element, height = 0) => {
 	if (element) {
-		let newHeight,
-			oldHeight = element.style.height;
+		let newHeight;
+		const oldHeight = element.style.height;
 
 		// Change the .stretch element height to 0 in order find the height of all
 		// the other elements
@@ -253,7 +252,7 @@ export const getRemainingHeight = (element, height = 0) => {
 		newHeight = height - element.parentNode.offsetHeight;
 
 		// Restore the old height, just in case
-		element.style.height = oldHeight + "px";
+		element.style.height = `${oldHeight}px`;
 
 		// Clear the parent (.slide) height. .removeProperty works in IE9+
 		element.parentNode.style.removeProperty("height");

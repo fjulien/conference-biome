@@ -53,7 +53,7 @@ export default class SlideNumber {
 	 * number, including formatting.
 	 */
 	getSlideNumber(slide = this.Reveal.getCurrentSlide()) {
-		let config = this.Reveal.getConfig();
+		const config = this.Reveal.getConfig();
 		let value;
 		let format = SLIDE_NUMBER_FORMAT_HORIZONTAL_DOT_VERTICAL;
 
@@ -72,7 +72,7 @@ export default class SlideNumber {
 			}
 
 			// Offset the current slide number by 1 to make it 1-indexed
-			let horizontalOffset =
+			const horizontalOffset =
 				slide && slide.dataset.visibility === "uncounted" ? 0 : 1;
 
 			value = [];
@@ -87,19 +87,20 @@ export default class SlideNumber {
 						this.Reveal.getTotalSlides(),
 					);
 					break;
-				default:
-					let indices = this.Reveal.getIndices(slide);
+				default: {
+					const indices = this.Reveal.getIndices(slide);
 					value.push(indices.h + horizontalOffset);
-					let sep =
+					const sep =
 						format === SLIDE_NUMBER_FORMAT_HORIZONTAL_SLASH_VERTICAL
 							? "/"
 							: ".";
 					if (this.Reveal.isVerticalSlide(slide))
 						value.push(sep, indices.v + 1);
+				}
 			}
 		}
 
-		let url = "#" + this.Reveal.location.getHash(slide);
+		const url = `#${this.Reveal.location.getHash(slide)}`;
 		return this.formatNumber(value[0], value[1], value[2], url);
 	}
 
@@ -113,18 +114,17 @@ export default class SlideNumber {
 	 * @param {HTMLElement} [url='#'+locationHash()] The url to link to
 	 * @return {string} HTML string fragment
 	 */
-	formatNumber(a, delimiter, b, url = "#" + this.Reveal.location.getHash()) {
-		if (typeof b === "number" && !isNaN(b)) {
+	formatNumber(a, delimiter, b, url = `#${this.Reveal.location.getHash()}`) {
+		if (typeof b === "number" && !Number.isNaN(b)) {
 			return `<a href="${url}">
 					<span class="slide-number-a">${a}</span>
 					<span class="slide-number-delimiter">${delimiter}</span>
 					<span class="slide-number-b">${b}</span>
 					</a>`;
-		} else {
-			return `<a href="${url}">
+		}
+		return `<a href="${url}">
 					<span class="slide-number-a">${a}</span>
 					</a>`;
-		}
 	}
 
 	destroy() {

@@ -1,31 +1,31 @@
-import SlideContent from "./controllers/slidecontent.js";
-import SlideNumber from "./controllers/slidenumber.js";
-import JumpToSlide from "./controllers/jumptoslide.js";
-import Backgrounds from "./controllers/backgrounds.js";
-import AutoAnimate from "./controllers/autoanimate.js";
-import ScrollView from "./controllers/scrollview.js";
-import PrintView from "./controllers/printview.js";
-import Fragments from "./controllers/fragments.js";
-import Overview from "./controllers/overview.js";
-import Keyboard from "./controllers/keyboard.js";
-import Location from "./controllers/location.js";
-import Controls from "./controllers/controls.js";
-import Progress from "./controllers/progress.js";
-import Pointer from "./controllers/pointer.js";
-import Plugins from "./controllers/plugins.js";
-import Touch from "./controllers/touch.js";
-import Focus from "./controllers/focus.js";
-import Notes from "./controllers/notes.js";
 import Playback from "./components/playback.js";
 import defaultConfig from "./config.js";
-import * as Util from "./utils/util.js";
-import * as Device from "./utils/device.js";
+import AutoAnimate from "./controllers/autoanimate.js";
+import Backgrounds from "./controllers/backgrounds.js";
+import Controls from "./controllers/controls.js";
+import Focus from "./controllers/focus.js";
+import Fragments from "./controllers/fragments.js";
+import JumpToSlide from "./controllers/jumptoslide.js";
+import Keyboard from "./controllers/keyboard.js";
+import Location from "./controllers/location.js";
+import Notes from "./controllers/notes.js";
+import Overview from "./controllers/overview.js";
+import Plugins from "./controllers/plugins.js";
+import Pointer from "./controllers/pointer.js";
+import PrintView from "./controllers/printview.js";
+import Progress from "./controllers/progress.js";
+import ScrollView from "./controllers/scrollview.js";
+import SlideContent from "./controllers/slidecontent.js";
+import SlideNumber from "./controllers/slidenumber.js";
+import Touch from "./controllers/touch.js";
 import {
-	SLIDES_SELECTOR,
 	HORIZONTAL_SLIDES_SELECTOR,
-	VERTICAL_SLIDES_SELECTOR,
 	POST_MESSAGE_METHOD_BLACKLIST,
+	SLIDES_SELECTOR,
+	VERTICAL_SLIDES_SELECTOR,
 } from "./utils/constants.js";
+import * as Device from "./utils/device.js";
+import * as Util from "./utils/util.js";
 
 // The reveal.js version
 export const VERSION = "5.0.1";
@@ -48,63 +48,63 @@ export default function (revealElement, options) {
 	const Reveal = {};
 
 	// Configuration defaults, can be overridden at initialization time
-	let config = {},
-		// Flags if reveal.js is loaded (has dispatched the 'ready' event)
-		ready = false,
-		// The horizontal and vertical index of the currently active slide
-		indexh,
-		indexv,
-		// The previous and current slide HTML elements
-		previousSlide,
-		currentSlide,
-		// Remember which directions that the user has navigated towards
-		navigationHistory = {
-			hasNavigatedHorizontally: false,
-			hasNavigatedVertically: false,
-		},
-		// Slides may have a data-state attribute which we pick up and apply
-		// as a class to the body. This list contains the combined state of
-		// all current slides.
-		state = [],
-		// The current scale of the presentation (see width/height config)
-		scale = 1,
-		// CSS transform that is currently applied to the slides container,
-		// split into two groups
-		slidesTransform = { layout: "", overview: "" },
-		// Cached references to DOM elements
-		dom = {},
-		// Flags if the interaction event listeners are bound
-		eventsAreBound = false,
-		// The current slide transition state; idle or running
-		transition = "idle",
-		// The current auto-slide duration
-		autoSlide = 0,
-		// Auto slide properties
-		autoSlidePlayer,
-		autoSlideTimeout = 0,
-		autoSlideStartTime = -1,
-		autoSlidePaused = false,
-		// Controllers for different aspects of our presentation. They're
-		// all given direct references to this Reveal instance since there
-		// may be multiple presentations running in parallel.
-		slideContent = new SlideContent(Reveal),
-		slideNumber = new SlideNumber(Reveal),
-		jumpToSlide = new JumpToSlide(Reveal),
-		autoAnimate = new AutoAnimate(Reveal),
-		backgrounds = new Backgrounds(Reveal),
-		scrollView = new ScrollView(Reveal),
-		printView = new PrintView(Reveal),
-		fragments = new Fragments(Reveal),
-		overview = new Overview(Reveal),
-		keyboard = new Keyboard(Reveal),
-		location = new Location(Reveal),
-		controls = new Controls(Reveal),
-		progress = new Progress(Reveal),
-		pointer = new Pointer(Reveal),
-		plugins = new Plugins(Reveal),
-		focus = new Focus(Reveal),
-		touch = new Touch(Reveal),
-		notes = new Notes(Reveal);
+	let config = {};
+	// Flags if reveal.js is loaded (has dispatched the 'ready' event)
+	let ready = false;
+	// The horizontal and vertical index of the currently active slide
+	let indexh;
+	let indexv;
+	// The previous and current slide HTML elements
+	let previousSlide;
+	let currentSlide;
+	// Remember which directions that the user has navigated towards
+	const navigationHistory = {
+		hasNavigatedHorizontally: false,
+		hasNavigatedVertically: false,
+	};
+	// Slides may have a data-state attribute which we pick up and apply
+	// as a class to the body. This list contains the combined state of
+	// all current slides.
+	let state = [];
+	// The current scale of the presentation (see width/height config)
+	let scale = 1;
+	// CSS transform that is currently applied to the slides container,
+	// split into two groups
+	const slidesTransform = { layout: "", overview: "" };
+	// Cached references to DOM elements
+	const dom = {};
+	// Flags if the interaction event listeners are bound
+	let eventsAreBound = false;
+	// The current slide transition state; idle or running
+	let transition = "idle";
+	// The current auto-slide duration
+	let autoSlide = 0;
+	// Auto slide properties
+	let autoSlidePlayer;
+	let autoSlideTimeout = 0;
+	let autoSlideStartTime = -1;
+	let autoSlidePaused = false;
+	// Controllers for different aspects of our presentation. They're
+	// all given direct references to this Reveal instance since there
+	// may be multiple presentations running in parallel.
+	const slideContent = new SlideContent(Reveal);
+	const slideNumber = new SlideNumber(Reveal);
+	const jumpToSlide = new JumpToSlide(Reveal);
+	const autoAnimate = new AutoAnimate(Reveal);
+	const backgrounds = new Backgrounds(Reveal);
+	const scrollView = new ScrollView(Reveal);
+	const printView = new PrintView(Reveal);
+	const fragments = new Fragments(Reveal);
+	const overview = new Overview(Reveal);
+	const keyboard = new Keyboard(Reveal);
+	const location = new Location(Reveal);
+	const controls = new Controls(Reveal);
+	const progress = new Progress(Reveal);
+	const pointer = new Pointer(Reveal);
+	const plugins = new Plugins(Reveal);
+	const focus = new Focus(Reveal);
+	const touch = new Touch(Reveal);
+	const notes = new Notes(Reveal);
 
 	/**
 	 * Starts up the presentation.
@@ -371,8 +371,8 @@ export default function (revealElement, options) {
 		}
 		// Element node
 		else if (node.nodeType === 1) {
-			let isAriaHidden = node.getAttribute("aria-hidden");
-			let isDisplayHidden = window.getComputedStyle(node)["display"] === "none";
+			const isAriaHidden = node.getAttribute("aria-hidden");
+			const isDisplayHidden = window.getComputedStyle(node).display === "none";
 			if (isAriaHidden !== "true" && !isDisplayHidden) {
 				Array.from(node.childNodes).forEach((child) => {
 					text += getStatusText(child);
@@ -382,7 +382,7 @@ export default function (revealElement, options) {
 
 		text = text.trim();
 
-		return text === "" ? "" : text + " ";
+		return text === "" ? "" : `${text} `;
 	}
 
 	/**
@@ -465,11 +465,11 @@ export default function (revealElement, options) {
 		// Expose our configured slide dimensions as custom props
 		dom.viewport.style.setProperty(
 			"--slide-width",
-			typeof config.width === "string" ? config.width : config.width + "px",
+			typeof config.width === "string" ? config.width : `${config.width}px`,
 		);
 		dom.viewport.style.setProperty(
 			"--slide-height",
-			typeof config.height === "string" ? config.height : config.height + "px",
+			typeof config.height === "string" ? config.height : `${config.height}px`,
 		);
 
 		if (config.shuffle) {
@@ -685,7 +685,7 @@ export default function (revealElement, options) {
 		if (slidesTransform.layout) {
 			Util.transformElement(
 				dom.slides,
-				slidesTransform.layout + " " + slidesTransform.overview,
+				`${slidesTransform.layout} ${slidesTransform.overview}`,
 			);
 		} else {
 			Util.transformElement(dom.slides, slidesTransform.overview);
@@ -697,7 +697,7 @@ export default function (revealElement, options) {
 	 * reveal DOM element.
 	 */
 	function dispatchEvent({ target = dom.wrapper, type, data, bubbles = true }) {
-		let event = document.createEvent("HTMLEvents", 1, 2);
+		const event = document.createEvent("HTMLEvents", 1, 2);
 		event.initEvent(type, bubbles, true);
 		Util.extend(event, data);
 		target.dispatchEvent(event);
@@ -734,7 +734,7 @@ export default function (revealElement, options) {
 	 */
 	function dispatchPostMessage(type, data) {
 		if (config.postMessageEvents && window.parent !== window.self) {
-			let message = {
+			const message = {
 				namespace: "reveal",
 				eventName: type,
 				state: getState(),
@@ -854,16 +854,16 @@ export default function (revealElement, options) {
 
 			let html = '<p class="title">Keyboard Shortcuts</p><br/>';
 
-			let shortcuts = keyboard.getShortcuts(),
-				bindings = keyboard.getBindings();
+			const shortcuts = keyboard.getShortcuts();
+			const bindings = keyboard.getBindings();
 
 			html += "<table><th>KEY</th><th>ACTION</th>";
-			for (let key in shortcuts) {
+			for (const key in shortcuts) {
 				html += `<tr><td>${key}</td><td>${shortcuts[key]}</td></tr>`;
 			}
 
 			// Add custom key bindings that have associated descriptions
-			for (let binding in bindings) {
+			for (const binding in bindings) {
 				if (bindings[binding].key && bindings[binding].description) {
 					html += `<tr><td>${bindings[binding].key}</td><td>${bindings[binding].description}</td></tr>`;
 				}
@@ -923,7 +923,7 @@ export default function (revealElement, options) {
 				if (Device.isMobile && !config.embedded) {
 					document.documentElement.style.setProperty(
 						"--vh",
-						window.innerHeight * 0.01 + "px",
+						`${window.innerHeight * 0.01}px`,
 					);
 				}
 
@@ -936,8 +936,8 @@ export default function (revealElement, options) {
 				// Layout the contents of the slides
 				layoutSlideContents(config.width, config.height);
 
-				dom.slides.style.width = size.width + "px";
-				dom.slides.style.height = size.height + "px";
+				dom.slides.style.width = `${size.width}px`;
+				dom.slides.style.height = `${size.height}px`;
 
 				// Determine scale of content to fit within available space
 				scale = Math.min(
@@ -965,7 +965,7 @@ export default function (revealElement, options) {
 					dom.slides.style.bottom = "auto";
 					dom.slides.style.right = "auto";
 					transformSlides({
-						layout: "translate(-50%, -50%) scale(" + scale + ")",
+						layout: `translate(-50%, -50%) scale(${scale})`,
 					});
 				}
 
@@ -988,8 +988,10 @@ export default function (revealElement, options) {
 						if (slide.classList.contains("stack")) {
 							slide.style.top = 0;
 						} else {
-							slide.style.top =
-								Math.max((size.height - slide.scrollHeight) / 2, 0) + "px";
+							slide.style.top = `${Math.max(
+								(size.height - slide.scrollHeight) / 2,
+								0,
+							)}px`;
 						}
 					} else {
 						slide.style.top = "";
@@ -1011,10 +1013,10 @@ export default function (revealElement, options) {
 			checkResponsiveScrollView();
 
 			dom.viewport.style.setProperty("--slide-scale", scale);
-			dom.viewport.style.setProperty("--viewport-width", viewportWidth + "px");
+			dom.viewport.style.setProperty("--viewport-width", `${viewportWidth}px`);
 			dom.viewport.style.setProperty(
 				"--viewport-height",
-				viewportHeight + "px",
+				`${viewportHeight}px`,
 			);
 
 			scrollView.layout();
@@ -1042,20 +1044,20 @@ export default function (revealElement, options) {
 			"section > .stretch, section > .r-stretch",
 		).forEach((element) => {
 			// Determine how much vertical space we can use
-			let remainingHeight = Util.getRemainingHeight(element, height);
+			const remainingHeight = Util.getRemainingHeight(element, height);
 
 			// Consider the aspect ratio of media elements
 			if (/(img|video)/gi.test(element.nodeName)) {
-				const nw = element.naturalWidth || element.videoWidth,
-					nh = element.naturalHeight || element.videoHeight;
+				const nw = element.naturalWidth || element.videoWidth;
+				const nh = element.naturalHeight || element.videoHeight;
 
 				const es = Math.min(width / nw, remainingHeight / nh);
 
-				element.style.width = nw * es + "px";
-				element.style.height = nh * es + "px";
+				element.style.width = `${nw * es}px`;
+				element.style.height = `${nh * es}px`;
 			} else {
-				element.style.width = width + "px";
-				element.style.height = remainingHeight + "px";
+				element.style.width = `${width}px`;
+				element.style.height = `${remainingHeight}px`;
 			}
 		});
 	}
@@ -1127,12 +1129,14 @@ export default function (revealElement, options) {
 
 		// Slide width may be a percentage of available width
 		if (typeof size.width === "string" && /%$/.test(size.width)) {
-			size.width = (parseInt(size.width, 10) / 100) * size.presentationWidth;
+			size.width =
+				(Number.parseInt(size.width, 10) / 100) * size.presentationWidth;
 		}
 
 		// Slide height may be a percentage of available height
 		if (typeof size.height === "string" && /%$/.test(size.height)) {
-			size.height = (parseInt(size.height, 10) / 100) * size.presentationHeight;
+			size.height =
+				(Number.parseInt(size.height, 10) / 100) * size.presentationHeight;
 		}
 
 		return size;
@@ -1170,7 +1174,7 @@ export default function (revealElement, options) {
 				? "data-start-indexv"
 				: "data-previous-indexv";
 
-			return parseInt(stack.getAttribute(attributeName) || 0, 10);
+			return Number.parseInt(stack.getAttribute(attributeName) || 0, 10);
 		}
 
 		return 0;
@@ -1185,9 +1189,7 @@ export default function (revealElement, options) {
 	 * @return {Boolean}
 	 */
 	function isVerticalSlide(slide = currentSlide) {
-		return (
-			slide && slide.parentNode && !!slide.parentNode.nodeName.match(/section/i)
-		);
+		return slide?.parentNode && !!slide.parentNode.nodeName.match(/section/i);
 	}
 
 	/**
@@ -1389,11 +1391,7 @@ export default function (revealElement, options) {
 
 		// If we were on a vertical stack, remember what vertical index
 		// it was on so we can resume at the same position when returning
-		if (
-			previousSlide &&
-			previousSlide.parentNode &&
-			previousSlide.parentNode.classList.contains("stack")
-		) {
+		if (previousSlide?.parentNode?.classList.contains("stack")) {
 			setPreviousVerticalIndex(previousSlide.parentNode, indexv);
 		}
 
@@ -1403,8 +1401,8 @@ export default function (revealElement, options) {
 		// Reset the state array
 		state.length = 0;
 
-		let indexhBefore = indexh || 0,
-			indexvBefore = indexv || 0;
+		const indexhBefore = indexh || 0;
+		const indexvBefore = indexv || 0;
 
 		// Activate and transition to the new slide
 		indexh = updateSlides(
@@ -1417,16 +1415,16 @@ export default function (revealElement, options) {
 		);
 
 		// Dispatch an event if the slide changed
-		let slideChanged = indexh !== indexhBefore || indexv !== indexvBefore;
+		const slideChanged = indexh !== indexhBefore || indexv !== indexvBefore;
 
 		// Ensure that the previous slide is never the same as the current
 		if (!slideChanged) previousSlide = null;
 
 		// Find the current horizontal slide and any possible vertical slides
 		// within it
-		let currentHorizontalSlide = horizontalSlides[indexh],
-			currentVerticalSlides =
-				currentHorizontalSlide.querySelectorAll("section");
+		const currentHorizontalSlide = horizontalSlides[indexh];
+		const currentVerticalSlides =
+			currentHorizontalSlide.querySelectorAll("section");
 
 		// Store references to the previous and current slides
 		currentSlide = currentVerticalSlides[indexv] || currentHorizontalSlide;
@@ -1590,7 +1588,7 @@ export default function (revealElement, options) {
 	 * @param {HTMLElement} slideElement
 	 */
 	function setCurrentScrollPage(slideElement, h, v) {
-		let indexhBefore = indexh || 0;
+		const indexhBefore = indexh || 0;
 
 		indexh = h;
 		indexv = v;
@@ -1730,13 +1728,13 @@ export default function (revealElement, options) {
 			// Insert the slide next to a randomly picked sibling slide
 			// slide. This may cause the slide to insert before itself,
 			// but that's not an issue.
-			let beforeSlide = slides[Math.floor(Math.random() * slides.length)];
+			const beforeSlide = slides[Math.floor(Math.random() * slides.length)];
 			if (beforeSlide.parentNode === slide.parentNode) {
 				slide.parentNode.insertBefore(slide, beforeSlide);
 			}
 
 			// Randomize the order of vertical slides (if there are any)
-			let verticalSlides = slide.querySelectorAll("section");
+			const verticalSlides = slide.querySelectorAll("section");
 			if (verticalSlides.length) {
 				shuffle(verticalSlides);
 			}
@@ -1759,10 +1757,10 @@ export default function (revealElement, options) {
 	function updateSlides(selector, index) {
 		// Select all slides and convert the NodeList result to
 		// an array
-		let slides = Util.queryAll(dom.wrapper, selector),
-			slidesLength = slides.length;
+		const slides = Util.queryAll(dom.wrapper, selector);
+		const slidesLength = slides.length;
 
-		let printMode = scrollView.isActive() || printView.isActive();
+		const printMode = scrollView.isActive() || printView.isActive();
 		let loopedForwards = false;
 		let loopedBackwards = false;
 
@@ -1783,9 +1781,9 @@ export default function (revealElement, options) {
 			index = Math.max(Math.min(index, slidesLength - 1), 0);
 
 			for (let i = 0; i < slidesLength; i++) {
-				let element = slides[i];
+				const element = slides[i];
 
-				let reverse = config.rtl && !isVerticalSlide(element);
+				const reverse = config.rtl && !isVerticalSlide(element);
 
 				// Avoid .remove() with multiple args for IE11 support
 				element.classList.remove("past");
@@ -1835,8 +1833,8 @@ export default function (revealElement, options) {
 				}
 			}
 
-			let slide = slides[index];
-			let wasPresent = slide.classList.contains("present");
+			const slide = slides[index];
+			const wasPresent = slide.classList.contains("present");
 
 			// Mark the current slide as present
 			slide.classList.add("present");
@@ -1854,7 +1852,7 @@ export default function (revealElement, options) {
 
 			// If this slide has a state associated with it, add it
 			// onto the current state of the deck
-			let slideState = slide.getAttribute("data-state");
+			const slideState = slide.getAttribute("data-state");
 			if (slideState) {
 				state = state.concat(slideState.split(" "));
 			}
@@ -1893,10 +1891,10 @@ export default function (revealElement, options) {
 	function updateSlidesVisibility() {
 		// Select all slides and convert the NodeList result to
 		// an array
-		let horizontalSlides = getHorizontalSlides(),
-			horizontalSlidesLength = horizontalSlides.length,
-			distanceX,
-			distanceY;
+		const horizontalSlides = getHorizontalSlides();
+		const horizontalSlidesLength = horizontalSlides.length;
+		let distanceX;
+		let distanceY;
 
 		if (horizontalSlidesLength && typeof indexh !== "undefined") {
 			// The number of steps away from the present slide that will
@@ -1915,10 +1913,10 @@ export default function (revealElement, options) {
 			}
 
 			for (let x = 0; x < horizontalSlidesLength; x++) {
-				let horizontalSlide = horizontalSlides[x];
+				const horizontalSlide = horizontalSlides[x];
 
-				let verticalSlides = Util.queryAll(horizontalSlide, "section"),
-					verticalSlidesLength = verticalSlides.length;
+				const verticalSlides = Util.queryAll(horizontalSlide, "section");
+				const verticalSlidesLength = verticalSlides.length;
 
 				// Determine how far away this slide is from the present
 				distanceX = Math.abs((indexh || 0) - x) || 0;
@@ -1940,10 +1938,10 @@ export default function (revealElement, options) {
 				}
 
 				if (verticalSlidesLength) {
-					let oy = getPreviousVerticalIndex(horizontalSlide);
+					const oy = getPreviousVerticalIndex(horizontalSlide);
 
 					for (let y = 0; y < verticalSlidesLength; y++) {
-						let verticalSlide = verticalSlides[y];
+						const verticalSlide = verticalSlides[y];
 
 						distanceY =
 							x === (indexh || 0)
@@ -1981,12 +1979,14 @@ export default function (revealElement, options) {
 	 * @return {{left: boolean, right: boolean, up: boolean, down: boolean}}
 	 */
 	function availableRoutes({ includeFragments = false } = {}) {
-		let horizontalSlides = dom.wrapper.querySelectorAll(
-				HORIZONTAL_SLIDES_SELECTOR,
-			),
-			verticalSlides = dom.wrapper.querySelectorAll(VERTICAL_SLIDES_SELECTOR);
+		const horizontalSlides = dom.wrapper.querySelectorAll(
+			HORIZONTAL_SLIDES_SELECTOR,
+		);
+		const verticalSlides = dom.wrapper.querySelectorAll(
+			VERTICAL_SLIDES_SELECTOR,
+		);
 
-		let routes = {
+		const routes = {
 			left: indexh > 0,
 			right: indexh < horizontalSlides.length - 1,
 			up: indexv > 0,
@@ -2016,7 +2016,7 @@ export default function (revealElement, options) {
 		// available if either a slid OR fragment is available in
 		// the given direction
 		if (includeFragments === true) {
-			let fragmentRoutes = fragments.availableRoutes();
+			const fragmentRoutes = fragments.availableRoutes();
 			routes.left = routes.left || fragmentRoutes.prev;
 			routes.up = routes.up || fragmentRoutes.prev;
 			routes.down = routes.down || fragmentRoutes.next;
@@ -2025,7 +2025,7 @@ export default function (revealElement, options) {
 
 		// Reverse horizontal controls for rtl
 		if (config.rtl) {
-			let left = routes.left;
+			const left = routes.left;
 			routes.left = routes.right;
 			routes.right = left;
 		}
@@ -2042,15 +2042,15 @@ export default function (revealElement, options) {
 	 * @return {number} Past slide count
 	 */
 	function getSlidePastCount(slide = currentSlide) {
-		let horizontalSlides = getHorizontalSlides();
+		const horizontalSlides = getHorizontalSlides();
 
 		// The number of past slides
 		let pastCount = 0;
 
 		// Step through all slides and count the past ones
 		mainLoop: for (let i = 0; i < horizontalSlides.length; i++) {
-			let horizontalSlide = horizontalSlides[i];
-			let verticalSlides = horizontalSlide.querySelectorAll("section");
+			const horizontalSlide = horizontalSlides[i];
+			const verticalSlides = horizontalSlide.querySelectorAll("section");
 
 			for (let j = 0; j < verticalSlides.length; j++) {
 				// Stop as soon as we arrive at the present
@@ -2090,21 +2090,21 @@ export default function (revealElement, options) {
 	 */
 	function getProgress() {
 		// The number of past and total slides
-		let totalCount = getTotalSlides();
+		const totalCount = getTotalSlides();
 		let pastCount = getSlidePastCount();
 
 		if (currentSlide) {
-			let allFragments = currentSlide.querySelectorAll(".fragment");
+			const allFragments = currentSlide.querySelectorAll(".fragment");
 
 			// If there are fragments in the current slide those should be
 			// accounted for in the progress.
 			if (allFragments.length > 0) {
-				let visibleFragments =
+				const visibleFragments =
 					currentSlide.querySelectorAll(".fragment.visible");
 
 				// This value represents how big a portion of the slide progress
 				// that is made up by its fragments (0-1)
-				let fragmentWeight = 0.9;
+				const fragmentWeight = 0.9;
 
 				// Add fragment progress to the past slide count
 				pastCount +=
@@ -2127,25 +2127,25 @@ export default function (revealElement, options) {
 	 */
 	function getIndices(slide) {
 		// By default, return the current indices
-		let h = indexh,
-			v = indexv,
-			f;
+		let h = indexh;
+		let v = indexv;
+		let f;
 
 		// If a slide is specified, return the indices of that slide
 		if (slide) {
 			// In scroll mode the original h/x index is stored on the slide
 			if (scrollView.isActive()) {
-				h = parseInt(slide.getAttribute("data-index-h"), 10);
+				h = Number.parseInt(slide.getAttribute("data-index-h"), 10);
 
 				if (slide.getAttribute("data-index-v")) {
-					v = parseInt(slide.getAttribute("data-index-v"), 10);
+					v = Number.parseInt(slide.getAttribute("data-index-v"), 10);
 				}
 			} else {
-				let isVertical = isVerticalSlide(slide);
-				let slideh = isVertical ? slide.parentNode : slide;
+				const isVertical = isVerticalSlide(slide);
+				const slideh = isVertical ? slide.parentNode : slide;
 
 				// Select all horizontal slides
-				let horizontalSlides = getHorizontalSlides();
+				const horizontalSlides = getHorizontalSlides();
 
 				// Now that we know which the horizontal slide is, get its index
 				h = Math.max(horizontalSlides.indexOf(slideh), 0);
@@ -2164,14 +2164,15 @@ export default function (revealElement, options) {
 		}
 
 		if (!slide && currentSlide) {
-			let hasFragments = currentSlide.querySelectorAll(".fragment").length > 0;
+			const hasFragments =
+				currentSlide.querySelectorAll(".fragment").length > 0;
 			if (hasFragments) {
-				let currentFragment = currentSlide.querySelector(".current-fragment");
-				if (
-					currentFragment &&
-					currentFragment.hasAttribute("data-fragment-index")
-				) {
-					f = parseInt(currentFragment.getAttribute("data-fragment-index"), 10);
+				const currentFragment = currentSlide.querySelector(".current-fragment");
+				if (currentFragment?.hasAttribute("data-fragment-index")) {
+					f = Number.parseInt(
+						currentFragment.getAttribute("data-fragment-index"),
+						10,
+					);
 				} else {
 					f = currentSlide.querySelectorAll(".fragment.visible").length - 1;
 				}
@@ -2187,7 +2188,7 @@ export default function (revealElement, options) {
 	function getSlides() {
 		return Util.queryAll(
 			dom.wrapper,
-			SLIDES_SELECTOR + ':not(.stack):not([data-visibility="uncounted"])',
+			`${SLIDES_SELECTOR}:not(.stack):not([data-visibility="uncounted"])`,
 		);
 	}
 
@@ -2211,7 +2212,7 @@ export default function (revealElement, options) {
 	 * Returns all vertical stacks (each stack can contain multiple slides).
 	 */
 	function getVerticalStacks() {
-		return Util.queryAll(dom.wrapper, HORIZONTAL_SLIDES_SELECTOR + ".stack");
+		return Util.queryAll(dom.wrapper, `${HORIZONTAL_SLIDES_SELECTOR}.stack`);
 	}
 
 	/**
@@ -2234,9 +2235,9 @@ export default function (revealElement, options) {
 	 */
 	function getSlidesAttributes() {
 		return getSlides().map((slide) => {
-			let attributes = {};
+			const attributes = {};
 			for (let i = 0; i < slide.attributes.length; i++) {
-				let attribute = slide.attributes[i];
+				const attribute = slide.attributes[i];
 				attributes[attribute.name] = attribute.value;
 			}
 			return attributes;
@@ -2258,11 +2259,10 @@ export default function (revealElement, options) {
 	 * @return {HTMLElement}
 	 */
 	function getSlide(x, y) {
-		let horizontalSlide = getHorizontalSlides()[x];
-		let verticalSlides =
-			horizontalSlide && horizontalSlide.querySelectorAll("section");
+		const horizontalSlide = getHorizontalSlides()[x];
+		const verticalSlides = horizontalSlide?.querySelectorAll("section");
 
-		if (verticalSlides && verticalSlides.length && typeof y === "number") {
+		if (verticalSlides?.length && typeof y === "number") {
 			return verticalSlides ? verticalSlides[y] : undefined;
 		}
 
@@ -2281,7 +2281,7 @@ export default function (revealElement, options) {
 	 * @return {(HTMLElement[]|*)}
 	 */
 	function getSlideBackground(x, y) {
-		let slide = typeof x === "number" ? getSlide(x, y) : x;
+		const slide = typeof x === "number" ? getSlide(x, y) : x;
 		if (slide) {
 			return slide.slideBackgroundElement;
 		}
@@ -2297,7 +2297,7 @@ export default function (revealElement, options) {
 	 * @return {{indexh: number, indexv: number, indexf: number, paused: boolean, overview: boolean}}
 	 */
 	function getState() {
-		let indices = getIndices();
+		const indices = getIndices();
 
 		return {
 			indexh: indices.h,
@@ -2322,8 +2322,8 @@ export default function (revealElement, options) {
 				Util.deserialize(state.indexf),
 			);
 
-			let pausedFlag = Util.deserialize(state.paused),
-				overviewFlag = Util.deserialize(state.overview);
+			const pausedFlag = Util.deserialize(state.paused);
+			const overviewFlag = Util.deserialize(state.overview);
 
 			if (typeof pausedFlag === "boolean" && pausedFlag !== isPaused()) {
 				togglePause(pausedFlag);
@@ -2345,17 +2345,17 @@ export default function (revealElement, options) {
 		cancelAutoSlide();
 
 		if (currentSlide && config.autoSlide !== false) {
-			let fragment = currentSlide.querySelector(
+			const fragment = currentSlide.querySelector(
 				".current-fragment[data-autoslide]",
 			);
 
-			let fragmentAutoSlide = fragment
+			const fragmentAutoSlide = fragment
 				? fragment.getAttribute("data-autoslide")
 				: null;
-			let parentAutoSlide = currentSlide.parentNode
+			const parentAutoSlide = currentSlide.parentNode
 				? currentSlide.parentNode.getAttribute("data-autoslide")
 				: null;
-			let slideAutoSlide = currentSlide.getAttribute("data-autoslide");
+			const slideAutoSlide = currentSlide.getAttribute("data-autoslide");
 
 			// Pick value in the following priority order:
 			// 1. Current fragment's data-autoslide
@@ -2363,11 +2363,11 @@ export default function (revealElement, options) {
 			// 3. Parent slide's data-autoslide
 			// 4. Global autoSlide setting
 			if (fragmentAutoSlide) {
-				autoSlide = parseInt(fragmentAutoSlide, 10);
+				autoSlide = Number.parseInt(fragmentAutoSlide, 10);
 			} else if (slideAutoSlide) {
-				autoSlide = parseInt(slideAutoSlide, 10);
+				autoSlide = Number.parseInt(slideAutoSlide, 10);
 			} else if (parentAutoSlide) {
-				autoSlide = parseInt(parentAutoSlide, 10);
+				autoSlide = Number.parseInt(parentAutoSlide, 10);
 			} else {
 				autoSlide = config.autoSlide;
 
@@ -2553,21 +2553,21 @@ export default function (revealElement, options) {
 				if (config.rtl) {
 					previousSlide = Util.queryAll(
 						dom.wrapper,
-						HORIZONTAL_SLIDES_SELECTOR + ".future",
+						`${HORIZONTAL_SLIDES_SELECTOR}.future`,
 					).pop();
 				} else {
 					previousSlide = Util.queryAll(
 						dom.wrapper,
-						HORIZONTAL_SLIDES_SELECTOR + ".past",
+						`${HORIZONTAL_SLIDES_SELECTOR}.past`,
 					).pop();
 				}
 
 				// When going backwards and arriving on a stack we start
 				// at the bottom of the stack
-				if (previousSlide && previousSlide.classList.contains("stack")) {
-					let v =
+				if (previousSlide?.classList.contains("stack")) {
+					const v =
 						previousSlide.querySelectorAll("section").length - 1 || undefined;
-					let h = indexh - 1;
+					const h = indexh - 1;
 					slide(h, v);
 				} else {
 					navigateLeft({ skipFragments });
@@ -2588,7 +2588,7 @@ export default function (revealElement, options) {
 
 		// Prioritize revealing fragments
 		if (skipFragments || fragments.next() === false) {
-			let routes = availableRoutes();
+			const routes = availableRoutes();
 
 			// When looping is enabled `routes.down` is always available
 			// so we need a separate check for when we've reached the
@@ -2650,9 +2650,7 @@ export default function (revealElement, options) {
 					});
 				} else {
 					console.warn(
-						'reveal.js: "' +
-							data.method +
-							'" is is blacklisted from the postMessage API',
+						`reveal.js: "${data.method}" is is blacklisted from the postMessage API`,
 					);
 				}
 			}
@@ -2731,7 +2729,7 @@ export default function (revealElement, options) {
 	 * @param {object} [event]
 	 */
 	function onFullscreenChange(event) {
-		let element =
+		const element =
 			document.fullscreenElement || document.webkitFullscreenElement;
 		if (element === dom.wrapper) {
 			event.stopImmediatePropagation();
@@ -2751,8 +2749,8 @@ export default function (revealElement, options) {
 	 * @param {object} event
 	 */
 	function onPreviewLinkClicked(event) {
-		if (event.currentTarget && event.currentTarget.hasAttribute("href")) {
-			let url = event.currentTarget.getAttribute("href");
+		if (event.currentTarget?.hasAttribute("href")) {
+			const url = event.currentTarget.getAttribute("href");
 			if (url) {
 				showPreview(url);
 				event.preventDefault();

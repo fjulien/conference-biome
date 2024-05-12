@@ -103,7 +103,7 @@ export default class Notes {
 		}
 
 		// ... or using <aside class="notes"> elements
-		let notesElements = slide.querySelectorAll("aside.notes");
+		const notesElements = slide.querySelectorAll("aside.notes");
 		if (notesElements) {
 			return Array.from(notesElements)
 				.map((notesElement) => notesElement.innerHTML)

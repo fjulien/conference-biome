@@ -92,7 +92,7 @@ export default class Focus {
 	}
 
 	onDocumentPointerDown(event) {
-		let revealElement = closest(event.target, ".reveal");
+		const revealElement = closest(event.target, ".reveal");
 		if (!revealElement || revealElement !== this.Reveal.getRevealElement()) {
 			this.blur();
 		}

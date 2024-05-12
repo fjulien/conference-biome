@@ -29,7 +29,7 @@ export default class Touch {
 	 *
 	 */
 	bind() {
-		let revealElement = this.Reveal.getRevealElement();
+		const revealElement = this.Reveal.getRevealElement();
 
 		if ("onpointerdown" in window) {
 			// Use W3C pointer events
@@ -61,7 +61,7 @@ export default class Touch {
 	 *
 	 */
 	unbind() {
-		let revealElement = this.Reveal.getRevealElement();
+		const revealElement = this.Reveal.getRevealElement();
 
 		revealElement.removeEventListener("pointerdown", this.onPointerDown, false);
 		revealElement.removeEventListener("pointermove", this.onPointerMove, false);
@@ -122,23 +122,23 @@ export default class Touch {
 	onTouchMove(event) {
 		if (this.isSwipePrevented(event.target)) return true;
 
-		let config = this.Reveal.getConfig();
+		const config = this.Reveal.getConfig();
 
 		// Each touch should only trigger one action
 		if (!this.touchCaptured) {
 			this.Reveal.onUserInput(event);
 
-			let currentX = event.touches[0].clientX;
-			let currentY = event.touches[0].clientY;
+			const currentX = event.touches[0].clientX;
+			const currentY = event.touches[0].clientY;
 
 			// There was only one touch point, look for a swipe
 			if (event.touches.length === 1 && this.touchStartCount !== 2) {
-				let availableRoutes = this.Reveal.availableRoutes({
+				const availableRoutes = this.Reveal.availableRoutes({
 					includeFragments: true,
 				});
 
-				let deltaX = currentX - this.touchStartX,
-					deltaY = currentY - this.touchStartY;
+				const deltaX = currentX - this.touchStartX;
+				const deltaY = currentY - this.touchStartY;
 
 				if (deltaX > SWIPE_THRESHOLD && Math.abs(deltaX) > Math.abs(deltaY)) {
 					this.touchCaptured = true;

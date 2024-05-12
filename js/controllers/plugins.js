@@ -35,8 +35,8 @@ export default class Plugins {
 		plugins.forEach(this.registerPlugin.bind(this));
 
 		return new Promise((resolve) => {
-			let scripts = [],
-				scriptsToLoad = 0;
+			const scripts = [];
+			let scriptsToLoad = 0;
 
 			dependencies.forEach((s) => {
 				// Load if there's no condition or the condition is truthy
@@ -84,7 +84,7 @@ export default class Plugins {
 	 */
 	initPlugins() {
 		return new Promise((resolve) => {
-			let pluginValues = Object.values(this.registeredPlugins);
+			const pluginValues = Object.values(this.registeredPlugins);
 			let pluginsToInitialize = pluginValues.length;
 
 			// If there are no plugins, skip this step
@@ -95,7 +95,7 @@ export default class Plugins {
 			else {
 				let initNextPlugin;
 
-				let afterPlugInitialized = () => {
+				const afterPlugInitialized = () => {
 					if (--pluginsToInitialize === 0) {
 						this.loadAsync().then(resolve);
 					} else {
@@ -107,11 +107,11 @@ export default class Plugins {
 
 				// Initialize plugins serially
 				initNextPlugin = () => {
-					let plugin = pluginValues[i++];
+					const plugin = pluginValues[i++];
 
 					// If the plugin has an 'init' method, invoke it
 					if (typeof plugin.init === "function") {
-						let promise = plugin.init(this.Reveal);
+						const promise = plugin.init(this.Reveal);
 
 						// If the plugin returned a Promise, wait for it
 						if (promise && typeof promise.then === "function") {
@@ -164,7 +164,7 @@ export default class Plugins {
 			plugin = plugin();
 		}
 
-		let id = plugin.id;
+		const id = plugin.id;
 
 		if (typeof id !== "string") {
 			console.warn("Unrecognized plugin format; can't find plugin.id", plugin);
@@ -177,9 +177,7 @@ export default class Plugins {
 				plugin.init(this.Reveal);
 			}
 		} else {
-			console.warn(
-				'reveal.js: "' + id + '" plugin has already been registered',
-			);
+			console.warn(`reveal.js: "${id}" plugin has already been registered`);
 		}
 	}
 
