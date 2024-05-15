@@ -25,7 +25,7 @@
         </section>
 
         <!-- 2 MOI-->
-        <section class="slide-2" id="slide-2">
+        <section class="slide-2" data-transition="zoom" id="slide-2">
             <h3>Julien</h3>
             <div class="is-flex align-items-center">
                 <div>
@@ -42,19 +42,18 @@
                 <h2>Formatage et analyse de code</h2>
             </section>
             <section>
-					<pre class="h-inherit"><code data-line-numbers="0">function OnepointTalk	({
-  subject		= "Hello biome!"	,duration		,
-  description		,startTalk		,
-						}	) {
+					<pre class="h-inherit"><code>function OnepointTalk(params) {
+                         const {subject = "Hello biome!",
+                        duration, description, startTalk} = params;
  if		(duration		<= 1		||		!startTalk	 )	 {
-	 return  <p>Pas possible </p>  }
+	 return  (<p>Pas possible </p>)  }
 
 		return (	 <div className="content" onClick={startTalk}>
  <h1>{subject  .toUpperCase ( ) }</h1>
   <strong>Le talk dure {duration }</strong>
 		<span>minute{duration > 1 ? "s" : ""	 }</span>
  {Array	.isArray		(description	 )  ?	( <ul>
-	 {description .map  ((d , i )	=> ( <li key={i}>{d }</li>  )	)	 }
+	 {description .map  ((d , i )	=> ( <li key={i}>{d}</li>  )	)	 }
 		</ul>	 )	 :	( <p>{description		}</p>  )	 }
   </div>	) ;	 }
 						</code></pre>
@@ -72,25 +71,30 @@
             </section>
             <section>
 					<pre class="h-inherit">
-						<code data-line-numbers="0|1-6|11-29">function OnepointTalk({
-	subject = "Hello biome!",
-	duration,
-	description,
-	startTalk,
-}) {
+						<code>function OnepointTalk(params) {
+	const {
+		subject = "Hello biome!",
+		duration,
+		description,
+		startTalk,
+	} = params;
 	if (duration <= 1 || !startTalk) {
-		return <p>Pas possible</p>;
+		return <p>Pas possible </p>;
 	}
 
 	return (
-		<div className="content" onClick={startTalk}>
+		<div
+                classname='content'
+                onclick='{startTalk}'>
 			<h1>{subject.toUpperCase()}</h1>
 			<strong>Le talk dure {duration}</strong>
-			<span>minute{duration > 1 ? "s" : ""}</span>
+			<span>
+				minute{duration > 1 ? "s" : ""}
+			</span>
 			{Array.isArray(description) ? (
 				<ul>
 					{description.map((d, i) => (
-						<li key={i}>{d}</li>
+						<li key='{i}'>{d}</li>
 					))}
 				</ul>
 			) : (
@@ -163,7 +167,7 @@
 
         <!-- 4 -->
         <section id="slide-4">
-            <section data-transition="zoom">
+            <section>
                 <img class="r-stretch bk-color-black p-2 w-95" src="images/slide-4/logo-biome.svg">
 
                 <aside class="notes">
@@ -176,7 +180,7 @@
                     <p>Accessibilité a11y</p>
                 </aside>
             </section>
-            <section data-background="images/slide-4/bg-prettier-defi.png" data-background-transition="zoom">
+            <section data-background="images/slide-4/bg-prettier-defi.png">
                 <aside class="notes">
                     <ol>
                         <li>un peu d'histoire</li>
@@ -229,7 +233,7 @@
             <section>
                 <h2>J'ai testé</h2>
                 <pre class="h-inherit">
-						<code data-line-numbers="all|5|16-17|19">// JavaScript
+						<code>// JavaScript
 const { exec } = require("child_process");
 const execCommand = (cmd, callback) => {
 	console.log("Start test");
@@ -253,7 +257,6 @@ execCommand(
 						</code>
 					</pre>
             </section>
-
             <section>
                 <h3>Projet actuel</h3>
                 <div class="is-flex justify-content-space-evenly">
@@ -264,6 +267,9 @@ execCommand(
                     <figure class="fragment is-flex align-items-center">
                         <img class="r-stretch size-1" src="icones/biome.svg">
                         <figcaption>2,311s</figcaption>
+                        <aside class="notes">
+                            <p>million (1 000 000)</p>
+                        </aside>
                     </figure>
                 </div>
                 <aside class="notes">
@@ -274,9 +280,17 @@ execCommand(
                 </aside>
             </section>
             <section>
+                <h2>NodeJS</h2>
+                <img class="r-stretch" src="images/slide-4/bruce-tout-puissant.gif">
+            </section>
+            <section>
                 <h2>En utilisant les outils de benchmark de biome</h2>
-                <pre>
-                    <code>hyperfine --show-output --ignore-failure --runs 10 --export-markdown benchmark.md
+                <pre class="h-inherit">
+                    <code>hyperfine
+    --show-output
+    --ignore-failure
+    --runs 10
+    --export-markdown benchmark.md
 -n Prettier "npx prettier ./**/*.{js,ts} --write --log-level=error"
 -n Biome "npx @biomejs/biome format . --write  --max-diagnostics=0  --log-level=error"
 </code>
@@ -284,7 +298,7 @@ execCommand(
                 <code class="t-font-size-3"></code>
             </section>
             <section>
-                <h2>NodeJS</h2>
+                <h3>NodeJS</h3>
                 <table>
                     <thead>
                     <tr>
@@ -324,19 +338,13 @@ execCommand(
                         <td>11.982</td>
                         <td>162.199</td>
                     </tr>
-                    <tr class="fragment">
-                        <th scope="row">Relative</th>
-                        <td>1.00</td>
-                        <td>12.78</td>
-                    </tr>
                     </tbody>
                 </table>
 
-                <h3 class="fragment">Biome est 12.78 fois plus rapide que Prettier</h3>
+                <h4 class="fragment fade-up">Biome est 12.78 fois plus rapide que Prettier</h4>
                 <aside class="notes">
                     <ol>
-                        <li>million (1 000 000)</li>
-                        <li>Bur sur prettier avec double quotes</li>
+                        <li>bug sur prettier avec double quotes</li>
                         <li>max-diagnostics=0 Biome imprime uniquement le nombre de diagnostics, ESLint imprime une
                             ligne pour chaque erreur
                         </li>
@@ -345,16 +353,15 @@ execCommand(
             </section>
             <section>
                 <h2>Démo</h2>
-                <pre>
-                    <code data-line-numbers="1|2|3|4|5|6|7">npm install -g --save-dev --save-exact @biomejs/biome
+                <pre class="fragment">
+                    <code>npm install -g --save-dev --save-exact @biomejs/biome
 biome init --jsonc
-biome migrate eslint --write // avoir un fichier biome.jsonc
+biome migrate eslint --write
 biome migrate prettier --write
 biome format --write .
 biome lint --apply .
 biome check --apply .
-biome check --apply-unsafe .
-                    </code>
+biome check --apply-unsafe .</code>
                 </pre>
             </section>
         </section>
@@ -507,15 +514,15 @@ biome check --apply-unsafe .
                         <li>Nouveau projet oui</li>
                         <li>Manque des languages</li>
                         <li>Prometteur, murisse</li>
+                        <li>3 versions mineurs cette année</li>
                         <li>Open source</li>
                     </ol>
                 </aside>
             </section>
             <section data-transition="zoom">
-                <h2>Merci à vous</h2>
+                <img class="r-stretch" src="images/slide-5/merci.gif">
                 <aside class="notes">
                     <ol>
-                        <li>3 versions mineurs cette année</li>
                         <li>merci à ceux qui m'ont aidée</li>
                     </ol>
                 </aside>

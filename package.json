@@ -1,8 +1,12 @@
 {
-	"name": "biome",
-	"version": "1.0.0",
+	"name": "reveal.js",
+	"version": "5.1.0",
 	"description": "The HTML Presentation Framework",
-	"packageManager": "bun@1.1.0",
+	"homepage": "https://revealjs.com",
+	"subdomain": "revealjs",
+	"main": "dist/reveal.js",
+	"module": "dist/reveal.esm.js",
+	"license": "MIT",
 	"scripts": {
 		"test": "gulp test",
 		"start": "gulp serve",
@@ -16,7 +20,6 @@
 		"@babel/core": "^7.23.2",
 		"@babel/eslint-parser": "^7.22.15",
 		"@babel/preset-env": "^7.23.2",
-		"@biomejs/biome": "1.7.3",
 		"@rollup/plugin-babel": "^6.0.4",
 		"@rollup/plugin-commonjs": "^25.0.7",
 		"@rollup/plugin-node-resolve": "^15.2.3",
@@ -46,5 +49,40 @@
 		"chokidar": "3.5.3",
 		"glob-parent": "6.0.2"
 	},
-	"browserslist": "> 2%, not dead"
+	"browserslist": "> 2%, not dead",
+	"eslintConfig": {
+		"env": {
+			"browser": true,
+			"es6": true
+		},
+		"parser": "@babel/eslint-parser",
+		"parserOptions": {
+			"sourceType": "module",
+			"allowImportExportEverywhere": true,
+			"requireConfigFile": false
+		},
+		"globals": {
+			"module": false,
+			"console": false,
+			"unescape": false,
+			"define": false,
+			"exports": false
+		},
+		"rules": {
+			"curly": 0,
+			"eqeqeq": 2,
+			"wrap-iife": [2, "any"],
+			"no-use-before-define": [
+				2,
+				{
+					"functions": false
+				}
+			],
+			"new-cap": 2,
+			"no-caller": 2,
+			"dot-notation": 0,
+			"no-eq-null": 2,
+			"no-unused-expressions": 0
+		}
+	}
 }
