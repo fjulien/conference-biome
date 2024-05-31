@@ -31,6 +31,10 @@
                 <div>
                     <p>Tech lead frontend</p>
                     <img class="r-stretch w-50 my-1-n" src="images/slide-2/onepoint.png">
+                    <div class="is-flex justify-content-center">
+                        <img class="r-stretch rounded size" src="images/github.svg">
+                        <p>@fjulien</p>
+                    </div>
                 </div>
                 <img class="r-stretch rounded" src="images/slide-2/moi.jpg">
             </div>
@@ -42,21 +46,24 @@
                 <h2>Formatage et analyse de code</h2>
             </section>
             <section>
-					<pre class="h-inherit"><code>function OnepointTalk(params) {
-                         const {subject = "Hello biome!",
-                        duration, description, startTalk} = params;
- if		(duration		<= 1		||		!startTalk	 )	 {
-	 return  (<p>Pas possible </p>)  }
+					<pre class="h-inherit"><code data-trim>
+                        <script type="text/template">
+function OnepointTalk(params) {
+const {subject = "Hello biome!",
+duration, description, startTalk} = params;
+if        (duration        <= 1        ||        !startTalk     )     {
+return  (<p>Pas possible </p>)  }
 
-		return (	 <div className="content" onClick={startTalk}>
+return (
+<div className="content" onClick={startTalk}>
  <h1>{subject  .toUpperCase ( ) }</h1>
   <strong>Le talk dure {duration }</strong>
 		<span>minute{duration > 1 ? "s" : ""	 }</span>
  {Array	.isArray		(description	 )  ?	( <ul>
 	 {description .map  ((d , i )	=> ( <li key={i}>{d}</li>  )	)	 }
 		</ul>	 )	 :	( <p>{description		}</p>  )	 }
-  </div>	) ;	 }
-						</code></pre>
+  </div>    ) ;     }
+                    </script></code></pre>
                 <aside class="notes">
                     <ol>
                         <li>Demande plus effort de lecture</li>
@@ -71,7 +78,8 @@
             </section>
             <section>
 					<pre class="h-inherit">
-						<code>function OnepointTalk(params) {
+						<code data-trim>
+function OnepointTalk(params) {
 	const {
 		subject = "Hello biome!",
 		duration,
@@ -142,11 +150,11 @@
                         <img class="r-stretch size-1" src="icones/chrome.svg">
                         <figcaption>Internet</figcaption>
                     </figure>
-                    <figure class="fragment">
+                    <figure>
                         <img class="r-stretch size-1" src="icones/vsc.svg">
                         <figcaption>IDE</figcaption>
                     </figure>
-                    <figure class="fragment">
+                    <figure>
                         <img class="r-stretch size-1" src="icones/npm.svg">
                         <figcaption>Librairies</figcaption>
                     </figure>
@@ -211,14 +219,13 @@
                     </figure>
                     <aside class="notes">
                         <ol>
-                            <li>En rust, prettier en js</li>
-                            <li>réputé pour sa rapidité et son efficacité et présente des avantages en termes de
+                            <li>En rust, prettier en js, réputé pour sa rapidité et son efficacité et présente des
+                                avantages en termes de
                                 performances
                             </li>
                             <li>+95% compatibilité tests JavaScript de prettier</li>
                             <li>Toutes les options de formatage</li>
                             <li>seule la syntaxe ecmascript est requise</li>
-                            <li>but gagner en rapidité</li>
                             <code class="t-font-size-3">git --no-pager diff --shortstat main</code>
                         </ol>
                     </aside>
@@ -235,29 +242,16 @@
             <section>
                 <h2>J'ai testé</h2>
                 <pre class="h-inherit">
-						<code>// JavaScript
-const { exec } = require("child_process");
-const execCommand = (cmd, callback) => {
-	console.log("Start test");
-	console.time("Timer");
-	exec(cmd, (error) => {
-		if (error) {
-			console.error(`exec error: ${error}`);
-			console.timeLog("Timer");
-			return;
-		}
-		callback();
-	});
-};
-execCommand(
-	'npx prettier . --write --log-level=silent',
-	'npx @biomejs/biome format . --write --log-level=none',
-	() => {
-		console.timeLog("Timer");
-	},
-);
-						</code>
-					</pre>
+                    <code data-trim>
+hyperfine
+    --show-output
+    --ignore-failure
+    --runs 10
+    --export-markdown benchmark.md
+-n Prettier "npx prettier ./**/*.{js,ts} --write --log-level=error"
+-n Biome "npx @biomejs/biome format . --write  --max-diagnostics=0  --log-level=error"
+</code>
+                </pre>
             </section>
             <section>
                 <h3>Projet actuel</h3>
@@ -284,20 +278,6 @@ execCommand(
             <section>
                 <h2>NodeJS</h2>
                 <img class="r-stretch" src="images/slide-4/bruce-tout-puissant.gif">
-            </section>
-            <section>
-                <h2>En utilisant les outils de benchmark de biome</h2>
-                <pre class="h-inherit">
-                    <code>hyperfine
-    --show-output
-    --ignore-failure
-    --runs 10
-    --export-markdown benchmark.md
--n Prettier "npx prettier ./**/*.{js,ts} --write --log-level=error"
--n Biome "npx @biomejs/biome format . --write  --max-diagnostics=0  --log-level=error"
-</code>
-                </pre>
-                <code class="t-font-size-3"></code>
             </section>
             <section>
                 <h3>NodeJS</h3>
@@ -353,16 +333,6 @@ execCommand(
             </section>
             <section>
                 <h2>Démo</h2>
-                <pre class="fragment">
-                    <code>npm install -g --save-dev --save-exact @biomejs/biome
-biome init --jsonc
-biome migrate eslint --write
-biome migrate prettier --write
-biome format --write .
-biome lint --apply .
-biome check --apply .
-biome check --apply-unsafe .</code>
-                </pre>
             </section>
         </section>
         <section>
@@ -513,19 +483,13 @@ biome check --apply-unsafe .</code>
                     <ol>
                         <li>Nouveau projet oui</li>
                         <li>Manque des languages</li>
-                        <li>Prometteur, murisse</li>
                         <li>3 versions mineurs cette année</li>
                         <li>Open source</li>
                     </ol>
                 </aside>
             </section>
             <section data-transition="zoom">
-                <img class="r-stretch" src="images/slide-5/merci.gif">
-                <aside class="notes">
-                    <ol>
-                        <li>merci à ceux qui m'ont aidée</li>
-                    </ol>
-                </aside>
+                <h1>Merci</h1>
             </section>
         </section>
     </div>
@@ -543,7 +507,6 @@ biome check --apply-unsafe .</code>
         hash: true,
         transition: 'fade',
         transitionSpeed: 'slow',
-        // Learn about plugins: https://revealjs.com/plugins/
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
     });
 </script>
